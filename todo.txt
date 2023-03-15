@@ -1,7 +1,7 @@
 CINEMA
 
 Classes
-    -> Movie (title, genre, releasedate, duration, director, synopsis?)
+    -> Movie (title, genre, releasedate, duration, director, casting, synopsis?)
 
     -> Director (firstname, lastname, genre, birthdate)
 

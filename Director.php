@@ -2,17 +2,17 @@
 
     class Director
         {
-            private string $_firstname;
-            private string $_lastname;
-            private $_releaseDate;
-            private int $_duration;
+            private string $_firstName;
+            private string $_lastName;
+            private $_genre;
+            private int $_birthDate;
 
-            public function __construct($_firstname, $_lastname, $_releaseDate, $_duration)
+            public function __construct(string $_firstName, string $_lastName, $_genre, $_birthDate)
             {
-                $this->_firstname = $_firstname;
-                $this->_lastname = $_lastname;
-                $this->_releaseDate = new DateTime($_releaseDate);
-                $this->_duration = $_duration;
+                $this->_firstName = $_firstName;
+                $this->_lastName = $_lastName;
+                $this->_genre = $_genre;
+                $this->_birthDate = $_birthDate;
             }
 
         }

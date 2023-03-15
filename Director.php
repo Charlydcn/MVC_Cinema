@@ -4,7 +4,7 @@
         {
             private string $_firstName;
             private string $_lastName;
-            private $_genre;
+            private string $_genre;
             private DateTime $_birthDate;
 
             public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate)

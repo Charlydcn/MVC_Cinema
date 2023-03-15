@@ -1,16 +1,16 @@
 <?php 
 
-    class Actor
+    class Role
         {
             private string $_firstName;
             private string $_lastName;
-            private $_movie;
+            private array $_movie;
 
-            public function __construct(string $_firstName, string $_lastName, string $_movie)
+            public function __construct(string $_firstName, string $_lastName)
             {
                 $this->_firstName = $_firstName;
                 $this->_lastName = $_lastName;
-                $this->_movie = $_movie;
+                $this->_movie = [];
             }
 
         }

@@ -2,14 +2,12 @@
 
     class Role
         {
-            private string $_firstName;
-            private string $_lastName;
+            private string $_roleName;
             private array $_roleMovies;
 
-            public function __construct(string $_firstName, string $_lastName)
+            public function __construct(string $_roleName)
             {
-                $this->_firstName = $_firstName;
-                $this->_lastName = $_lastName;
+                $this->_roleName = $_roleName;
                 $this->_roleMovies = [];
             }
 

@@ -3,13 +3,13 @@
     class Actor extends Person
         {
             private Role $_role;
-            private array $_actorMovies;
+            private array $_movies;
 
             public function __construct(Role $_role)
             {
                 $this->_role = $_role;
                 // $this->_role->addRole($this);
-                $this->_actorMovies = [];
+                $this->_movies = [];
             }
 
 // ************************************************ MÉTHODES ************************************************ 
@@ -20,10 +20,10 @@
                 return $this->_role;
             }
 
-            public function getActorMovies() // A TESTER
+            public function getMovies() // A TESTER
             {
                 $result = "<ul>";
-                foreach ($this->_actorMovies as $movie) {
+                foreach ($this->_movies as $movie) {
                     $result .= "<li>" . $movie . "</li>";
                 }
                 $result .= "</ul>";
@@ -38,7 +38,7 @@
                 $this->_role = $role;
             }
 
-            public function setActorMovies(array $directorMovies) // A TESTER
+            public function setMovies(array $directorMovies) // A TESTER
             {
                 $this->_directorMovies = $directorMovies;
             }
@@ -52,7 +52,7 @@
             //     . "<strong>Genre : </strong>". $this->_genre . "<br>"
             //     . "<strong>Age : </strong>". $this->getAge() . "<br>"
             //     . "<strong>Role : </strong>". $this->_role . "<br>"
-            //     . "<strong>Movies : </strong>" . $this->getActorMovies();
+            //     . "<strong>Movies : </strong>" . $this->getMovies();
             // }
             }
 

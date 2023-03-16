@@ -2,21 +2,21 @@
 
     class Director extends Person
         {
-            private array $_directorMovies;
+            private array $_movies;
 
             public function __construct()
             {
-                $this->_directorMovies = [];
+                $this->_movies = [];
             }
 
 
 // ************************************************ MÉTHODES ************************************************ 
 // ************************************** ACCESSEURS (getters) **************************************
 
-            public function getDirectorMovies() // A TESTER
+            public function getMovies() // A TESTER
             {
                 $result = "<ul>";
-                foreach ($this->_directorMovies as $movie) {
+                foreach ($this->_movies as $movie) {
                     $result .= "<li>" . $movie . "</li>";
                 }
                 $result .= "</ul>";
@@ -26,9 +26,9 @@
     // *************************************************************************************************
     // ************************************** MUTATEURS (setters) ************************************** 
             
-            public function setDirectorMovies(array $directorMovies) // A TESTER
+            public function setMovies(array $movies) // A TESTER
             {
-                $this->_directorMovies = $directorMovies;
+                $this->_movies = $movies;
             }
 
     // *************************************************************************************************
@@ -38,7 +38,7 @@
                 return "<strong>Director's name : </strong>" . $this->_firstName . " " . $this->_lastName . "<br>"
                 . "<strong>Genre : </strong>". $this->_genre . "<br>"
                 . "<strong>Age : </strong>". $this->getAge() . "<br>"
-                . "<strong>Movies : </strong>" . $this->getDirectorMovies();
+                . "<strong>Movies : </strong>" . $this->getMovies();
             }
         }
 

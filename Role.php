@@ -2,41 +2,41 @@
 
     class Role
         {
-            private string $_roleName;
-            private array $_roleMovies;
-            private array $_roleActors;
+            private string $_name;
+            private array $_movies;
+            private array $_actors;
 
-            public function __construct(string $_roleName)
+            public function __construct(string $_name)
             {
-                $this->_roleName = $_roleName;
-                $this->_roleMovies = [];
+                $this->_name = $_name;
+                $this->_movies = [];
                 // $this->_role->addMovies($this);
-                $this->_roleActors = [];
+                $this->_actors = [];
                 // $this->_role->addActors($this);
             }
 
 // ************************************************ MÉTHODES ************************************************ 
 // ************************************** ACCESSEURS (getters) *************************************
 
-            public function getRoleName()
+            public function getName()
             {
-                return $this->_roleName;
+                return $this->_name;
             }
 
-            public function getRoleMovies()
+            public function getMovies()
             {
                 $result = "<ul>";
-                foreach ($this->_roleMovies as $movie) {
+                foreach ($this->_movies as $movie) {
                     $result .= "<li>" . $movie . "</li>";
                 }
                 $result .= "</ul>";
                 return $result;
             }
 
-            public function getRoleActors()
+            public function getActors()
             {
                 $result = "<ul>";
-                foreach ($this->_roleActors as $actor) {
+                foreach ($this->_actors as $actor) {
                     $result .= "<li>" . $actor . "</li>";
                 }
                 $result .= "</ul>";
@@ -46,26 +46,26 @@
 // *************************************************************************************************
 // ************************************** MUTATEURS (setters) ************************************** 
 
-            public function setRoleName($roleName)
+            public function setName($name)
             {
-                $this->_roleName = $roleName;
+                $this->_name = $name;
             }
 
-            public function setRoleMovies(array $roleMovies)
+            public function setMovies(array $movies)
             {
-                $this->_roleMovies = $roleMovies;
+                $this->_movies = $movies;
             }
 
-            public function setRoleActors(array $roleActors)
+            public function setActors(array $actors)
             {
-                $this->_roleActors = $roleActors;
+                $this->_actors = $actors;
             }
 
 // *************************************************************************************************
 
             public function __toString()
             {
-                return $this->_roleName . "<br>";
+                return $this->_name . "<br>";
 
             }
 

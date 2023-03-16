@@ -2,16 +2,17 @@ CINEMA
 
 Classes
     -> Movie (title, movieGenre, releaseDate, duration, director, casting, synopsis?)
-
-    -> Director (firstname, lastname, genre, birthdate)
-
-    -> Actor (firstname, lastname, genre, birthdate, role, actorMovies)
+    
+    -> Person (firstname, lastname, genre, birthdate) = PARENT DE Director & Actor
+        -> Director (directorMovie)
+        -> Actor (role, actorMovies)
 
     -> Role (rolename, movies, actors)
-    
-    -> movieGenre ?
 
-    -> ...
+    -> Casting (Role, Acteur, Film)
+        -> array casting dans les trois /\
+    
+    -> Héritage????...
 
 ********************************** MOVIE ********************************************************************
 

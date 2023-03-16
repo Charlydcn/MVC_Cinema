@@ -10,7 +10,9 @@
             {
                 $this->_roleName = $_roleName;
                 $this->_roleMovies = [];
+                // $this->_role->addMovies($this);
                 $this->_roleActors = [];
+                // $this->_role->addActors($this);
             }
 
         }

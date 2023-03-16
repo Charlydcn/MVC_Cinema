@@ -29,6 +29,10 @@
         $samRaimi = new Director("Sam", "Raimi", "Male", "1959/10/23");        
         $samMendes = new Director("Sam", "Mendes", "Male", "1965/08/01");
 
+        echo $timBurton . "<br>";
+        echo $samRaimi . "<br>";
+        echo $samMendes . "<br>";
+
     // ***************************************************** ROLE *****************************************************
 
         //***** Batman *****/
@@ -86,11 +90,11 @@
         125,
         $timBurton,
         [
-            $michaelKeaton->$batman,
-            $kimBasinger->$vickiVale,
-            $jackNicholson->$joker,
-            $jackPalance->$carlGrissom,
-            $michaelGough->$alfredPennyworth
+            $michaelKeaton=>$batman,
+            $kimBasinger=>$vickiVale,
+            $jackNicholson=>$joker,
+            $jackPalance=>$carlGrissom,
+            $michaelGough=>$alfredPennyworth
         ],
         "Le célèbre et impitoyable justicier, Batman, est de retour. Plus beau, plus fort et plus dépoussiéré que jamais, il s'apprête à nettoyer Gotham City et à
         affronter le terrible Joker..."

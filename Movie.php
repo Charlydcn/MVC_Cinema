@@ -19,6 +19,7 @@
             $this->_director = $_director;
             // $this->_director->addDirector($this);
             $this->_casting = [];
+            // $this->_director->addCastingActor($this);            
             $this->_synopsis = $_synopsis;
         }
 
@@ -106,16 +107,16 @@
 
 // *************************************************************************************************
 
-        public function __toString() // A TESTER
-        {
-            return "<strong>Movie title : </strong>" . $this->_title . "<br>"
-            . "<strong>Genre : </strong>" . $this->_genre . "<br>"
-            . "<strong>Release date : </strong>". $this->getReleaseDate() . "<br>"
-            . "<strong>Duration : </strong>". $this->_duration . "<br>"
-            . "<strong>Director : </strong>" . $this->_director . "<br>"
-            . "<strong>Casting : </strong>" . $this->getCasting()
-            . "<strong>Synopsis : </strong>" . $this->_synopsis;
-        }
+        // public function __toString() // A TESTER
+        // {
+        //     return "<strong>Movie title : </strong>" . $this->_title . "<br>"
+        //     . "<strong>Genre : </strong>" . $this->_genre . "<br>"
+        //     . "<strong>Release date : </strong>". $this->getReleaseDate() . "<br>"
+        //     . "<strong>Duration : </strong>". $this->_duration . "<br>"
+        //     . "<strong>Director : </strong>" . $this->_director . "<br>"
+        //     . "<strong>Casting : </strong>" . $this->getCasting()
+        //     . "<strong>Synopsis : </strong>" . $this->_synopsis;
+        // }
         
     }
 

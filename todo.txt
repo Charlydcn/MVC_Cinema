@@ -7,7 +7,7 @@ Classes
 
     -> Actor (firstname, lastname, genre, birthdate, role(nomdupersonnage), moviesPlayed)
 
-    -> Role (rolename, movies)
+    -> Role (rolename, movies, actors)
     
     -> ...
 
@@ -68,53 +68,53 @@ Classes
 
 ********************************** DIRECTOR ********************************************************************
 
-$timBurton = ("Tim", "Burton", "Male", "1958/08/25")
+$timBurton = new Director("Tim", "Burton", "Male", "1958/08/25")
 
-$samRaimi = ("Sam", "Raimi", "Male", "1959/10/23")
+$samRaimi = new Director("Sam", "Raimi", "Male", "1959/10/23")
 
-$samMendes = ("Sam", "Mendes", "Male", "1965/08/01")
+$samMendes = new Director("Sam", "Mendes", "Male", "1965/08/01")
 
 
 ********************************** ACTOR ********************************************************************
 
-$michaelKeaton = ("Michael", "Keaton", "Male", "1951/09/05")
-$kimbaSinger = ("Kim", "Basinger", "Female", "1953/12/08")
-$jackNicholson = ("Jack", "Nicholson", "Male", "1937/04/22")
-$jackPalance = ("Jack", "Palance", "Male", "1919/02/18")
-$michaelGough = ("Michael", "Gough", "Male", "1916/12/23")
+$michaelKeaton = new Actor("Michael", "Keaton", "Male", "1951/09/05")
+$kimbaSinger = new Actor("Kim", "Basinger", "Female", "1953/12/08")
+$jackNicholson = new Actor("Jack", "Nicholson", "Male", "1937/04/22")
+$jackPalance = new Actor("Jack", "Palance", "Male", "1919/02/18")
+$michaelGough = new Actor("Michael", "Gough", "Male", "1916/12/23")
 
-$tobeyMaguire = ("Tobey", "Maguire", "Male", "1975/06/27")
-$willemDafoe = ("Willem", "Dafoe", "Male", "1955/07/22")
-$kirstenDunst = ("Kirsten", "Dunst", "Female", "1982/04/30")
-$jamesFranco = ("James", "Franco", "Male", "1978/04/19")
-$rosemaryHarris = ("Rosemary", "Harris", "Female", "1927/09/19")
+$tobeyMaguire = new Actor("Tobey", "Maguire", "Male", "1975/06/27")
+$willemDafoe = new Actor("Willem", "Dafoe", "Male", "1955/07/22")
+$kirstenDunst = new Actor("Kirsten", "Dunst", "Female", "1982/04/30")
+$jamesFranco = new Actor("James", "Franco", "Male", "1978/04/19")
+$rosemaryHarris = new Actor("Rosemary", "Harris", "Female", "1927/09/19")
 
-$danielCraig = ("Daniel", "Craig", "Male", "1968/03/02")
-$judiDench = ("Judi", "Dench", "Female", "1934/12/09")
-$javierBarden = ("Javier", "Bardem", "Male", "1969/03/01")
-$ralphFiennes = ("Ralph", "Fiennes", "Male", "1962/12/22")
-$naomiesHarris = ("Naomie", "Harris", "Female", "1976/09/06")
+$danielCraig = new Actor("Daniel", "Craig", "Male", "1968/03/02")
+$judiDench = new Actor("Judi", "Dench", "Female", "1934/12/09")
+$javierBarden = new Actor("Javier", "Bardem", "Male", "1969/03/01")
+$ralphFiennes = new Actor("Ralph", "Fiennes", "Male", "1962/12/22")
+$naomiesHarris = new Actor("Naomie", "Harris", "Female", "1976/09/06")
 
 
 ********************************** ROLE ********************************************************************
 
-$batman
-$vickiVale
-$joker
-$carlGrissom
-$alfredPennyworth
+$batman = new Role("Batman")
+$vickiVale = new Role("Vicki Vale")
+$joker = new Role("Joker")
+$carlGrissom = new Role("Carl Grissom")
+$alfredPennyworth = new Role("Alfred Pennyworth")
 
-$spiderMan
-$normanOsborn
-$maryJane
-$harryOsborn
-$auntMay
+$spiderMan = new Role("Spider-Man")
+$normanOsborn = new Role("Norman Osborn")
+$maryJane = new Role("Mary Jane")
+$harryOsborn = new Role("Harry Osborn")
+$auntMay = new Role("Aunt May")
 
-$jamesBond
-$m
-$raoulSilva
-$garrethMallory
-$eveMoneypenny
+$jamesBond = new Role("James Bond")
+$m = new Role("M")
+$raoulSilva = new Role("Raoul Silva")
+$garrethMallory = new Role("Garreth Mallory")
+$eveMoneypenny = new Role("Eve Moneypenny")
 
 
 

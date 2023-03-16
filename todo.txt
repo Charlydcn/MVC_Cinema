@@ -1,12 +1,85 @@
 CINEMA
 
 Classes
-    -> Movie (title, genre, releasedate, duration, director, casting, synopsis?)
+    -> Movie (title, movieGenre, releaseDate, duration, director, casting, synopsis?)
 
     -> Director (firstname, lastname, genre, birthdate)
 
-    -> Actor (firstname, lastname, genre, birthdate, role(nomdupersonnage))
+    -> Actor (firstname, lastname, genre, birthdate, role(nomdupersonnage), moviesPlayed)
 
-    -> Role (firstname, lastname, movie)
+    -> Role (rolename, movies)
     
     -> ...
+
+    FILM : Batman
+    -> title : Batman
+    -> movieGenre : Fantastique, Thriller, Action
+    -> releaseDate : 1989/09/13
+    -> duration : 125min
+    -> director : $timburton
+    -> casting :[
+                  $michaelkeaton->$batman,
+                  $kimbasinger->$vickivale,
+                  $jacknicholson->$joker,
+                  $jackpalance->$carlgrissom,
+                  $michaelgough->$alfredpennyworth
+                ]
+    -> synopsis : Le célèbre et impitoyable justicier, Batman, est de retour. Plus beau, plus fort et plus dépoussiéré que jamais, il s'apprête à nettoyer Gotham City et à affronter le terrible Joker...
+
+
+
+
+    FILM : Spider-man
+    -> title : Spider-man
+    -> movieGenre : Fantastique, Action
+    -> releaseDate : 2002/06/12
+    -> duration : 121min
+    -> director : $samraimi
+    -> casting :[
+                  $tobeymaguire->$spiderman,
+                  $willemdafoe->$normanosborn,
+                  $kirstendunst->$maryjane,
+                  $jamesfranco->$harryosborn,
+                  $rosemaryharris->$auntmay
+                ]               
+    -> synopsis : Après avoir été piqué par une araignée mutante, le collégien timoré Peter Parker subit une étrange transformation génétique. Il acquiert alors d'étonnantes facultés, comme de pouvoir s'accrocher aux surfaces des murs ou fabriquer des fils adhésifs qui lui permettent de se balancer d'un immeuble à l'autre...
+
+
+
+
+    FILM : Skyfall
+    -> title : Skyfall
+    -> movieGenre : Action, Espionnage, Thriller
+    -> releaseDate : 2012/10/26
+    -> duration : 143min
+    -> director : $samMendes
+    -> casting :[
+                  $danielCraig->$jamesBond,
+                  $judiDench->$m,
+                  $javierBarden->$raoulSilva,
+                  $ralphFiennes->$garrethMallory,
+                  $naomiesHarris->$eveMoneypenny
+                ]                
+    -> synopsis : Lorsque la dernière mission de Bond tourne mal, plusieurs agents infiltrés se retrouvent exposés dans le monde entier, Le MI6 est attaqué, et M est obligée de relocaliser l’Agence...
+
+
+
+
+
+
+
+
+
+    -> ROLE : $spiderman
+    -> ACTEURS : Tobey Maguire, Andrew Garfield, Tom Holland
+
+    -> ROLE : $jamesbond
+    -> ACTEURS : Daniel Craig, Sean Connery, Roger Moore
+
+    -> ROLE : $joker
+    -> ACTEURS : Joaquin Phoenix, Jared Leto, Heath Ledger
+
+    -> ROLE : $batman
+       -> Michael Keaton (Michael, Keaton, Male, 1951/09/05, Batman)
+       -> Chistian Bale (Chistian, Bale, Male, 1974/01/30 , Batman)
+       -> Robert Pattinson (Robert, Pattinson, Male, 1986/05/13, Batman)

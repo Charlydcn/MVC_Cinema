@@ -5,10 +5,12 @@ Classes
 
     -> Director (firstname, lastname, genre, birthdate)
 
-    -> Actor (firstname, lastname, genre, birthdate, role(nomdupersonnage), moviesPlayed)
+    -> Actor (firstname, lastname, genre, birthdate, role, actorMovies)
 
     -> Role (rolename, movies, actors)
     
+    -> movieGenre ?
+
     -> ...
 
 ********************************** MOVIE ********************************************************************

@@ -67,7 +67,7 @@
             
             public function setLastName($lastName) // A TESTER
             {
-                $this->_lastName = $lastName; // A TESTER
+                $this->_lastName = $lastName;
             }
                         
             public function setGenre($genre) // A TESTER

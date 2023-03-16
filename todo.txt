@@ -11,6 +11,8 @@ Classes
     
     -> ...
 
+********************************** MOVIE ********************************************************************
+
     FILM : Batman
     -> title : Batman
     -> movieGenre : Fantastique, Thriller, Action
@@ -18,11 +20,11 @@ Classes
     -> duration : 125min
     -> director : $timburton
     -> casting :[
-                  $michaelkeaton->$batman,
-                  $kimbasinger->$vickivale,
-                  $jacknicholson->$joker,
-                  $jackpalance->$carlgrissom,
-                  $michaelgough->$alfredpennyworth
+                  $michaelKeaton->$batman,
+                  $kimBasinger->$vickiVale,
+                  $jackNicholson->$joker,
+                  $jackPalance->$carlGrissom,
+                  $michaelGough->$alfredPennyworth
                 ]
     -> synopsis : Le célèbre et impitoyable justicier, Batman, est de retour. Plus beau, plus fort et plus dépoussiéré que jamais, il s'apprête à nettoyer Gotham City et à affronter le terrible Joker...
 
@@ -34,13 +36,13 @@ Classes
     -> movieGenre : Fantastique, Action
     -> releaseDate : 2002/06/12
     -> duration : 121min
-    -> director : $samraimi
+    -> director : $samRaimi
     -> casting :[
-                  $tobeymaguire->$spiderman,
-                  $willemdafoe->$normanosborn,
-                  $kirstendunst->$maryjane,
-                  $jamesfranco->$harryosborn,
-                  $rosemaryharris->$auntmay
+                  $tobeyMaguire->$spiderMan,
+                  $willemDafoe->$normanOsborn,
+                  $kirstenDunst->$maryJane,
+                  $jamesFranco->$harryOsborn,
+                  $rosemaryHarris->$auntMay
                 ]               
     -> synopsis : Après avoir été piqué par une araignée mutante, le collégien timoré Peter Parker subit une étrange transformation génétique. Il acquiert alors d'étonnantes facultés, comme de pouvoir s'accrocher aux surfaces des murs ou fabriquer des fils adhésifs qui lui permettent de se balancer d'un immeuble à l'autre...
 
@@ -61,6 +63,59 @@ Classes
                   $naomiesHarris->$eveMoneypenny
                 ]                
     -> synopsis : Lorsque la dernière mission de Bond tourne mal, plusieurs agents infiltrés se retrouvent exposés dans le monde entier, Le MI6 est attaqué, et M est obligée de relocaliser l’Agence...
+
+
+
+********************************** DIRECTOR ********************************************************************
+
+$timBurton = ("Tim", "Burton", "Male", "1958/08/25")
+
+$samRaimi = ("Sam", "Raimi", "Male", "1959/10/23")
+
+$samMendes = ("Sam", "Mendes", "Male", "1965/08/01")
+
+
+********************************** ACTOR ********************************************************************
+
+$michaelKeaton = ("Michael", "Keaton", "Male", "1951/09/05")
+$kimbaSinger = ("Kim", "Basinger", "Female", "1953/12/08")
+$jackNicholson = ("Jack", "Nicholson", "Male", "1937/04/22")
+$jackPalance = ("Jack", "Palance", "Male", "1919/02/18")
+$michaelGough = ("Michael", "Gough", "Male", "1916/12/23")
+
+$tobeyMaguire = ("Tobey", "Maguire", "Male", "1975/06/27")
+$willemDafoe = ("Willem", "Dafoe", "Male", "1955/07/22")
+$kirstenDunst = ("Kirsten", "Dunst", "Female", "1982/04/30")
+$jamesFranco = ("James", "Franco", "Male", "1978/04/19")
+$rosemaryHarris = ("Rosemary", "Harris", "Female", "1927/09/19")
+
+$danielCraig = ("Daniel", "Craig", "Male", "1968/03/02")
+$judiDench = ("Judi", "Dench", "Female", "1934/12/09")
+$javierBarden = ("Javier", "Bardem", "Male", "1969/03/01")
+$ralphFiennes = ("Ralph", "Fiennes", "Male", "1962/12/22")
+$naomiesHarris = ("Naomie", "Harris", "Female", "1976/09/06")
+
+
+********************************** ROLE ********************************************************************
+
+$batman
+$vickiVale
+$joker
+$carlGrissom
+$alfredPennyworth
+
+$spiderMan
+$normanOsborn
+$maryJane
+$harryOsborn
+$auntMay
+
+$jamesBond
+$m
+$raoulSilva
+$garrethMallory
+$eveMoneypenny
+
 
 
 

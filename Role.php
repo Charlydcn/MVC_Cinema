@@ -65,9 +65,7 @@
 
             public function __toString()
             {
-                return "<strong>Role's name : </strong>" . $this->_roleName . "<br>"
-                . "<strong>Movies : </strong>". $this->getRoleMovies() . "<br>"
-                . "<strong>Actors who played the role : </strong>". $this->getRoleActors() . "<br>";
+                return $this->_roleName . "<br>";
 
             }
 

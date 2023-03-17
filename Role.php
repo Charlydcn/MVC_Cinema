@@ -5,6 +5,7 @@
             private string $_name;
             private array $_movies;
             private array $_actors;
+            private array $_castings;
 
             public function __construct(string $_name)
             {
@@ -13,6 +14,7 @@
                 // $this->_role->addMovies($this);
                 $this->_actors = [];
                 // $this->_role->addActors($this);
+                $this->_castings = [];
             }
 
 // ************************************************ MÉTHODES ************************************************ 
@@ -43,6 +45,16 @@
                 return $result;
             }
 
+            public function getCastings()
+            {
+                $result = "<ul>";
+                foreach ($this->_castings as $casting) {
+                    $result .= "<li>" . $casting . "</li>";
+                }
+                $result .= "</ul>";
+                return $result; 
+            }
+
 // *************************************************************************************************
 // ************************************** MUTATEURS (setters) ************************************** 
 
@@ -63,9 +75,14 @@
 
 // *************************************************************************************************
 
+            public function addCasting(Casting $casting)
+            {
+                $this->_castings[] = $casting;
+            }
+
             public function __toString()
             {
-                return $this->_name . "<br>";
+                return $this->_name;
 
             }
 

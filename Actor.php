@@ -4,6 +4,7 @@
         {
             private Role $_role;
             private array $_movies;
+            private array $_castings;
 
             public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate, Role $_role)
             {
@@ -12,7 +13,7 @@
                 // $this->_role->addRole($this);
                 $this->_movies = [];
                 // $this->_movies->addActor($this);
-
+                $this->_castings = [];
             }
 
 // ************************************************ MÉTHODES ************************************************ 
@@ -33,6 +34,16 @@
                 return $result;
             }
 
+            public function getCastings()
+            {
+                $result = "<ul>";
+                foreach ($this->_castings as $casting) {
+                    $result .= "<li>" . $casting . "</li>";
+                }
+                $result .= "</ul>";
+                return $result; 
+            }
+
 // *************************************************************************************************
 // ************************************** MUTATEURS (setters) ************************************** 
 
@@ -48,9 +59,14 @@
 
 // *************************************************************************************************
 
+            public function addCasting(Casting $casting)
+            {
+                $this->_castings[] = $casting;
+            }
+
             public function __toString() // A TESTER
             {
-                return $this->getFirstName() . " " . $this->getLastName() . "<br>";
+                return $this->getFirstName() . " " . $this->getLastName();
             }
             //     . "<strong>Genre : </strong>". $this->_genre . "<br>"
             //     . "<strong>Age : </strong>". $this->getAge() . "<br>"

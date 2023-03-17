@@ -2,38 +2,31 @@
 
     class Casting
         {
-            private array $_roles = [];
-            private array $_actors = [];
+            private Role $_role;
+            private Actor $_actor;
             private Movie $_movie;
 
-            public function __construct(array $_roles, array $_actors, Movie $_movie)
+            public function __construct(Role $_role, Actor $_actor, Movie $_movie)
             {
-                $this->_roles = $_roles;
-                $this->_actors = $_actors;
+                $this->_role = $_role;
+                $this->_actor = $_actor;
                 $this->_movie = $_movie;
+                $_role->addCasting($this);
+                $_actor->addCasting($this);
+                $_movie->addCasting($this);
             }
 
 // ************************************************ MÉTHODES ************************************************ 
 // ************************************** ACCESSEURS (getters) **************************************
                     
-            public function getRoles() // A TESTER
+            public function getRole() // A TESTER
             {
-                $result = "<ul>";
-                foreach ($this->_roles as $role) {
-                    $result .= "<li>" . $role . "</li>";
-                }
-                $result .= "</ul>";
-                return $result;
+                return $this->_role;
             }
 
-            public function getActors() // A TESTER
+            public function getActor() // A TESTER
             {
-                $result = "<ul>";
-                foreach ($this->_actors as $actor) {
-                    $result .= "<li>" . $actor . "</li>";
-                }
-                $result .= "</ul>";
-                return $result;
+                return $this->_actor;
             }
 
             public function getMovie() // A TESTER
@@ -44,14 +37,14 @@
 // *************************************************************************************************
 // ************************************** MUTATEURS (setters) ************************************** 
 
-            public function setRoles($roles) // A TESTER
+            public function setRoles($role) // A TESTER
             {
-                $this->_roles = $roles;
+                $this->_role = $role;
             }
 
-            public function setActors($actors) // A TESTER
+            public function setActors($actor) // A TESTER
             {
-                $this->_actors = $actors;
+                $this->_actor = $actor;
             }
                         
             public function setMovie($movie) // A TESTER
@@ -61,10 +54,10 @@
 
 // *************************************************************************************************
 
-            // public function __toString()
-            // {
-            //     return 
-            // }
+            public function __toString()
+            {
+                return $this->getActor() . " (" . $this->getRole() . ") ";
+            }
 
         }
 

@@ -2,15 +2,15 @@
 
     class Casting
         {
-            private Role $_roles;
-            private Actor $_actors;
-            private Movie $_movies;
+            private array $_roles = [];
+            private array $_actors = [];
+            private Movie $_movie;
 
-            public function __construct(Role $_roles, Actor $_actors, Movie $_movies)
+            public function __construct(array $_roles, array $_actors, Movie $_movie)
             {
                 $this->_roles = $_roles;
                 $this->_actors = $_actors;
-                $this->_movies = $_movies;
+                $this->_movie = $_movie;
             }
 
 // ************************************************ MÉTHODES ************************************************ 
@@ -18,43 +18,53 @@
                     
             public function getRoles() // A TESTER
             {
-                return $this->_firstName;
+                $result = "<ul>";
+                foreach ($this->_roles as $role) {
+                    $result .= "<li>" . $role . "</li>";
+                }
+                $result .= "</ul>";
+                return $result;
             }
 
             public function getActors() // A TESTER
             {
-                return $this->_lastName;
+                $result = "<ul>";
+                foreach ($this->_actors as $actor) {
+                    $result .= "<li>" . $actor . "</li>";
+                }
+                $result .= "</ul>";
+                return $result;
             }
 
-            public function getMovies() // A TESTER
+            public function getMovie() // A TESTER
             {
-                return $this->_genre;
+                return $this->_movie;
             }
 
 // *************************************************************************************************
 // ************************************** MUTATEURS (setters) ************************************** 
 
-            public function setFirstName($firstName) // A TESTER
+            public function setRoles($roles) // A TESTER
             {
-                $this->_firstName = $firstName;
+                $this->_roles = $roles;
             }
 
-            public function setLastName($lastName) // A TESTER
+            public function setActors($actors) // A TESTER
             {
-                $this->_lastName = $lastName;
+                $this->_actors = $actors;
             }
                         
-            public function setGenre($genre) // A TESTER
+            public function setMovie($movie) // A TESTER
             {
-                $this->_genre = $genre;
-            }
-
-            public function setBirthDate($birthDate) // A TESTER
-            {
-                $this->_birthDate = new Datetime($_birthDate);
+                $this->_movie = $movie;
             }
 
 // *************************************************************************************************
+
+            // public function __toString()
+            // {
+            //     return 
+            // }
 
         }
 

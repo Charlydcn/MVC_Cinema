@@ -2,10 +2,10 @@
 
     abstract class Person
         {
-            private string $_firstName;
-            private string $_lastName;
-            private string $_genre;
-            private DateTime $_birthDate;
+            protected string $_firstName;
+            protected string $_lastName;
+            protected string $_genre;
+            protected DateTime $_birthDate;
 
             public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate)
             {

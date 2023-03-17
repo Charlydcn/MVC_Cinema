@@ -29,9 +29,9 @@
         $samRaimi = new Director("Sam", "Raimi", "Male", "1959/10/23");        
         $samMendes = new Director("Sam", "Mendes", "Male", "1965/08/01");
 
-        echo $timBurton . "<br>";
-        echo $samRaimi . "<br>";
-        echo $samMendes . "<br>";
+        // echo $timBurton . "<br>";
+        // echo $samRaimi . "<br>";
+        // echo $samMendes . "<br>";
 
     // ***************************************************** ROLE *****************************************************
 
@@ -60,7 +60,7 @@
         
         //***** Batman *****/
         $michaelKeaton = new Actor("Michael", "Keaton", "Male", "1951/09/05", $batman);
-        $kimbaSinger = new Actor("Kim", "Basinger", "Female", "1953/12/08", $vickiVale);
+        $kimBasinger = new Actor("Kim", "Basinger", "Female", "1953/12/08", $vickiVale);
         $jackNicholson = new Actor("Jack", "Nicholson", "Male", "1937/04/22", $joker);
         $jackPalance = new Actor("Jack", "Palance", "Male", "1919/02/18", $carlGrissom);
         $michaelGough = new Actor("Michael", "Gough", "Male", "1916/12/23", $alfredPennyworth);
@@ -82,31 +82,25 @@
     // ***************************************************** MOVIE *****************************************************
     // ******************************************* Batman *******************************************
 
-        $batman = new Movie
+        $movieBatman = new Movie
         (
         "Batman",
         "Action",
         "1989/09/13",
         125,
         $timBurton,
-        [
-            $michaelKeaton=>$batman,
-            $kimBasinger=>$vickiVale,
-            $jackNicholson=>$joker,
-            $jackPalance=>$carlGrissom,
-            $michaelGough=>$alfredPennyworth
-        ],
+        $castingBatman,
         "Le célèbre et impitoyable justicier, Batman, est de retour. Plus beau, plus fort et plus dépoussiéré que jamais, il s'apprête à nettoyer Gotham City et à
         affronter le terrible Joker..."
         );
 
-        // echo $batman->getTitle() . "<br>";
-        // echo $batman->getMovieGenre() . "<br>";
-        // echo $batman->getReleaseDate() . "<br>";
-        // echo $batman->getDuration() . "<br>";
-        // echo $batman->getDirector() . "<br>";
-        // echo $batman->getCasting() . "<br>";
-        // echo $batman->getSynopsis() . "<br>";
+        // echo $movieBatman->getTitle() . "<br>";
+        // echo $movieBatman->getMovieGenre() . "<br>";
+        // echo $movieBatman->getReleaseDate() . "<br>";
+        // echo $movieBatman->getDuration() . "<br>";
+        // echo $movieBatman->getDirector() . "<br>";
+        // echo $movieBatman->getCasting() . "<br>";
+        // echo $movieBatman->getSynopsis() . "<br>";
 
     // ******************************************* Spider-man ***************************************
 
@@ -118,11 +112,11 @@
         121,
         $samRaimi,
         [
-            $tobeyMaguire->$spiderMan,
-            $willemDafoe->$normanOsborn,
-            $kirstenDunst->$maryJane,
-            $jamesFranco->$harryOsborn,
-            $rosemaryHarris->$auntMay
+            // $tobeyMaguire->$spiderMan,
+            // $willemDafoe->$normanOsborn,
+            // $kirstenDunst->$maryJane,
+            // $jamesFranco->$harryOsborn,
+            // $rosemaryHarris->$auntMay
         ],
         "Après avoir été piqué par une araignée mutante, le collégien timoré Peter Parker subit une étrange transformation génétique. Il acquiert alors d'étonnantes facultés,
         comme de pouvoir s'accrocher aux surfaces des murs ou fabriquer des fils adhésifs qui lui permettent de se balancer d'un immeuble à l'autre..."
@@ -147,11 +141,11 @@
         143,
         $samMendes,
         [
-            $danielCraig->$jamesBond,
-            $judiDench->$m,
-            $javierBarden->$raoulSilva,
-            $ralphFiennes->$garrethMallory,
-            $naomiesHarris->$eveMoneypenny
+            // $danielCraig->$jamesBond,
+            // $judiDench->$m,
+            // $javierBarden->$raoulSilva,
+            // $ralphFiennes->$garrethMallory,
+            // $naomiesHarris->$eveMoneypenny
         ],
         "Lorsque la dernière mission de Bond tourne mal, plusieurs agents infiltrés se retrouvent exposés dans le monde entier, Le MI6 est attaqué, et M est obligée
         de relocaliser l'Agence..."
@@ -164,8 +158,21 @@
         // echo $skyfall->getDirector() . "<br>";
         // echo $skyfall->getCasting() . "<br>";
         // echo $skyfall->getSynopsis() . "<br>";
+        
+    // ***************************************************** CASTING *****************************************************
 
+        $castingBatman = new Casting
+        (
+            [$batman, $vickiVale, $joker, $carlGrissom, $alfredPennyworth],
+            [$michaelKeaton, $kimBasinger, $jackNicholson, $jackPalance, $michaelGough],
+            $movieBatman
+        );
+ 
+        echo $castingBatman->getActors();
+        echo $castingBatman->getRoles();
+        echo $castingBatman->getMovie();
 
+        
     
     
     ?>

@@ -5,11 +5,14 @@
             private Role $_role;
             private array $_movies;
 
-            public function __construct(Role $_role)
+            public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate, Role $_role)
             {
+                parent::__construct($_firstName, $_lastName, $_genre, $_birthDate);
                 $this->_role = $_role;
                 // $this->_role->addRole($this);
                 $this->_movies = [];
+                // $this->_movies->addActor($this);
+
             }
 
 // ************************************************ MÉTHODES ************************************************ 
@@ -47,7 +50,7 @@
 
             public function __toString() // A TESTER
             {
-                return $this->_firstName . " " . $this->_lastName . "<br>";
+                return $this->getFirstName() . " " . $this->getLastName() . "<br>";
             }
             //     . "<strong>Genre : </strong>". $this->_genre . "<br>"
             //     . "<strong>Age : </strong>". $this->getAge() . "<br>"

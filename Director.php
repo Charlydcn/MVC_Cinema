@@ -4,8 +4,9 @@
         {
             private array $_movies;
 
-            public function __construct()
+            public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate, )
             {
+                parent::__construct($_firstName, $_lastName, $_genre, $_birthDate);
                 $this->_movies = [];
             }
 
@@ -33,13 +34,15 @@
 
     // *************************************************************************************************
 
+            public function addMovie(Movie $movie)
+            {
+                $this->_movies[] = $movie;
+            }
+
             public function __toString() // A TESTER
             {
-                return "<strong>Director's name : </strong>" . $this->_firstName . " " . $this->_lastName . "<br>"
-                . "<strong>Genre : </strong>". $this->_genre . "<br>"
-                . "<strong>Age : </strong>". $this->getAge() . "<br>"
-                . "<strong>Movies : </strong>" . $this->getMovies();
-            }
+                return $this->getFirstName() . " " . $this->getLastName() . "<br>";
         }
+    }
 
 ?>

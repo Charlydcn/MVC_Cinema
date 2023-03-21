@@ -228,6 +228,8 @@
 
     echo "<strong>Movies starring " . $tobeyMaguire . " : " . $tobeyMaguire->getMovies();
 
+    echo $spy->getNbMovie();
+
     ?>
 
 </body>

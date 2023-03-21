@@ -12,9 +12,9 @@ class Director extends Person
 
 
     // ************************************************ MÉTHODES ************************************************ 
-// ************************************** ACCESSEURS (getters) **************************************
+    // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getMovies() // A TESTER
+    public function getMovies() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_movies as $movie) {
@@ -27,9 +27,9 @@ class Director extends Person
     // *************************************************************************************************
     // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setMovies(array $movies) // A TESTER
+    public function setMovies(Movie $movie) // CHECK
     {
-        $this->_movies = $movies;
+        $this->_movies[] = $movie;
     }
 
     // *************************************************************************************************
@@ -39,7 +39,7 @@ class Director extends Person
         $this->_movies[] = $movie;
     }
 
-    public function __toString() // A TESTER
+    public function __toString() // CHECK
     {
         return $this->getFirstName() . " " . $this->getLastName();
     }

@@ -127,11 +127,7 @@ class Movie
 
     public function __toString() // A TESTER
     {
-        return "<strong>Movie title : </strong>" . $this->_title . "<br>"
-            . "<strong>Genre : </strong>" . $this->_movieGenre . "<br>"
-            . "<strong>Release date : </strong>" . $this->getReleaseDate() . "<br>"
-            . "<strong>Duration : </strong>" . $this->_duration . "<br>"
-            . "<strong>Director : </strong>" . $this->_director;
+        return $this->_title;
 
     }
 }

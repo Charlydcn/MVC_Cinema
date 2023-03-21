@@ -34,9 +34,9 @@ class Casting
         return $this->_movie;
     }
 
-    public function getInfos()
+    public function getCastingForMovie()
     {
-        return "Dans le film <strong>" . $this->_movie . "</strong>,<strong> " . $this->_role . "</strong> a été joué par <strong>" . $this->_actor . "</strong>. ";
+        return $this->_role . " (" . $this->_actor . ") ";
     }
 
     // *************************************************************************************************
@@ -61,7 +61,7 @@ class Casting
 
     public function __toString()
     {
-        return $this->getActor() . " (" . $this->getRole() . ") ";
+        return $this->getActor() . " (" . $this->getRole() . ") " . $this->getMovie();
     }
 
 }

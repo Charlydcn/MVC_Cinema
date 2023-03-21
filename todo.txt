@@ -14,6 +14,36 @@ Classes
     
     -> Héritage????...
 
+
+On doit pouvoir :
+
+CHECK || Lister la liste des acteurs ayant incarné un rôle précis (ex: les acteurs ayant joué le rôle de Batman : Michael Keaton, Val Kilmer, George Clooney, …)
+
+CHECK || Lister le casting d'un film (dans le film Star Wars Episode IV, Han Solo a été incarné par Harrison Ford, Luke Skywalker a été incarné par Mark Hamill, ...)
+
+Lister les films par genre (exemple : le genre SF est associé à X films : Star Wars, Blade Runner, ...)
+
+Lister la filmographie d'un acteur (dans quels films a-t-il joué ?)
+
+CHECK || Lister la filmographie d'un réalisateur (quels sont les films qu'a réalisé ce réalisateur ?)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ********************************** MOVIE ********************************************************************
 
     FILM : Batman

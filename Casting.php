@@ -17,42 +17,42 @@ class Casting
     }
 
     // ************************************************ MÉTHODES ************************************************ 
-// ************************************** ACCESSEURS (getters) **************************************
+    // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getRole() // A TESTER
+    public function getRole() // CHECK
     {
         return $this->_role;
     }
 
-    public function getActor() // A TESTER
+    public function getActor() // CHECK
     {
         return $this->_actor;
     }
 
-    public function getMovie() // A TESTER
+    public function getMovie() // CHECK
     {
         return $this->_movie;
     }
 
-    public function getCastingForMovie()
+    public function getCastingForMovie() // CHECK
     {
         return $this->_role . " (" . $this->_actor . ") ";
     }
 
     // *************************************************************************************************
-// ************************************** MUTATEURS (setters) ************************************** 
+    // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setRoles($role) // A TESTER
+    public function setRole($role) // CHECK
     {
         $this->_role = $role;
     }
 
-    public function setActors($actor) // A TESTER
+    public function setActor($actor) // CHECK
     {
         $this->_actor = $actor;
     }
 
-    public function setMovie($movie) // A TESTER
+    public function setMovie($movie) // CHECK
     {
         $this->_movie = $movie;
     }

@@ -31,27 +31,27 @@ class Movie
         return $this->_title;
     }
 
-    public function getMovieGenre() // A TESTER
+    public function getMovieGenre() // CHECK
     {
         return $this->_movieGenre;
     }
 
-    public function getReleaseDate() // A TESTER
+    public function getReleaseDate() // CHECK
     {
         return $this->_releaseDate->format("Y-m-d");
     }
 
-    public function getDuration() // A TESTER
+    public function getDuration() // CHECK
     {
         return $this->_duration;
     }
 
-    public function getDirector() // A TESTER
+    public function getDirector() // CHECK
     {
         return $this->_director;
     }
 
-    public function getCastings()
+    public function getCastings() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {
@@ -61,12 +61,12 @@ class Movie
         return $result;
     }
 
-    public function getSynopsis() // A TESTER
+    public function getSynopsis() // CHECK
     {
         return $this->_synopsis;
     }
 
-    public function getInfos()
+    public function getInfos() // CHECK
     {
         $result = "<h2>" . strtoupper($this->_title) . "<br></h2>"
             . "<strong>Title : </strong>" . $this->_title . "<br>";
@@ -87,32 +87,32 @@ class Movie
         $this->_title = $title;
     }
 
-    public function setMovieGenre($movieGenre) // A TESTER
+    public function setMovieGenre($movieGenre) // CHECK
     {
-        $this->_movieGenre = $movieGenre; // A TESTER
+        $this->_movieGenre = $movieGenre;
     }
 
-    public function setReleaseDate($releaseDate) // A TESTER
+    public function setReleaseDate($releaseDate) // CHECK
     {
         $this->_releaseDate = new Datetime($releaseDate);
     }
 
-    public function setDuration($duration) // A TESTER
+    public function setDuration($duration) // CHECK
     {
         $this->_duration = $duration;
     }
 
-    public function setDirector($director) // A TESTER
+    public function setDirector($director) // CHECK
     {
         $this->_director = $director;
     }
 
-    // public function setCasting(array $casting) // A TESTER
-    // {
-    //     $this->_casting = $casting;
-    // }
+    public function setCastings(Casting $casting) // CHECK
+    {
+        $this->_castings[] = $casting;
+    }
 
-    public function setSynopsis($synopsis) // A TESTER
+    public function setSynopsis($synopsis) // CHECK
     {
         $this->_synopsis = $synopsis;
     }

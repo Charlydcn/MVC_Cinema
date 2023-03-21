@@ -129,9 +129,7 @@ class Movie
         return $this->_title . " (" . $this->_releaseDate->format("Y") . ") ";
 
     }
+
 }
-
-
-
 
 ?>

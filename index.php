@@ -72,8 +72,8 @@
 
     // ************************** ECHO **************************
     
-    echo $movieBatman->getInfos();
-
+    // echo $movieBatman->getInfos();
+    
     // **************************************************** SPIDERMAN ****************************************************
     
     // ************************** DIRECTOR **********************
@@ -119,8 +119,8 @@
 
     // ************************** ECHO **************************
     
-    echo $movieSpiderman->getInfos();
-
+    // echo $movieSpiderman->getInfos();
+    
     // **************************************************** SKYFALL ****************************************************
     
     // ************************** DIRECTOR **********************
@@ -166,8 +166,8 @@
 
     // ************************** ECHO **************************
     
-    echo $skyfall->getInfos();
-
+    // echo $skyfall->getInfos();
+    
 
     // **************************************************** TESTMOVIE123 ****************************************************
     
@@ -205,7 +205,7 @@
 
     // ************************** CASTINGS **********************
     
-    $testRole1Casting = new Casting($testRole1, $testActor1, $testMovie1);
+    $testRole1Casting = new Casting($testRole1, $tobeyMaguire, $testMovie1);
     $testRole2Casting = new Casting($testRole2, $testActor2, $testMovie1);
     $testRole3Casting = new Casting($testRole3, $testActor3, $testMovie1);
     $testRole4Casting = new Casting($testRole4, $testActor4, $testMovie1);
@@ -213,22 +213,73 @@
 
     // ************************** ECHO **************************
     
-    echo $testMovie1->getInfos();
-
+    // echo $testMovie1->getInfos();
+    
     // **************************************************** TEST ****************************************************
     
     $valKilmer = new Actor("Val", "Kilmer", "Male", "1959/12/31", $batman);
     $georgeClooney = new Actor("George", "Clooney", "Male", "1961/05/06", $batman);
 
-    echo "<h2>TESTS</h2>";
+    // echo "<h2>TESTS</h2>";
+    
+    // echo "<h3>Get actor by role<br>******************************</h3>";
+    
+    // echo "<strong>Acteurs ayant joué le rôle de " . $batman . " : <br></strong>" . $batman->getActors();
+    
 
-    echo "<strong>Actors who played the role " . $batman . " :</strong>" . $batman->getActors();
+    // echo "<h3>Get role by actor<br>******************************</h3>";
+    
+    // echo "<strong>Rôles jouées par " . $tobeyMaguire . ": <br></strong>" . $tobeyMaguire->getRoles();
+    
 
-    echo " <strong>Movies directed by " . $samMendes . " :</strong>" . $samMendes->getMovies();
+    // echo "<h3>Get full casting<br>******************************</h3>";
+    
+    // echo "Dans le film <strong>" . $movieBatman . ":<br></strong>"
+    //     . "<strong>" . $batmanCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $batmanCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $vickiValeCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $vickiValeCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $jokerCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $jokerCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $carlGrissomCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $carlGrissomCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $alfredPennyworthCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $alfredPennyworthCasting->getActor() . "</strong>";
+    
 
-    echo "<strong>Movies starring " . $tobeyMaguire . " : " . $tobeyMaguire->getMovies();
+    // echo "<h3>Get movies by director<br>******************************</h3>";
+    
+    // echo "<strong>Filmographie de " . $samMendes . " :</strong>" . $samMendes->getMovies();
+    
 
-    echo $spy->getNbMovie();
+    // echo "<h3>Get movies by actor<br>******************************</h3>";
+    
+    // echo "<strong>Filmographie de " . $tobeyMaguire . ": <br></strong>" . $tobeyMaguire->getMovies() . "<br>";
+    
+
+    // echo "<h3>Get movies by genre<br>******************************</h3>";
+    
+    // echo "Le genre " . $spy . " est associé à " . $spy->getNbMovie() . " films : <br>" . $spy->getMovies();
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     ?>
 

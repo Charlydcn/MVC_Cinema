@@ -18,7 +18,7 @@ class Role
         return $this->_name;
     }
 
-    public function getActors() // A TESTER
+    public function getActors() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {
@@ -28,7 +28,7 @@ class Role
         return $result;
     }
 
-    public function getMovies() // A TESTER
+    public function getMovies() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {

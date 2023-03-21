@@ -3,31 +3,30 @@
 class Movie
 {
     private string $_title;
-    private string $_movieGenre;
+    private MovieGenre $_movieGenre;
     private DateTime $_releaseDate;
     private int $_duration;
     private Director $_director;
     private array $_castings;
     private string $_synopsis;
 
-    public function __construct(string $_title, string $_movieGenre, string $_releaseDate, int $_duration, Director $_director, string $_synopsis)
+    public function __construct(string $_title, MovieGenre $_movieGenre, string $_releaseDate, int $_duration, Director $_director, string $_synopsis)
     {
         $this->_title = $_title;
         $this->_movieGenre = $_movieGenre;
         $this->_releaseDate = new DateTime($_releaseDate);
         $this->_duration = $_duration;
         $this->_director = $_director;
-        $this->_director->addMovie($this);
+        $_director->addMovie($this);
         $this->_castings = [];
         $this->_synopsis = $_synopsis;
-        // $this->_actor->addMovie($this);
+        $_movieGenre->addMovie($this);
     }
-
 
     // ************************************************ MÉTHODES ************************************************ 
     // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getTitle() // A TESTER
+    public function getTitle() // CHECK
     {
         return $this->_title;
     }
@@ -56,7 +55,7 @@ class Movie
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {
-            $result .= "<li>" . $casting . "</li>";
+            $result .= "<li>" . $casting->getCastingForMovie() . "</li>";
         }
         $result .= "</ul>";
         return $result;
@@ -83,7 +82,7 @@ class Movie
     // *************************************************************************************************
     // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setTitle($title) // A TESTER
+    public function setTitle($title) // CHECK
     {
         $this->_title = $title;
     }

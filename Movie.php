@@ -127,7 +127,7 @@ class Movie
 
     public function __toString() // A TESTER
     {
-        return $this->_title;
+        return $this->_title . " (" . $this->_releaseDate->format("Y") . ") ";
 
     }
 }

@@ -12,14 +12,14 @@ class MovieGenre
     }
 
     // ************************************************ MÉTHODES ************************************************ 
-// ************************************** ACCESSEURS (getters) **************************************
+    // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getGenre() // A TESTER
+    public function getGenre() // CHECK
     {
         return $this->_genre;
     }
 
-    public function getMovies()
+    public function getMovies() // CHECK
     {
         $result = "";
         foreach ($this->_movies as $movie) {
@@ -28,22 +28,27 @@ class MovieGenre
         return $result;
     }
 
-    public function getNbMovie()
+    public function getNbMovies() // CHECK
     {
         return count($this->_movies);
     }
 
     // *************************************************************************************************
-// ************************************** MUTATEURS (setters) ************************************** 
+    // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setGenre($genre) // A TESTER
+    public function setGenre($genre) // CHECK
     {
         $this->_genre = $genre;
     }
 
+    public function setMovies(Movie $movie) // CHECK
+    {
+        $this->_movies[] = $movie;
+    }
+
     // *************************************************************************************************
 
-    public function __toString()
+    public function __toString() // CHECK
     {
         return $this->_genre;
     }

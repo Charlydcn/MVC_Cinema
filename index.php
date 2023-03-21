@@ -23,9 +23,9 @@
         include $class_name . ".php";
     });
 
-    $action = "Action";
-    $fantasy = "Fantasy";
-    $spy = "Spy";
+    $action = new MovieGenre("Action");
+    $fantasy = new MovieGenre("Fantasy");
+    $spy = new MovieGenre("Spy");
 
     // **************************************************** BATMAN ****************************************************
     

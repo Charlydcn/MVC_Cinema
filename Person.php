@@ -18,27 +18,27 @@ abstract class Person
     // ************************************************ MÉTHODES ************************************************ 
 // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getFirstName() // A TESTER
+    public function getFirstName() // CHECK
     {
         return $this->_firstName;
     }
 
-    public function getLastName() // A TESTER
+    public function getLastName() // CHECK
     {
         return $this->_lastName;
     }
 
-    public function getGenre() // A TESTER
+    public function getGenre() // CHECK
     {
         return $this->_genre;
     }
 
-    public function getBirthDate() // A TESTER
+    public function getBirthDate() // CHECK
     {
         return $this->_birthDate->format("Y-m-d");
     }
 
-    public function getAge() // A TESTER
+    public function getAge() // CHECK
     {
         $now = new DateTime();
         $age = $this->_birthDate->diff($now);
@@ -48,22 +48,22 @@ abstract class Person
     // *************************************************************************************************
 // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setFirstName($firstName) // A TESTER
+    public function setFirstName($firstName) // CHECK
     {
         $this->_firstName = $firstName;
     }
 
-    public function setLastName($lastName) // A TESTER
+    public function setLastName($lastName) // CHECK
     {
         $this->_lastName = $lastName;
     }
 
-    public function setGenre($genre) // A TESTER
+    public function setGenre($genre) // CHECK
     {
         $this->_genre = $genre;
     }
 
-    public function setBirthDate($birthDate) // A TESTER
+    public function setBirthDate($birthDate) // CHECK
     {
         $this->_birthDate = new Datetime($birthDate);
     }

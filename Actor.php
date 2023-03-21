@@ -8,13 +8,13 @@ class Actor extends Person
     public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate, Role $_role)
     {
         parent::__construct($_firstName, $_lastName, $_genre, $_birthDate);
-        $_role->addActor($this);
+        // $_role->addActor($this);
     }
 
     // ************************************************ MÉTHODES ************************************************ 
     // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getRoles() // A TESTER
+    public function getRoles() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {
@@ -24,7 +24,7 @@ class Actor extends Person
         return $result;
     }
 
-    public function getMovies() // A TESTER
+    public function getMovies() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {
@@ -34,7 +34,7 @@ class Actor extends Person
         return $result;
     }
 
-    public function getCastings()
+    public function getCastings() // CHECK
     {
         $result = "<ul>";
         foreach ($this->_castings as $casting) {
@@ -47,15 +47,10 @@ class Actor extends Person
     // *************************************************************************************************
     // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setRole($role) // A TESTER
+    public function setCastings($casting) // CHECK
     {
-        $this->_role = $role;
+        $this->_castings[] = $casting;
     }
-
-    // public function setMovies(array $directorMovies) // A TESTER
-    // {
-    //     $this->_directorMovies = $directorMovies;
-    // }
 
     // *************************************************************************************************
 
@@ -64,12 +59,8 @@ class Actor extends Person
         $this->_castings[] = $casting;
     }
 
-    // public function addMovie(Movie $movie)
-    // {
-    //     $this->_movies[] = $movie;
-    // }
 
-    public function __toString() // A TESTER
+    public function __toString() // CHECK
     {
         return $this->getFirstName() . " " . $this->getLastName();
     }

@@ -3,41 +3,36 @@
 class Role
 {
     private string $_name;
-    private array $_movies;
-    private array $_actors;
     private array $_castings;
 
     public function __construct(string $_name)
     {
         $this->_name = $_name;
-        $this->_movies = [];
-        $this->_actors = [];
-        $this->_castings = [];
     }
 
     // ************************************************ MÉTHODES ************************************************ 
-// ************************************** ACCESSEURS (getters) *************************************
+    // ************************************** ACCESSEURS (getters) *************************************
 
-    public function getName()
+    public function getName() // CHECK
     {
         return $this->_name;
     }
 
-    public function getMovies()
+    public function getActors() // A TESTER
     {
         $result = "<ul>";
-        foreach ($this->_movies as $movie) {
-            $result .= "<li>" . $movie . "</li>";
+        foreach ($this->_castings as $casting) {
+            $result .= "</li>" . $casting->getActor() . "</li><br>";
         }
         $result .= "</ul>";
         return $result;
     }
 
-    public function getActors()
+    public function getMovies() // A TESTER
     {
         $result = "<ul>";
-        foreach ($this->_actors as $actor) {
-            $result .= "<li>" . $actor . "</li>";
+        foreach ($this->_castings as $casting) {
+            $result .= "</li>" . $casting->getMovie() . "</li><br>";
         }
         $result .= "</ul>";
         return $result;
@@ -53,22 +48,16 @@ class Role
         return $result;
     }
 
-    // *************************************************************************************************
-// ************************************** MUTATEURS (setters) ************************************** 
+    // ************************************** MUTATEURS (setters) ************************************** 
 
-    public function setName($name)
+    public function setName($name) // CHECK
     {
         $this->_name = $name;
     }
 
-    public function setMovies(array $movies)
+    public function setCastings($casting)
     {
-        $this->_movies = $movies;
-    }
-
-    public function setActors(array $actors)
-    {
-        $this->_actors = $actors;
+        $this->_castings[] = $casting;
     }
 
     // *************************************************************************************************
@@ -76,11 +65,6 @@ class Role
     public function addCasting(Casting $casting)
     {
         $this->_castings[] = $casting;
-    }
-
-    public function addActor(Actor $actor)
-    {
-        $this->_actors[] = $actor;
     }
 
     public function __toString()

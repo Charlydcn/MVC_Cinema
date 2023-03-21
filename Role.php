@@ -11,9 +11,7 @@
             {
                 $this->_name = $_name;
                 $this->_movies = [];
-                // $this->_role->addMovies($this);
                 $this->_actors = [];
-                // $this->_role->addActors($this);
                 $this->_castings = [];
             }
 
@@ -78,6 +76,11 @@
             public function addCasting(Casting $casting)
             {
                 $this->_castings[] = $casting;
+            }
+
+            public function addActor(Actor $actor)
+            {
+                $this->_actors[] = $actor;
             }
 
             public function __toString()

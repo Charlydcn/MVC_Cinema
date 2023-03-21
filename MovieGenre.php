@@ -4,13 +4,11 @@ class MovieGenre
 {
     private string $_genre;
     private array $_movies;
-    private static $_nbMovie = 0;
 
     public function __construct(string $_genre)
     {
         $this->_genre = $_genre;
         $this->_movies = [];
-        self::$_nbMovie++;
     }
 
     // ************************************************ MÉTHODES ************************************************ 
@@ -21,9 +19,18 @@ class MovieGenre
         return $this->_genre;
     }
 
+    public function getMovies()
+    {
+        $result = "";
+        foreach ($this->_movies as $movie) {
+            $result .= $movie . "<br>";
+        }
+        return $result;
+    }
+
     public function getNbMovie()
     {
-        echo self::$_nbMovie;
+        return count($this->_movies);
     }
 
     // *************************************************************************************************
@@ -41,10 +48,10 @@ class MovieGenre
         return $this->_genre;
     }
 
-    // public function addMovie(Movie $movie)
-// {
-//     $this->_movies = $movie;
-// }
+    public function addMovie(Movie $movie)
+    {
+        $this->_movies[] = $movie;
+    }
 
 }
 

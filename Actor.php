@@ -2,33 +2,33 @@
 
 class Actor extends Person
 {
-    private array $_role;
-    private array $_movies;
+
     private array $_castings;
-    private Role $_roles;
 
     public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate, Role $_role)
     {
         parent::__construct($_firstName, $_lastName, $_genre, $_birthDate);
-        $this->_role = [];
         $_role->addActor($this);
-        $this->_movies = [];
-        $this->_castings = [];
     }
 
     // ************************************************ MÉTHODES ************************************************ 
-// ************************************** ACCESSEURS (getters) **************************************
+    // ************************************** ACCESSEURS (getters) **************************************
 
-    public function getRole() // A TESTER
+    public function getRoles() // A TESTER
     {
-        return $this->_role;
+        $result = "<ul>";
+        foreach ($this->_castings as $casting) {
+            $result .= "</li>" . $casting->getRole() . "</li><br>";
+        }
+        $result .= "</ul>";
+        return $result;
     }
 
     public function getMovies() // A TESTER
     {
         $result = "<ul>";
-        foreach ($this->_movies as $movie) {
-            $result .= "<li>" . $movie . "</li>";
+        foreach ($this->_castings as $casting) {
+            $result .= "</li>" . $casting->getMovie() . "</li><br>";
         }
         $result .= "</ul>";
         return $result;
@@ -45,7 +45,7 @@ class Actor extends Person
     }
 
     // *************************************************************************************************
-// ************************************** MUTATEURS (setters) ************************************** 
+    // ************************************** MUTATEURS (setters) ************************************** 
 
     public function setRole($role) // A TESTER
     {
@@ -64,10 +64,10 @@ class Actor extends Person
         $this->_castings[] = $casting;
     }
 
-    public function addMovie(Movie $movie)
-    {
-        $this->_movies[] = $movie;
-    }
+    // public function addMovie(Movie $movie)
+    // {
+    //     $this->_movies[] = $movie;
+    // }
 
     public function __toString() // A TESTER
     {

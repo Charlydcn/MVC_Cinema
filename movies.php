@@ -6,76 +6,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
-    <link rel="stylesheet" href="/assets/style.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/assets/CSS/style.css">
+
+    <!-- *************PHP REQUIRE************* -->
+    <?php require 'assets/classes/Person.php' ?>
+    <?php require 'assets/classes/Director.php' ?>
+    <?php require 'assets/classes/Role.php' ?>
+    <?php require 'assets/classes/Actor.php' ?>
+    <?php require 'assets/classes/Movie.php' ?>
+    <?php require 'assets/classes/Casting.php' ?>
+    <?php require 'assets/classes/MovieGenre.php' ?>
+    <?php require 'assets/classes/indexold.php'?>
+    <style> <?php include 'assets/CSS/style.css'; ?> </style>
+    <!-- ************************************* -->
+    
 </head>
 
 <body>
-
+    
     <header>
 
         <h1>POO CINEMA</h1>
 
-        <header>
+        <nav>
+            <ul>
+                <a href="index.php">
+                    <li>Accueil</li>
+                </a>
 
-            <nav>
-                <ul>
-                    <a href="index.php">
-                        <li>Accueil</li>
-                    </a>
-                    <a href="movies.php">
-                        <li>Films</li>
-                    </a>
-                    <a href="actors.php">
-                        <li>Acteurs</li>
-                    </a>
-                    <a href="directors.php">
-                        <li>Producteurs</li>
-                    </a>
-                    <a href="roles.php">
-                        <li>Rôles</li>
-                    </a>
-                </ul>
-            </nav>
+                <a href="actors.php">
+                    <li>Acteurs</li>
+                </a>
 
-        </header>
+                <a href="directors.php">
+                    <li>Producteurs</li>
+                </a>
 
-        <main>
+                <a href="roles.php">
+                    <li>Rôles</li>
+                </a>
+            </ul>
+        </nav>
 
-            <article>
+     </header>
+
+    <main>
+        
+        <div id="movie_cards">
+            <article class="movie_card">
                 <figure>
-                    <img src="/assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
-                </figure>
-                <figcaption>
+
+                    <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+
+                    <figcaption>
                     <?php echo $movieBatman ?>
-                </figcaption>
-            </article>
-
-            <article>
-                <figure>
+                    </figcaption>
 
                 </figure>
-                <figcaption>
-
-                </figcaption>
             </article>
 
-            <article>
+            <article class="movie_card">
+
                 <figure>
+                    <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    
+                    <figcaption>
+                    <?php echo $movieBatman ?>
+                    </figcaption>
 
                 </figure>
-                <figcaption>
-
-                </figcaption>
             </article>
 
-        </main>
+            <article class="movie_card">
 
-        <footer>
+                <figure>
+                    <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    
+                    <figcaption>
+                    <?php echo $movieBatman ?>
+                    </figcaption>
 
-        </footer>
+                </figure>
+            </article>
+    
+        </div>
+
+    </main>
+
+    <footer>
+
+    </footer>
 
 </body>
 

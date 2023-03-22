@@ -36,9 +36,13 @@
                 <a href="index.php">
                     <li>Accueil</li>
                 </a>
-                
+
                 <a href="movies.php">
                     <li>Films</li>
+                </a>
+
+                <a href="actors.php">
+                    <li>Acteurs</li>
                 </a>
 
                 <a href="directors.php">

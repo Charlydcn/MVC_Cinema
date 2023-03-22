@@ -40,13 +40,17 @@
                 <a href="movies.php">
                     <li>Films</li>
                 </a>
-                
+
                 <a href="actors.php">
                     <li>Acteurs</li>
                 </a>
 
                 <a href="directors.php">
                     <li>Producteurs</li>
+                </a>
+
+                <a href="roles.php">
+                    <li>Rôles</li>
                 </a>
             </ul>
         </nav>

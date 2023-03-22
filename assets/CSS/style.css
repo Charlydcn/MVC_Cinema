@@ -1,0 +1,89 @@
+/* GENERAL */
+
+* {
+    font-family: Poppins;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior:smooth;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 1.5rem;
+}
+
+header > h1 {
+    width: auto;
+    color:rgb(25, 41, 114);
+    text-align: center;
+}
+
+/* NAV */
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:50%;
+}
+
+nav ul {
+    display:inline-flex;
+    list-style-type: none;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+nav a {
+    text-decoration: none;
+    font-size:1.25rem;
+    color:rgb(25, 41, 114);
+}
+
+/* MOVIE CARDS */
+
+#movie_cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 2.5%;
+    justify-content: space-around;
+}
+
+.movie_card {
+    max-width: 400px;
+}
+
+.movie_card figure {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.movie_card figure img {
+    max-width:325px;
+    transition: .3s;
+}
+
+.movie_card a:nth-child(2) {
+    text-decoration: none;
+    width: fit-content;
+    color:rgb(25, 41, 114);
+    transition:.3s;
+}
+
+.movie_card a:nth-child(2):hover, .movie_card figure img:hover {
+    opacity:85%;
+}

@@ -5,10 +5,9 @@ class Actor extends Person
 
     private array $_castings;
 
-    public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate, Role $_role)
+    public function __construct(string $_firstName, string $_lastName, string $_genre, string $_birthDate)
     {
         parent::__construct($_firstName, $_lastName, $_genre, $_birthDate);
-        // $_role->addActor($this);
     }
 
     // ************************************************ MÉTHODES ************************************************ 

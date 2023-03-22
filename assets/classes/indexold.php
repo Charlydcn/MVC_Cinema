@@ -15,8 +15,6 @@
 
 <body>
 
-    <h1>CINEMA</h1>
-
     <?php
 
     spl_autoload_register(function ($class_name) {
@@ -102,7 +100,7 @@
     
     $movieSpiderman = new Movie
     (
-        "Spider-man",
+        "Spiderman",
         $fantasy,
         "2002/06/12",
         121,

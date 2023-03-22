@@ -73,8 +73,8 @@ nav a {
 }
 
 .movie_card figure img {
-    max-width:325px;
     transition: .3s;
+    max-height: 500px;
 }
 
 .movie_card a:nth-child(2) {

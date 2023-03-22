@@ -37,6 +37,10 @@
                     <li>Accueil</li>
                 </a>
 
+                <a href="movies.php">
+                    <li>Films</li>
+                </a>
+
                 <a href="actors.php">
                     <li>Acteurs</li>
                 </a>
@@ -56,40 +60,49 @@
     <main>
         
         <div id="movie_cards">
+
             <article class="movie_card">
                 <figure>
-
-                    <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
-
-                    <figcaption>
-                    <?php echo $movieBatman ?>
-                    </figcaption>
-
+                    <a href="http://localhost/Charly/Cinema/assets/img/batman1989-cover.jpg" target="_blank">
+                        <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    </a>
                 </figure>
+            
+            <?php echo $movieBatman->getInfos()  ?>
+
             </article>
 
             <article class="movie_card">
-
                 <figure>
-                    <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
-                    
-                    <figcaption>
-                    <?php echo $movieBatman ?>
-                    </figcaption>
-
+                    <a href="http://localhost/Charly/Cinema/assets/img/spiderman2002-cover.jpg" target="_blank">
+                        <img src="assets/img/spiderman2002-cover.jpg" alt="movie cover batman 1989">
+                    </a>
                 </figure>
+
+                <?php echo $movieSpiderman->getInfos()  ?>
+
             </article>
 
             <article class="movie_card">
-
                 <figure>
-                    <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
-                    
-                    <figcaption>
-                    <?php echo $movieBatman ?>
-                    </figcaption>
-
+                    <a href="http://localhost/Charly/Cinema/assets/img/skyfall2012-cover.jpg" target="_blank">
+                        <img src="assets/img/skyfall2012-cover.jpg" alt="movie cover batman 1989">
+                    </a>
                 </figure>
+
+                <?php echo $skyfall->getInfos()  ?>
+
+            </article>
+
+            <article class="movie_card">
+                <figure>
+                    <a href="http://localhost/Charly/Cinema/assets/img/batman1989-cover.jpg" target="_blank">
+                        <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    </a>
+                </figure>
+
+                <?php echo $testMovie1->getInfos()  ?>
+
             </article>
     
         </div>

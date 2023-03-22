@@ -21,11 +21,12 @@ CHECK || Lister la liste des acteurs ayant incarné un rôle précis (ex: les ac
 
 CHECK || Lister le casting d'un film (dans le film Star Wars Episode IV, Han Solo a été incarné par Harrison Ford, Luke Skywalker a été incarné par Mark Hamill, ...)
 
-Lister les films par genre (exemple : le genre SF est associé à X films : Star Wars, Blade Runner, ...)
-
-Lister la filmographie d'un acteur (dans quels films a-t-il joué ?)
-
 CHECK || Lister la filmographie d'un réalisateur (quels sont les films qu'a réalisé ce réalisateur ?)
+
+CHECK || Lister les films par genre (exemple : le genre SF est associé à X films : Star Wars, Blade Runner, ...)
+
+CHECK || Lister la filmographie d'un acteur (dans quels films a-t-il joué ?)
+
 
 
 

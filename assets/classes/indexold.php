@@ -44,11 +44,11 @@
 
     // ************************** ACTORS ************************
     
-    $michealKeaton = new Actor("Michael", "Keaton", "Male", "1951/09/05", $batman);
-    $kimBasinger = new Actor("Kim", "Basinger", "Female", "1953/12/08", $vickiVale);
-    $jackNicholson = new Actor("Jack", "Nicholson", "Male", "1937/04/22", $joker);
-    $jackPalance = new Actor("Jack", "Palance", "Male", "1919/02/18", $carlGrissom);
-    $michaelGough = new Actor("Michael", "Gough", "Male", "1916/12/23", $alfredPennyworth);
+    $michealKeaton = new Actor("Michael", "Keaton", "Male", "1951/09/05");
+    $kimBasinger = new Actor("Kim", "Basinger", "Female", "1953/12/08");
+    $jackNicholson = new Actor("Jack", "Nicholson", "Male", "1937/04/22");
+    $jackPalance = new Actor("Jack", "Palance", "Male", "1919/02/18");
+    $michaelGough = new Actor("Michael", "Gough", "Male", "1916/12/23");
 
     // ************************** MOVIE ************************
     
@@ -92,11 +92,11 @@
 
     // ************************** ACTORS ************************
     
-    $tobeyMaguire = new Actor("Tobey", "Maguire", "Male", "1975/06/27", $spiderMan);
-    $willemDafoe = new Actor("Willem", "Dafoe", "Male", "1955/07/22", $normanOsborn);
-    $kirstenDunst = new Actor("Kirsten", "Dunst", "Female", "1982/04/30", $maryJane);
-    $jamesFranco = new Actor("James", "Franco", "Male", "1978/04/19", $harryOsborn);
-    $rosemaryHarris = new Actor("Rosemary", "Harris", "Female", "1927/09/19", $auntMay);
+    $tobeyMaguire = new Actor("Tobey", "Maguire", "Male", "1975/06/27");
+    $willemDafoe = new Actor("Willem", "Dafoe", "Male", "1955/07/22");
+    $kirstenDunst = new Actor("Kirsten", "Dunst", "Female", "1982/04/30");
+    $jamesFranco = new Actor("James", "Franco", "Male", "1978/04/19");
+    $rosemaryHarris = new Actor("Rosemary", "Harris", "Female", "1927/09/19");
 
     // ************************** MOVIE ************************
     
@@ -140,11 +140,11 @@
 
     // ************************** ACTORS ************************
     
-    $danielCraig = new Actor("Daniel", "Craig", "Male", "1968/03/02", $jamesBond);
-    $judiDench = new Actor("Judi", "Dench", "Female", "1934/12/09", $m);
-    $javierBarden = new Actor("Javier", "Bardem", "Male", "1969/03/01", $raoulSilva);
-    $ralphFiennes = new Actor("Ralph", "Fiennes", "Male", "1962/12/22", $garrethMallory);
-    $naomiesHarris = new Actor("Naomie", "Harris", "Female", "1976/09/06", $eveMoneypenny);
+    $danielCraig = new Actor("Daniel", "Craig", "Male", "1968/03/02");
+    $judiDench = new Actor("Judi", "Dench", "Female", "1934/12/09");
+    $javierBarden = new Actor("Javier", "Bardem", "Male", "1969/03/01");
+    $ralphFiennes = new Actor("Ralph", "Fiennes", "Male", "1962/12/22");
+    $naomiesHarris = new Actor("Naomie", "Harris", "Female", "1976/09/06");
 
     // ************************** MOVIE ************************
     
@@ -188,11 +188,11 @@
 
     // ************************** ACTORS ************************
     
-    $testActor1 = new Actor("actor 1", "test", "Male", "1968/03/02", $testRole1);
-    $testActor2 = new Actor("actor 2", "test", "Female", "1934/12/09", $testRole2);
-    $testActor3 = new Actor("actor 3", "test", "Male", "1969/03/01", $testRole3);
-    $testActor4 = new Actor("actor 4", "test", "Male", "1962/12/22", $testRole4);
-    $testActor5 = new Actor("actor 5", "test", "Female", "1976/09/06", $testRole5);
+    $testActor1 = new Actor("actor 1", "test", "Male", "1968/03/02");
+    $testActor2 = new Actor("actor 2", "test", "Female", "1934/12/09");
+    $testActor3 = new Actor("actor 3", "test", "Male", "1969/03/01");
+    $testActor4 = new Actor("actor 4", "test", "Male", "1962/12/22");
+    $testActor5 = new Actor("actor 5", "test", "Female", "1976/09/06");
 
     // ************************** MOVIE ************************
     
@@ -220,57 +220,57 @@
     
     // **************************************************** TEST ****************************************************
     
-    $valKilmer = new Actor("Val", "Kilmer", "Male", "1959/12/31", $batman);
-    $georgeClooney = new Actor("George", "Clooney", "Male", "1961/05/06", $batman);
+    $valKilmer = new Actor("Val", "Kilmer", "Male", "1959/12/31");
+    $georgeClooney = new Actor("George", "Clooney", "Male", "1961/05/06");
 
-    echo "<h2>TESTS</h2>";
+    // echo "<h2>TESTS</h2>";
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get actor by role<br>******************************</h3>";
+    // echo "<h3>Get actor by role<br>******************************</h3>";
 
-    echo "<strong>Acteurs ayant joué le rôle de " . $batman . " : <br></strong>" . $batman->getActors();
+    // echo "<strong>Acteurs ayant joué le rôle de " . $batman . " : <br></strong>" . $batman->getActors();
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get movie by role<br>******************************</h3>";
+    // echo "<h3>Get movie by role<br>******************************</h3>";
 
-    echo "<strong>Films dans lequel le rôle " . $batman . " est joué: <br></strong>" . $batman->getMovies();
+    // echo "<strong>Films dans lequel le rôle " . $batman . " est joué: <br></strong>" . $batman->getMovies();
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get role by actor<br>******************************</h3>";
+    // echo "<h3>Get role by actor<br>******************************</h3>";
 
-    echo "<strong>Rôles jouées par " . $tobeyMaguire . ": <br></strong>" . $tobeyMaguire->getRoles();
+    // echo "<strong>Rôles jouées par " . $tobeyMaguire . ": <br></strong>" . $tobeyMaguire->getRoles();
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get movies by actor<br>******************************</h3>";
+    // echo "<h3>Get movies by actor<br>******************************</h3>";
 
-    echo "<strong>Filmographie de " . $tobeyMaguire . ": <br></strong>" . $tobeyMaguire->getMovies();
+    // echo "<strong>Filmographie de " . $tobeyMaguire . ": <br></strong>" . $tobeyMaguire->getMovies();
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get full casting<br>******************************</h3>";
+    // echo "<h3>Get full casting<br>******************************</h3>";
 
-    echo "Dans le film <strong>" . $movieBatman . ":<br></strong>"
-        . "<strong>" . $batmanCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $batmanCasting->getActor() . "</strong>, "
-        . "<strong>" . $vickiValeCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $vickiValeCasting->getActor() . "</strong>, "
-        . "<strong>" . $jokerCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $jokerCasting->getActor() . "</strong>, "
-        . "<strong>" . $carlGrissomCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $carlGrissomCasting->getActor() . "</strong>, "
-        . "<strong>" . $alfredPennyworthCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $alfredPennyworthCasting->getActor() . "</strong>";
+    // echo "Dans le film <strong>" . $movieBatman . ":<br></strong>"
+    //     . "<strong>" . $batmanCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $batmanCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $vickiValeCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $vickiValeCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $jokerCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $jokerCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $carlGrissomCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $carlGrissomCasting->getActor() . "</strong>, "
+    //     . "<strong>" . $alfredPennyworthCasting->getRole() . "</strong>" . " a été joué par " . "<strong>" . $alfredPennyworthCasting->getActor() . "</strong>";
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get movies by director<br>******************************</h3>";
+    // echo "<h3>Get movies by director<br>******************************</h3>";
 
-    echo "<strong>Filmographie de " . $samMendes . " :</strong>" . $samMendes->getMovies();
+    // echo "<strong>Filmographie de " . $samMendes . " :</strong>" . $samMendes->getMovies();
 
-    // *********************************************************************************************************
+    // // *********************************************************************************************************
     
-    echo "<h3>Get movies by genre<br>******************************</h3>";
+    // echo "<h3>Get movies by genre<br>******************************</h3>";
 
-    echo "Le genre " . $spy . " est associé à " . $spy->getNbMovies() . " films : <br>" . $spy->getMovies();
+    // echo "Le genre " . $spy . " est associé à " . $spy->getNbMovies() . " films : <br>" . $spy->getMovies();
 
     ?>
 

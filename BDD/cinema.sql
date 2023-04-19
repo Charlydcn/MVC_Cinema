@@ -88,7 +88,7 @@ INSERT INTO `casting` (`id_casting`, `id_role`, `id_actor`, `id_movie`) VALUES
 	(3, 3, 3, 1),
 	(4, 4, 4, 1),
 	(5, 5, 5, 1),
-	(6, 6, 8, 2),
+	(6, 6, 6, 2),
 	(7, 7, 7, 2),
 	(8, 8, 8, 2),
 	(9, 9, 9, 2),

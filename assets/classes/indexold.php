@@ -78,6 +78,12 @@
 
 
 
+
+
+
+    
+
+
     // *******************************************************************************************************************
     // **************************************************** SPIDERMAN ****************************************************
     
@@ -185,6 +191,11 @@
 
 
 
+
+
+
+
+
     // ********************************************************************************************************************** 
     // **************************************************** TESTMOVIE123 ****************************************************
     
@@ -231,6 +242,10 @@
     // ************************** ECHO **************************
     
     // echo $testMovie1->getInfos();
+
+
+
+
 
 
 
@@ -289,6 +304,11 @@
 
 
 
+
+
+
+
+
     // ********************************************************************************************************************************* 
     // **************************************************** SHAWSHANK REDEMPTION *******************************************************
 
@@ -333,6 +353,12 @@
     $heywoodCasting = new Casting($heywood, $williamSadler, $theShawshankRedemption);
 
 
+
+
+
+
+
+
     // ********************************************************************************************************************************* 
     // **************************************************** PULP FICTION ***************************************************************
 
@@ -375,6 +401,58 @@
     $miaWallaceCasting = new Casting($miaWallace, $umaThurman, $pulpFiction);
     $butchCoolidgeCasting = new Casting($butchCoolidge, $bruceWillis, $pulpFiction);
     $marcellusWallaceCasting = new Casting($marcellusWallace, $vingRhames, $pulpFiction);
+
+
+
+
+
+
+
+
+
+
+
+
+    // ********************************************************************************************************************************* 
+    // **************************************************** FORREST GUMP ***************************************************************
+
+    // ************************** DIRECTOR **************************
+
+    $robertZemeckis = new Director("Robert", "Zemeckis", "Male", "1951/05/14");
+
+    // ************************** ROLES *************************
+
+    $forrestGump = new Role("Forrest Gump");
+    $ltDan = new Role("Lieutenant Dan");
+    $jennyCurran = new Role("Jenny Curran");
+    $bubbaBlue = new Role("Bubba Blue");
+
+    // ************************** ACTORS ************************
+
+    $tomHanks = new Actor("Tom", "Hanks", "Male", "1956/07/09");
+    $garySinise = new Actor("Gary", "Sinise", "Male", "1955/03/17");
+    $robinWright = new Actor("Robin", "Wright", "Female", "1966/04/08");
+    $mykeltiWilliamson = new Actor("Mykelti", "Williamson", "Male", "1960/03/04");
+
+    // ************************** MOVIE ************************
+
+    $forrestGumpMovie = new Movie
+    (
+        "Forrest Gump",
+        $drama,
+        "1994/07/06",
+        142,
+        $robertZemeckis,
+        "Forrest Gump est un homme simple d'esprit mais doté d'un coeur immense. Il traverse les décennies et rencontre des personnalités marquantes, tout en étant témoin de grands événements historiques. Tout au long de son parcours, il ne perd jamais de vue son amour de jeunesse, Jenny."
+    );
+
+    // ************************** CASTINGS **********************
+
+    $forrestGumpCasting = new Casting($forrestGump, $tomHanks, $forrestGumpMovie);
+    $ltDanCasting = new Casting($ltDan, $garySinise, $forrestGumpMovie);
+    $jennyCurranCasting = new Casting($jennyCurran, $robinWright, $forrestGumpMovie);
+    $bubbaBlueCasting = new Casting($bubbaBlue, $mykeltiWilliamson, $forrestGumpMovie);
+
 
 
 

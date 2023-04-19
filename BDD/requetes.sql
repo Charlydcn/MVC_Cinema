@@ -23,13 +23,12 @@ INNER JOIN person ON director.id_person = person.id_person
 WHERE person.first_name = "Robert" AND person.last_name = "Zemeckis"
 
 -- d. Nombre de films par genre (classés dans l’ordre décroissant)
-
-
--- e. Nombre de films par réalisateur (classés dans l’ordre décroissant)
-
-
--- f. Casting d’un film en particulier (id_film) : nom, prénom des acteurs + sexe
-
+SELECT movie_genre.genre_name AS "Movie genre", COUNT(title) AS "Movies"
+FROM movie
+INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
+INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_genre
+GROUP BY movie_genre.genre_name
+ORDER BY COUNT(title) DESC
 
 -- g. Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de sortie 
 

@@ -73,6 +73,11 @@
     
     // echo $movieBatman->getInfos();
     
+
+
+
+
+
     // *******************************************************************************************************************
     // **************************************************** SPIDERMAN ****************************************************
     
@@ -120,6 +125,12 @@
     // ************************** ECHO **************************
     
     // echo $movieSpiderman->getInfos();
+
+
+
+
+
+
     
     // *****************************************************************************************************************    
     // **************************************************** SKYFALL ****************************************************
@@ -169,6 +180,11 @@
     
     // echo $skyfall->getInfos();
     
+
+
+
+
+
     // ********************************************************************************************************************** 
     // **************************************************** TESTMOVIE123 ****************************************************
     
@@ -215,6 +231,158 @@
     // ************************** ECHO **************************
     
     // echo $testMovie1->getInfos();
+
+
+
+
+
+
+    // ********************************************************************************************************************** 
+    // **************************************************** INCEPTION *******************************************************
+
+    // ************************** DIRECTOR **********************
+
+    $christopherNolan = new Director("Christopher", "Nolan", "Male", "1970/07/30");
+
+    // ************************** ROLES *************************
+
+    $domCobb = new Role("Dom Cobb");
+    $ariane = new Role("Ariane");
+    $mal = new Role("Mal");
+    $eames = new Role("Eames");
+    $saïto = new Role("Saïto");
+
+    // ************************** ACTORS ************************
+
+    $leonardoDiCaprio = new Actor("Leonardo", "DiCaprio", "Male", "1974/11/11");
+    $ellenPage = new Actor("Ellen", "Page", "Female", "1987/02/21");
+    $marionCotillard = new Actor("Marion", "Cotillard", "Female", "1975/09/30");
+    $tomHardy = new Actor("Tom", "Hardy", "Male", "1977/09/15");
+    $kenWatanabe = new Actor("Ken", "Watanabe", "Male", "1959/10/21");
+
+    // ************************** MOVIE ************************
+
+    $movieInception = new Movie
+    (
+    "Inception",
+    $scienceFiction,
+    "2010/07/16",
+    148,
+    $christopherNolan,
+    "Dom Cobb est un voleur expérimenté, le meilleur dans l'art dangereux de l'extraction, qui consiste à voler les secrets les plus intimes enfouis au plus profond du subconscient durant une phase de rêve, lorsque l'esprit est le plus vulnérable. Avec l'aide d'une équipe de spécialistes, il est devenu un acteur incontournable dans le monde de l'espionnage industriel."
+    );
+
+    // ************************** CASTINGS **********************
+
+    $domCobbCasting = new Casting($domCobb, $leonardoDiCaprio, $movieInception);
+    $arianeCasting = new Casting($ariane, $ellenPage, $movieInception);
+    $malCasting = new Casting($mal, $marionCotillard, $movieInception);
+    $eamesCasting = new Casting($eames, $tomHardy, $movieInception);
+    $saïtoCasting = new Casting($saïto, $kenWatanabe, $movieInception);
+
+
+    // ************************** ECHO **************************
+
+    // echo $movieInception->getInfos();
+
+
+
+
+
+    // ********************************************************************************************************************************* 
+    // **************************************************** SHAWSHANK REDEMPTION *******************************************************
+
+    // ************************** DIRECTOR **********************
+
+    $frankDarabont = new Director("Frank", "Darabont", "Male", "1959/01/28");
+
+    // ************************** ROLES *************************
+
+    $andyDufresne = new Role("Andy Dufresne");
+    $ellisBoydRedding = new Role("Ellis Boyd 'Red' Redding");
+    $byronHadley = new Role("Byron Hadley");
+    $samuelNorton = new Role("Samuel Norton");
+    $heywood = new Role("Heywood");
+
+    // ************************** ACTORS ************************
+
+    $timRobbins = new Actor("Tim", "Robbins", "Male", "1958/10/16");
+    $morganFreeman = new Actor("Morgan", "Freeman", "Male", "1937/06/01");
+    $clancyBrown = new Actor("Clancy", "Brown", "Male", "1959/01/05");
+    $bobGunton = new Actor("Bob", "Gunton", "Male", "1945/11/15");
+    $williamSadler = new Actor("William", "Sadler", "Male", "1950/04/13");
+
+    // ************************** MOVIE ************************
+
+    $theShawshankRedemption = new Movie
+    (
+        "The Shawshank Redemption",
+        $drama,
+        "1994/09/10",
+        142,
+        $frankDarabont,
+        "Andy Dufresne, a successful banker, is convicted of murdering his wife and her lover and is sentenced to life imprisonment at the Shawshank prison. He becomes friends with a fellow inmate, Ellis Boyd 'Red' Redding, and finds solace in his knowledge and companionship while being tormented by the guards and his fellow inmates."
+    );
+
+    // ************************** CASTINGS **********************
+
+    $andyDufresneCasting = new Casting($andyDufresne, $timRobbins, $theShawshankRedemption);
+    $ellisBoydReddingCasting = new Casting($ellisBoydRedding, $morganFreeman, $theShawshankRedemption);
+    $byronHadleyCasting = new Casting($byronHadley, $clancyBrown, $theShawshankRedemption);
+    $samuelNortonCasting = new Casting($samuelNorton, $bobGunton, $theShawshankRedemption);
+    $heywoodCasting = new Casting($heywood, $williamSadler, $theShawshankRedemption);
+
+
+    // ********************************************************************************************************************************* 
+    // **************************************************** PULP FICTION ***************************************************************
+
+    // ************************** DIRECTOR **********************
+
+    $quentinTarantino = new Director("Quentin", "Tarantino", "Male", "1963/03/27");
+
+    // ************************** ROLES *************************
+
+    $vincentVega = new Role("Vincent Vega");
+    $julesWinnfield = new Role("Jules Winnfield");
+    $miaWallace = new Role("Mia Wallace");
+    $butchCoolidge = new Role("Butch Coolidge");
+    $marcellusWallace = new Role("Marcellus Wallace");
+
+    // ************************** ACTORS ************************
+
+    $johnTravolta = new Actor("John", "Travolta", "Male", "1954/02/18");
+    $samuelLJackson = new Actor("Samuel L.", "Jackson", "Male", "1948/12/21");
+    $umaThurman = new Actor("Uma", "Thurman", "Female", "1970/04/29");
+    $bruceWillis = new Actor("Bruce", "Willis", "Male", "1955/03/19");
+    $vingRhames = new Actor("Ving", "Rhames", "Male", "1959/05/12");
+
+    // ************************** MOVIE ************************
+
+    $pulpFiction = new Movie
+    (
+        "Pulp Fiction",
+        $crime,
+        "1994/10/14",
+        154,
+        $quentinTarantino,
+        "L'odyssée sanglante et burlesque de petits malfrats dans la jungle de Hollywood, à travers trois histoires qui s'entrecroisent."
+    );
+
+    // ************************** CASTINGS **********************
+
+    $vincentVegaCasting = new Casting($vincentVega, $johnTravolta, $pulpFiction);
+    $julesWinnfieldCasting = new Casting($julesWinnfield, $samuelLJackson, $pulpFiction);
+    $miaWallaceCasting = new Casting($miaWallace, $umaThurman, $pulpFiction);
+    $butchCoolidgeCasting = new Casting($butchCoolidge, $bruceWillis, $pulpFiction);
+    $marcellusWallaceCasting = new Casting($marcellusWallace, $vingRhames, $pulpFiction);
+
+
+
+
+
+
+
+
     
     // **************************************************** TEST ****************************************************
     

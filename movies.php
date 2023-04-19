@@ -104,6 +104,39 @@
                 <?php echo $testMovie1->getInfos()  ?>
 
             </article>
+
+            <article class="movie_card">
+                <figure>
+                    <a href="http://localhost/Charly/Cinema/assets/img/batman1989-cover.jpg" target="_blank">
+                        <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    </a>
+                </figure>
+
+                <?php echo $pulpFiction->getInfos()  ?>
+
+            </article>
+
+            <article class="movie_card">
+                <figure>
+                    <a href="http://localhost/Charly/Cinema/assets/img/batman1989-cover.jpg" target="_blank">
+                        <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    </a>
+                </figure>
+
+                <?php echo $forrestGumpMovie->getInfos()  ?>
+
+            </article>
+
+            <article class="movie_card">
+                <figure>
+                    <a href="http://localhost/Charly/Cinema/assets/img/batman1989-cover.jpg" target="_blank">
+                        <img src="assets/img/batman1989-cover.jpg" alt="movie cover batman 1989">
+                    </a>
+                </figure>
+
+                <?php echo $theShawshankRedemption->getInfos()  ?>
+
+            </article>
     
         </div>
 

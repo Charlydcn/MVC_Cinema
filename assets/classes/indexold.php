@@ -426,6 +426,7 @@
     $ltDan = new Role("Lieutenant Dan");
     $jennyCurran = new Role("Jenny Curran");
     $bubbaBlue = new Role("Bubba Blue");
+    $mrsGump = new Role("Mrs. Gump");
 
     // ************************** ACTORS ************************
 
@@ -433,6 +434,7 @@
     $garySinise = new Actor("Gary", "Sinise", "Male", "1955/03/17");
     $robinWright = new Actor("Robin", "Wright", "Female", "1966/04/08");
     $mykeltiWilliamson = new Actor("Mykelti", "Williamson", "Male", "1960/03/04");
+    $sallyField = new Actor("Sally", "Field", "Female", "1946/11/06");
 
     // ************************** MOVIE ************************
 
@@ -452,6 +454,7 @@
     $ltDanCasting = new Casting($ltDan, $garySinise, $forrestGumpMovie);
     $jennyCurranCasting = new Casting($jennyCurran, $robinWright, $forrestGumpMovie);
     $bubbaBlueCasting = new Casting($bubbaBlue, $mykeltiWilliamson, $forrestGumpMovie);
+    $bubbaBlueCasting = new Casting($MrsGump, $sallyField, $forrestGumpMovie);
 
 
 

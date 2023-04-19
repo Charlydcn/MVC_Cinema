@@ -30,6 +30,14 @@ INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_
 GROUP BY movie_genre.genre_name
 ORDER BY COUNT(title) DESC
 
+-- e. Nombre de films par réalisateur (classés dans l’ordre décroissant)
+SELECT first_name AS "Director", last_name AS "", COUNT(title) AS "Movies"
+FROM person
+INNER JOIN director ON director.id_person = person.id_person
+INNER JOIN movie ON director.id_director = movie.id_director
+GROUP BY first_name, last_name
+ORDER BY COUNT(title) DESC
+
 -- g. Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de sortie 
 
 

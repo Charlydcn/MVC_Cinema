@@ -16,7 +16,11 @@ WHERE LENGTH > 145
 ORDER BY LENGTH DESC
 
 -- c. Liste des films d’un réalisateur (en précisant l’année de sortie)
-
+SELECT title AS "Robert Zemeckis' movies", YEAR(release_date) AS "Release date"
+FROM movie
+INNER JOIN director ON movie.id_director = director.id_director
+INNER JOIN person ON director.id_person = person.id_person
+WHERE person.first_name = "Robert" AND person.last_name = "Zemeckis"
 
 -- d. Nombre de films par genre (classés dans l’ordre décroissant)
 

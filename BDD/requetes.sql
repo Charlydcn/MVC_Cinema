@@ -38,6 +38,15 @@ INNER JOIN movie ON director.id_director = movie.id_director
 GROUP BY first_name, last_name
 ORDER BY COUNT(title) DESC
 
+-- f. Casting d’un film en particulier (id_film) : nom, prénom des acteurs + sexe
+SELECT first_name AS "Actors who played in Batman", last_name "", genre AS "Genre", role_name AS "Role played" -- (j'ai ajouté le rôle joué)
+FROM person
+INNER JOIN actor ON person.id_person = actor.id_person
+INNER JOIN casting ON actor.id_actor = casting.id_actor
+INNER JOIN movie ON casting.id_movie = movie.id_movie
+INNER JOIN role ON casting.id_role = role.id_role
+WHERE title = "Batman"
+
 -- g. Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de sortie 
 
 

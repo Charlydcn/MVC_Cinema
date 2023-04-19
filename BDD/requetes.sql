@@ -9,8 +9,11 @@ WHERE movie.id_movie IN (
 	WHERE title = "Batman"
 	)
 
--- b. Liste des films dont la durée excède 2h15 classés par durée (du plus long au plus court
-
+-- b. Liste des films dont la durée excède 2h15 classés par durée (du plus long au plus court)
+SELECT title AS "Movies longer than 2h15"
+FROM movie
+WHERE LENGTH > 145
+ORDER BY LENGTH DESC
 
 -- c. Liste des films d’un réalisateur (en précisant l’année de sortie)
 

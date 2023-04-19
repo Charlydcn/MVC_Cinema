@@ -24,6 +24,9 @@
     $action = new MovieGenre("Action");
     $fantasy = new MovieGenre("Fantasy");
     $spy = new MovieGenre("Spy");
+    $sciFi = new MovieGenre("Science-Fiction");
+    $drama = new MovieGenre("Drama");
+    $crime = new MovieGenre("Crime");
 
     // ****************************************************************************************************************
     // **************************************************** BATMAN ****************************************************
@@ -280,7 +283,7 @@
     $movieInception = new Movie
     (
     "Inception",
-    $scienceFiction,
+    $sciFi,
     "2010/07/16",
     148,
     $christopherNolan,
@@ -454,7 +457,7 @@
     $ltDanCasting = new Casting($ltDan, $garySinise, $forrestGumpMovie);
     $jennyCurranCasting = new Casting($jennyCurran, $robinWright, $forrestGumpMovie);
     $bubbaBlueCasting = new Casting($bubbaBlue, $mykeltiWilliamson, $forrestGumpMovie);
-    $bubbaBlueCasting = new Casting($MrsGump, $sallyField, $forrestGumpMovie);
+    $bubbaBlueCasting = new Casting($mrsGump, $sallyField, $forrestGumpMovie);
 
 
 

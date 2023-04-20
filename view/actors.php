@@ -10,6 +10,7 @@ ob_start();
 
 $content = ob_get_clean();
 $title = "Actors";
+$secondTitle = "Actors";
 require 'template.php';
 
 ?>

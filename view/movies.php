@@ -41,6 +41,7 @@ ob_start();
 
 $content = ob_get_clean();
 $title = "Movies";
+$secondTitle = "Movies";
 require 'template.php';
 
 ?>

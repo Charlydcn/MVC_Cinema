@@ -11,9 +11,21 @@
 
 nav {
     display: flex;
+    gap: 2rem;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #DBE5F4;
+    height: 50px;
+    width: 90%;
+    margin: auto;
 }
 
-nav ul a li {
+nav a {
     text-decoration: none;
+    font-size: 24px;
+    list-style-type: none;
+    background-color: #DBE5F4;
+    color: black;
 }

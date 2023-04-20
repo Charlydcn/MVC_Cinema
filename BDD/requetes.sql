@@ -1,16 +1,12 @@
 -- a. Informations d’un film (id_film) : titre, année, durée (au format HH:MM) et réalisateur
-SELECT title "Movie title", YEAR(release_date) AS "Release Date", LENGTH AS "Movie Duration", person.first_name AS "Director", person.last_name AS ""
+SELECT title "Movie title", YEAR(release_date) AS "Release date", LENGTH AS "Movie duration", person.first_name AS "Director", person.last_name AS ""
 FROM movie
 INNER JOIN director ON movie.id_director = director.id_director
 INNER JOIN person ON director.id_person = person.id_person
-WHERE movie.id_movie IN (
-	SELECT id_movie
-	FROM movie
-	WHERE title = "Batman"
-	)
+WHERE movie.id_movie = 1
 
 -- b. Liste des films dont la durée excède 2h15 classés par durée (du plus long au plus court)
-SELECT title AS "Movies longer than 2h15"
+SELECT title AS "Movies longer than 2h15", LENGTH AS "Duration (min)"
 FROM movie
 WHERE LENGTH > 145
 ORDER BY LENGTH DESC
@@ -39,19 +35,26 @@ GROUP BY first_name, last_name
 ORDER BY COUNT(title) DESC
 
 -- f. Casting d’un film en particulier (id_film) : nom, prénom des acteurs + sexe
-SELECT first_name AS "Actors who played in Batman", last_name "", genre AS "Genre", role_name AS "Role played" -- (j'ai ajouté le rôle joué)
+SELECT first_name AS "Actor(s)/Actress(es) who played in Batman", last_name "", genre AS "Genre", role_name AS "Role played" -- (j'ai ajouté le rôle joué)
 FROM person
 INNER JOIN actor ON person.id_person = actor.id_person
 INNER JOIN casting ON actor.id_actor = casting.id_actor
 INNER JOIN movie ON casting.id_movie = movie.id_movie
 INNER JOIN role ON casting.id_role = role.id_role
-WHERE title = "Batman"
+WHERE movie.id_movie = 1
 
--- g. Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de sortie 
-
-
--- (du film le plus récent au plus ancien)
-
+-- g. Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de sortie (du film le plus récent au plus ancien)
+SELECT title AS "Movie(s) starring Leonardo DiCaprio", release_date AS "Release date", role_name AS "Role played"
+FROM movie
+INNER JOIN casting ON movie.id_movie = casting.id_movie
+INNER JOIN role ON casting.id_role = role.id_role
+INNER JOIN actor ON casting.id_actor = actor.id_actor
+WHERE casting.id_actor = (
+	SELECT id_actor
+	FROM actor
+	WHERE id_actor = 16
+	)
+ORDER BY release_date ASC
 
 -- h. Listes des personnes qui sont à la fois acteurs et réalisateurs
 

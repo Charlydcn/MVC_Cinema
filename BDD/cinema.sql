@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `director` (
   CONSTRAINT `director_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.director : ~7 rows (environ)
+-- Listage des données de la table cinema.director : ~8 rows (environ)
 INSERT INTO `director` (`id_director`, `id_person`) VALUES
 	(1, 1),
 	(2, 20),
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   PRIMARY KEY (`id_person`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.person : ~0 rows (environ)
+-- Listage des données de la table cinema.person : ~44 rows (environ)
 INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `birthdate`, `genre`) VALUES
 	(1, 'Tim', 'Burton', '1959-08-25', 'Male'),
 	(2, 'Michael', 'Keaton', '1953-12-09', 'Male'),
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.role : ~0 rows (environ)
+-- Listage des données de la table cinema.role : ~37 rows (environ)
 INSERT INTO `role` (`id_role`, `role_name`) VALUES
 	(1, 'Batman'),
 	(2, 'Vicki Vale'),

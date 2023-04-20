@@ -1,15 +1,25 @@
 <?php
 
-ob_start();
+use Controller\CinemaController;
 
-?>
+spl_autoload_register(function ($class_name) {
+    include $class_name . '.php';
+});
 
+$ctrlCinema = new CinemaController();
 
+if(isset($_GET['action'])) {
+    switch($_GET['action']) {
 
-<?php
+        case "listMovies" : $ctrlCinema->listMovies();
+        
+        break;
 
-$content = ob_get_clean();
-$title = "Home";
-require 'template.php';
+        case "listActors" : $ctrlCinema->listActors();
+        
+        break;
+
+    }
+}
 
 ?>

@@ -1,0 +1,39 @@
+VUES CINEMA PDO/SQL
+
+VUE home.php
+-> ...
+-> ...
+-> ...
+
+VUE movies.php
+-> Liste des films (cover, title, release_date(YEAR))
+    -> Click sur un film = VUE movie_detail.php (title, genre, release_date, duration, director, casting, synopsis)
+        -> Click sur le titre = VUE movie_detail.php
+        -> Click sur le genre = VUE genre_detail.php
+        -> Click sur le réalisateur = VUE director_detail.php
+        -> Click sur un acteur du casting = VUE actor_detail.php
+
+VUE actors.php
+-> Liste des acteurs (portrait, first_name, last_name)
+    -> Click sur un acteur = VUE actor_detail.php
+
+VUE directors.php
+-> Liste des réalisateurs (portrait, first_name, last_name)
+    -> Click sur un réalisateur = VUE director_detail.php
+
+VUE genres.php
+-> Liste des genres (genre_name)
+    -> Click sur un genre = genre_detail.php
+
+
+liste des vues :
+- home.php
+- movies.php
+- actors.php
+- directors.php
+- genres.php
+
+- movie_detail.php
+- actor_detail.php
+- director_detail.php
+- genre_detail.php

@@ -1,15 +1,15 @@
 -- a. Informations d’un film (id_film) : titre, année, durée (au format HH:MM) et réalisateur
-SELECT title "Movie title", YEAR(release_date) AS "Release date", LENGTH AS "Movie duration", person.first_name AS "Director", person.last_name AS ""
+SELECT title "Movie title", YEAR(release_date) AS "Release date", SEC_TO_TIME(LENGTH*60) AS "Movie duration", person.first_name AS "Director", person.last_name AS ""
 FROM movie
 INNER JOIN director ON movie.id_director = director.id_director
 INNER JOIN person ON director.id_person = person.id_person
 WHERE movie.id_movie = 1
 
 -- b. Liste des films dont la durée excède 2h15 classés par durée (du plus long au plus court)
-SELECT title AS "Movies longer than 2h15", LENGTH AS "Duration (min)"
+SELECT title AS "Movies longer than 2h15", length AS "Duration (min)"
 FROM movie
-WHERE LENGTH > 145
-ORDER BY LENGTH DESC
+WHERE length > 135
+ORDER BY length DESC
 
 -- c. Liste des films d’un réalisateur (en précisant l’année de sortie)
 SELECT title AS "Robert Zemeckis' movies", YEAR(release_date) AS "Release date"
@@ -17,6 +17,8 @@ FROM movie
 INNER JOIN director ON movie.id_director = director.id_director
 INNER JOIN person ON director.id_person = person.id_person
 WHERE person.first_name = "Robert" AND person.last_name = "Zemeckis"
+-- ou bien avec l'ID :
+-- WHERE director.id_director = 7
 
 -- d. Nombre de films par genre (classés dans l’ordre décroissant)
 SELECT movie_genre.genre_name AS "Movie genre", COUNT(title) AS "Movies"
@@ -24,7 +26,7 @@ FROM movie
 INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
 INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_genre
 GROUP BY movie_genre.genre_name
-ORDER BY COUNT(title) DESC
+ORDER BY "Movies" DESC
 
 -- e. Nombre de films par réalisateur (classés dans l’ordre décroissant)
 SELECT first_name AS "Director", last_name AS "", COUNT(title) AS "Movies"
@@ -32,7 +34,7 @@ FROM person
 INNER JOIN director ON director.id_person = person.id_person
 INNER JOIN movie ON director.id_director = movie.id_director
 GROUP BY first_name, last_name
-ORDER BY COUNT(title) DESC
+ORDER BY "Movies" DESC
 
 -- f. Casting d’un film en particulier (id_film) : nom, prénom des acteurs + sexe
 SELECT first_name AS "Actor(s)/Actress(es) who played in Batman", last_name "", genre AS "Genre", role_name AS "Role played" -- (j'ai ajouté le rôle joué)
@@ -49,11 +51,7 @@ FROM movie
 INNER JOIN casting ON movie.id_movie = casting.id_movie
 INNER JOIN role ON casting.id_role = role.id_role
 INNER JOIN actor ON casting.id_actor = actor.id_actor
-WHERE casting.id_actor = (
-	SELECT id_actor
-	FROM actor
-	WHERE id_actor = 16
-	)
+WHERE actor.id_actor = 16
 ORDER BY release_date ASC
 
 -- h. Listes des personnes qui sont à la fois acteurs et réalisateurs

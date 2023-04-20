@@ -60,7 +60,10 @@ ORDER BY release_date ASC
 
 
 -- i. Liste des films qui ont moins de 5 ans (classés du plus récent au plus ancien)
-
+SELECT title AS "Movies from the 5 past years" , release_date AS "Release date"
+FROM movie
+WHERE release_date > NOW() - INTERVAL 5 YEAR
+ORDER BY release_date DESC
 
 -- j. Nombre d’hommes et de femmes parmi les acteurs
 

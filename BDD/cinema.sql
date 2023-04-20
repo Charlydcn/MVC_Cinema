@@ -14,7 +14,21 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table cinema.actor : ~11 rows (environ)
+
+-- Listage de la structure de la base pour cinema
+CREATE DATABASE IF NOT EXISTS `cinema` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `cinema`;
+
+-- Listage de la structure de table cinema. actor
+CREATE TABLE IF NOT EXISTS `actor` (
+  `id_actor` int NOT NULL AUTO_INCREMENT,
+  `id_person` int NOT NULL,
+  PRIMARY KEY (`id_actor`),
+  UNIQUE KEY `id_person` (`id_person`),
+  CONSTRAINT `actor_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table cinema.actor : ~37 rows (environ)
 INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(1, 2),
 	(2, 3),
@@ -54,46 +68,70 @@ INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(36, 52),
 	(37, 53);
 
--- Listage des données de la table cinema.casting : ~35 rows (environ)
-INSERT INTO `casting` (`id_role`, `id_actor`, `id_movie`) VALUES
-	(18, 18, 4),
-	(1, 1, 1),
-	(2, 2, 1),
-	(3, 3, 1),
-	(4, 4, 1),
-	(6, 6, 2),
-	(7, 7, 2),
-	(8, 8, 2),
-	(9, 9, 2),
-	(15, 15, 3),
-	(12, 12, 3),
-	(13, 13, 3),
-	(14, 14, 3),
-	(11, 11, 3),
-	(16, 16, 4),
-	(17, 17, 4),
-	(5, 5, 1),
-	(19, 19, 4),
-	(20, 20, 4),
-	(21, 21, 5),
-	(22, 22, 5),
-	(23, 23, 5),
-	(24, 24, 5),
-	(25, 25, 5),
-	(26, 26, 6),
-	(27, 27, 6),
-	(28, 28, 6),
-	(29, 29, 6),
-	(30, 30, 6),
-	(31, 31, 7),
-	(32, 32, 7),
-	(33, 33, 7),
-	(34, 34, 7),
-	(35, 35, 7),
-	(10, 10, 2),
-	(36, 36, 1),
-	(36, 36, 2),
-	(36, 36, 3);
+-- Listage de la structure de table cinema. casting
+CREATE TABLE IF NOT EXISTS `casting` (
+  `id_casting` int NOT NULL AUTO_INCREMENT,
+  `id_role` int NOT NULL,
+  `id_actor` int NOT NULL,
+  `id_movie` int NOT NULL,
+  PRIMARY KEY (`id_casting`),
+  KEY `id_role` (`id_role`),
+  KEY `id_actor` (`id_actor`),
+  KEY `id_movie` (`id_movie`),
+  CONSTRAINT `casting_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`),
+  CONSTRAINT `casting_ibfk_2` FOREIGN KEY (`id_actor`) REFERENCES `actor` (`id_actor`),
+  CONSTRAINT `casting_ibfk_3` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id_movie`)
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table cinema.casting : ~38 rows (environ)
+INSERT INTO `casting` (`id_casting`, `id_role`, `id_actor`, `id_movie`) VALUES
+	(36, 18, 18, 4),
+	(37, 1, 1, 1),
+	(38, 2, 2, 1),
+	(39, 3, 3, 1),
+	(40, 4, 4, 1),
+	(41, 6, 6, 2),
+	(42, 7, 7, 2),
+	(43, 8, 8, 2),
+	(44, 9, 9, 2),
+	(45, 15, 15, 3),
+	(46, 12, 12, 3),
+	(47, 13, 13, 3),
+	(48, 14, 14, 3),
+	(49, 11, 11, 3),
+	(50, 16, 16, 4),
+	(51, 17, 17, 4),
+	(52, 5, 5, 1),
+	(53, 19, 19, 4),
+	(54, 20, 20, 4),
+	(55, 21, 21, 5),
+	(56, 22, 22, 5),
+	(57, 23, 23, 5),
+	(58, 24, 24, 5),
+	(59, 25, 25, 5),
+	(60, 26, 26, 6),
+	(61, 27, 27, 6),
+	(62, 28, 28, 6),
+	(63, 29, 29, 6),
+	(64, 30, 30, 6),
+	(65, 31, 31, 7),
+	(66, 32, 32, 7),
+	(67, 33, 33, 7),
+	(68, 34, 34, 7),
+	(69, 35, 35, 7),
+	(70, 10, 10, 2),
+	(71, 36, 36, 1),
+	(72, 36, 36, 2),
+	(73, 36, 36, 3);
+
+-- Listage de la structure de table cinema. director
+CREATE TABLE IF NOT EXISTS `director` (
+  `id_director` int NOT NULL AUTO_INCREMENT,
+  `id_person` int NOT NULL,
+  PRIMARY KEY (`id_director`),
+  UNIQUE KEY `id_person` (`id_person`),
+  CONSTRAINT `director_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table cinema.director : ~7 rows (environ)
 INSERT INTO `director` (`id_director`, `id_person`) VALUES
@@ -106,6 +144,21 @@ INSERT INTO `director` (`id_director`, `id_person`) VALUES
 	(7, 46),
 	(8, 52);
 
+-- Listage de la structure de table cinema. movie
+CREATE TABLE IF NOT EXISTS `movie` (
+  `id_movie` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `release_date` date NOT NULL,
+  `length` int NOT NULL,
+  `synopsis` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `rating` int DEFAULT NULL,
+  `poster` varchar(255) DEFAULT NULL,
+  `id_director` int NOT NULL,
+  PRIMARY KEY (`id_movie`),
+  KEY `id_director` (`id_director`),
+  CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`id_director`) REFERENCES `director` (`id_director`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- Listage des données de la table cinema.movie : ~7 rows (environ)
 INSERT INTO `movie` (`id_movie`, `title`, `release_date`, `length`, `synopsis`, `rating`, `poster`, `id_director`) VALUES
 	(1, 'Batman', '1989-09-13', 125, 'The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.', 84, 'missing.png', 1),
@@ -115,6 +168,13 @@ INSERT INTO `movie` (`id_movie`, `title`, `release_date`, `length`, `synopsis`, 
 	(5, 'The Shawshank Redemption', '1994-09-10', 142, 'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.', 98, 'missing.png', 5),
 	(6, 'Pulp Fiction', '1994-10-14', 154, 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 96, 'missing.png', 6),
 	(7, 'Forrest Gump', '1994-07-06', 142, 'The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.', 95, 'missing.png', 7);
+
+-- Listage de la structure de table cinema. movie_genre
+CREATE TABLE IF NOT EXISTS `movie_genre` (
+  `id_movie_genre` int NOT NULL AUTO_INCREMENT,
+  `genre_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_movie_genre`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table cinema.movie_genre : ~11 rows (environ)
 INSERT INTO `movie_genre` (`id_movie_genre`, `genre_name`) VALUES
@@ -129,6 +189,16 @@ INSERT INTO `movie_genre` (`id_movie_genre`, `genre_name`) VALUES
 	(9, 'Detective'),
 	(10, 'Crime'),
 	(11, 'Romance');
+
+-- Listage de la structure de table cinema. person
+CREATE TABLE IF NOT EXISTS `person` (
+  `id_person` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `birthdate` date NOT NULL,
+  `genre` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_person`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table cinema.person : ~0 rows (environ)
 INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `birthdate`, `genre`) VALUES
@@ -177,6 +247,13 @@ INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `birthdate`, `genr
 	(52, 'Monsieur', 'Test', '2023-04-20', 'Male'),
 	(53, 'Madame', 'Test', '2023-04-20', 'Female');
 
+-- Listage de la structure de table cinema. role
+CREATE TABLE IF NOT EXISTS `role` (
+  `id_role` int NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_role`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- Listage des données de la table cinema.role : ~0 rows (environ)
 INSERT INTO `role` (`id_role`, `role_name`) VALUES
 	(1, 'Batman'),
@@ -216,6 +293,16 @@ INSERT INTO `role` (`id_role`, `role_name`) VALUES
 	(35, 'Mrs. Gump'),
 	(36, 'Super Monsieur Test'),
 	(37, 'Super Madame Test');
+
+-- Listage de la structure de table cinema. set_movie_genre
+CREATE TABLE IF NOT EXISTS `set_movie_genre` (
+  `id_movie` int NOT NULL,
+  `id_movie_genre` int NOT NULL,
+  PRIMARY KEY (`id_movie`,`id_movie_genre`),
+  KEY `id_movie_genre` (`id_movie_genre`),
+  CONSTRAINT `set_movie_genre_ibfk_1` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id_movie`),
+  CONSTRAINT `set_movie_genre_ibfk_2` FOREIGN KEY (`id_movie_genre`) REFERENCES `movie_genre` (`id_movie_genre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table cinema.set_movie_genre : ~14 rows (environ)
 INSERT INTO `set_movie_genre` (`id_movie`, `id_movie_genre`) VALUES

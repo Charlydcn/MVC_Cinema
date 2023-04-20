@@ -80,4 +80,9 @@ INNER JOIN actor ON person.id_person = actor.id_person
 WHERE birthdate < NOW() - INTERVAL 50 YEAR
 
 -- l. Acteurs ayant joué dans 3 films ou plus
-
+SELECT first_name AS "Actors who played in 3 movies or more", last_name AS "", COUNT(casting.id_movie) AS "Number of movie"
+FROM person
+INNER JOIN actor ON person.id_person = actor.id_person
+INNER JOIN casting ON actor.id_actor = casting.id_actor
+GROUP BY actor.id_actor
+HAVING COUNT(casting.id_movie) >= 3

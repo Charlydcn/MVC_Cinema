@@ -57,7 +57,10 @@ WHERE casting.id_actor = (
 ORDER BY release_date ASC
 
 -- h. Listes des personnes qui sont à la fois acteurs et réalisateurs
-
+SELECT first_name AS "Person(s) that are both actor and director", last_name AS ""
+FROM person
+INNER JOIN actor ON person.id_person = actor.id_person
+INNER JOIN director ON person.id_person = director.id_person
 
 -- i. Liste des films qui ont moins de 5 ans (classés du plus récent au plus ancien)
 SELECT title AS "Movies from the 5 past years" , release_date AS "Release date"

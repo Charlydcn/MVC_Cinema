@@ -69,7 +69,9 @@ WHERE release_date > NOW() - INTERVAL 5 YEAR
 ORDER BY release_date DESC
 
 -- j. Nombre d’hommes et de femmes parmi les acteurs
-
+SELECT COUNT(genre) AS "Number of actor(s) / actress(es)", genre AS "Genre"
+FROM person
+GROUP BY genre
 
 -- k. Liste des acteurs ayant plus de 50 ans (âge révolu et non révolu)
 

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `actor` (
   CONSTRAINT `actor_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.actor : ~7 rows (environ)
+-- Listage des données de la table cinema.actor : ~37 rows (environ)
 INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(1, 2),
 	(2, 3),
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `director` (
   CONSTRAINT `director_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.director : ~7 rows (environ)
+-- Listage des données de la table cinema.director : ~8 rows (environ)
 INSERT INTO `director` (`id_director`, `id_person`) VALUES
 	(1, 1),
 	(2, 20),
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `movie` (
   `release_date` date NOT NULL,
   `length` int NOT NULL,
   `synopsis` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `rating` int DEFAULT NULL,
+  `rating` float DEFAULT NULL,
   `poster` varchar(255) DEFAULT NULL,
   `id_director` int NOT NULL,
   PRIMARY KEY (`id_movie`),
@@ -161,13 +161,13 @@ CREATE TABLE IF NOT EXISTS `movie` (
 
 -- Listage des données de la table cinema.movie : ~7 rows (environ)
 INSERT INTO `movie` (`id_movie`, `title`, `release_date`, `length`, `synopsis`, `rating`, `poster`, `id_director`) VALUES
-	(1, 'Batman', '1989-09-13', 125, 'The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.', 84, 'missing_poster.png', 1),
-	(2, 'Spider-man', '2002-06-12', 121, 'After being bitten by a genetically-modified spider, a shy teenager gains spider-like abilities that he uses to fight injustice as a masked superhero and face a vengeful enemy.', 67, 'missing_poster.png', 2),
-	(3, 'Skyfall', '2012-10-26', 143, 'James Bond\'s loyalty to M is tested when her past comes back to haunt her. When MI6 comes under attack, 007 must track down and destroy the threat, no matter how personal the cost.', 86, 'missing_poster.png', 3),
-	(4, 'Inception', '2010-07-16', 148, 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.', 91, 'missing_poster.png', 4),
-	(5, 'The Shawshank Redemption', '1994-09-10', 142, 'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.', 98, 'missing_poster.png', 5),
-	(6, 'Pulp Fiction', '1994-10-14', 154, 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 96, 'missing_poster.png', 6),
-	(7, 'Forrest Gump', '1994-07-06', 142, 'The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.', 95, 'missing_poster.png', 7);
+	(1, 'Batman', '1989-09-13', 125, 'The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.', 4, 'missing_poster.png', 1),
+	(2, 'Spider-man', '2002-06-12', 121, 'After being bitten by a genetically-modified spider, a shy teenager gains spider-like abilities that he uses to fight injustice as a masked superhero and face a vengeful enemy.', 3, 'missing_poster.png', 2),
+	(3, 'Skyfall', '2012-10-26', 143, 'James Bond\'s loyalty to M is tested when her past comes back to haunt her. When MI6 comes under attack, 007 must track down and destroy the threat, no matter how personal the cost.', 4, 'missing_poster.png', 3),
+	(4, 'Inception', '2010-07-16', 148, 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.', 4.5, 'missing_poster.png', 4),
+	(5, 'The Shawshank Redemption', '1994-09-10', 142, 'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.', 5, 'missing_poster.png', 5),
+	(6, 'Pulp Fiction', '1994-10-14', 154, 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 4.5, 'missing_poster.png', 6),
+	(7, 'Forrest Gump', '1994-07-06', 142, 'The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.', 4.5, 'missing_poster.png', 7);
 
 -- Listage de la structure de table cinema. movie_genre
 CREATE TABLE IF NOT EXISTS `movie_genre` (
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.role : ~0 rows (environ)
+-- Listage des données de la table cinema.role : ~37 rows (environ)
 INSERT INTO `role` (`id_role`, `role_name`) VALUES
 	(1, 'Batman'),
 	(2, 'Vicki Vale'),

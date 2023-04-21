@@ -14,63 +14,36 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg bg-light">
-            <!-- <a href="movies.php">Movies</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
 
-            <a href="actors.php">Actors</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-            <a href="directors.php">Directors</a>
-
-            <a href="genres.php">Genres</a>
-        </nav> -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            Home
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Link
-                        </a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                    </li>
-
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                Action
-                            </a>
+                    <a class="navbar-brand" href="#"> <?= $secondTitle ?> </a>
+    
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="movies.php">Movies</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                Another action
-                            </a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="actors.php">Actors</a>
                         </li>
-                        <li>
-                            <hr class="dropdown-divider">
+                        <li class="nav-item">
+                            <a class="nav-link" href="directors.php">Directors</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                Something else here
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="genres.php">Genres</a>
                         </li>
                     </ul>
+                    
+                </div>
 
-                    <li class="nav-item">
-                        <a class="nav-link disabled">
-                            Disabled
-                        </a>
-                    </li>    
             </div>
+        </nav>
 
     </nav>
 

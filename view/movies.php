@@ -3,39 +3,34 @@
 ob_start();
 
 ?>
-        
-<div id="movie_cards">
 
-    <article class="movie_card">
-        
-    </article>
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Release date</th>
+        </tr>
+    </thead>
 
-    <article class="movie_card">
-        
-    </article>
+    <tbody>
 
-    <article class="movie_card">
-        
-    </article>
+        <?php
 
-    <article class="movie_card">
-        
-    </article>
+        foreach ($sql->fetchAll() as $movie) { ?>
+            <tr>
+                <td>
+                    <a class="text-decoration-none text-reset" href="index.php?movie_detail&id=<?= $movie['id_movie'] ?>">
+                        <?= $movie['title'] ?>
+                    </a>
+                </td>
+                <td><?= $movie['release_date'] ?></td>
+            </tr>
 
-    <article class="movie_card">
-        
-    </article>
 
-    <article class="movie_card">
-        
-    </article>
+        <?php } ?>
 
-    <article class="movie_card">
-        
-    </article>
-
-</div>
-
+    </tbody>
+</table>
 
 <?php
 

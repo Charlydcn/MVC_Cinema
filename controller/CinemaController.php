@@ -13,7 +13,7 @@ class CinemaController
         $pdo = Connect::dbConnect();
 
         $sql = $pdo->query(
-            "SELECT *
+            "SELECT id_movie, title, YEAR(release_date) AS 'release_date', poster
             FROM movie"
         );
 
@@ -162,11 +162,11 @@ class CinemaController
         $pdo = Connect::dbConnect();
 
         $sql = $pdo->query(
-            "SELECT movie_genre.genre_name, COUNT(title) AS 'count'
+            "SELECT movie_genre.id_movie_genre, movie_genre.genre_name, COUNT(title) AS 'count'
             FROM movie
             INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
             INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_genre
-            GROUP BY movie_genre.genre_name
+            GROUP BY movie_genre.id_movie_genre, movie_genre.genre_name
             ORDER BY COUNT(title) DESC"
         );
 

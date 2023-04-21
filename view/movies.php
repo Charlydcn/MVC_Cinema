@@ -11,7 +11,7 @@ ob_start();
     foreach ($sql->fetchAll() as $movie) { ?>
 
         <div class="col-lg-2">
-            <a class="text-decoration-none text-reset" href="">
+            <a class="text-decoration-none text-reset" href="index.php?action=movie_detail&id=<?= $movie['id_movie'] ?>">
                 <figure>
                     <img src="public/img/<?= $movie['poster'] ?>" alt="portrait <?= $movie['title'] ?>" class="img-thumbnail">
                     <figcaption class="text-center fw-semibold"><?= $movie['title'] ?> (<?= $movie['release_date'] ?>)</figcaption>

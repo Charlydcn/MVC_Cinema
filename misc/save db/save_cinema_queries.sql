@@ -26,7 +26,7 @@ FROM movie
 INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
 INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_genre
 GROUP BY movie_genre.genre_name
-ORDER BY "Movies" DESC
+ORDER BY COUNT(title) DESC
 
 -- e. Nombre de films par réalisateur (classés dans l’ordre décroissant)
 SELECT first_name AS "Director", last_name AS "", COUNT(title) AS "Movies"

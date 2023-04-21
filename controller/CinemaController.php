@@ -27,8 +27,8 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $sql = $pdo->prepare(
-            "SELECT title, YEAR(release_date), SEC_TO_TIME(length*60), first_name, last_name, synopsis, rating, poster, genre_name
+        $sqlDetail = $pdo->prepare(
+            "SELECT title, YEAR(release_date) AS 'release_date', SEC_TO_TIME(length*60) AS 'length', first_name, last_name, synopsis, rating, poster, GROUP_CONCAT(genre_name) AS 'genres'
             FROM movie
             INNER JOIN director ON movie.id_director = director.id_director
             INNER JOIN person ON director.id_person = person.id_person
@@ -37,17 +37,10 @@ class CinemaController
             WHERE movie.id_movie = :id"
         );
 
-        $sql->execute(["id" => $id]);
+        $sqlDetail->execute(["id" => $id]);
 
-        require "view/movie_detail.php";
-    }
-
-    public function movieCasting($id)
-    {
-        $pdo = Connect::dbConnect();
-
-        $sql = $pdo->prepare(
-            "SELECT first_name, last_name, role_name
+        $sqlCasting = $pdo->prepare(
+            "SELECT first_name, last_name, role_name, actor.id_actor
             FROM person
             INNER JOIN actor ON person.id_person = actor.id_person
             INNER JOIN casting ON actor.id_actor = casting.id_actor
@@ -56,7 +49,7 @@ class CinemaController
             WHERE movie.id_movie = :id"
         );
 
-        $sql->execute(["id" => $id]);
+        $sqlCasting->execute(["id" => $id]);
 
         require "view/movie_detail.php";
     }
@@ -81,22 +74,16 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $sql = $pdo->prepare(
+        $sqlDetails = $pdo->prepare(
             "SELECT *
             FROM actor
             WHERE id_actor = :id"
         );
 
-        $sql->execute(["id" => $id]);
+        $sqlDetails->execute(["id" => $id]);
 
-        require "view/actor_detail.php";
-    }
 
-    public function actorMovies($id)
-    {
-        $pdo = Connect::dbConnect();
-
-        $sql = $pdo->prepare(
+        $sqlMovies = $pdo->prepare(
             "SELECT title, release_date, role_name
             FROM movie
             INNER JOIN casting ON movie.id_movie = casting.id_movie
@@ -106,7 +93,7 @@ class CinemaController
             ORDER BY release_date ASC"
         );
 
-        $sql->execute(["id" => $id]);
+        $sqlMovies->execute(["id" => $id]);
 
         require "view/actor_detail.php";
     }
@@ -131,29 +118,22 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $sql = $pdo->prepare(
+        $sqlDetail = $pdo->prepare(
             "SELECT *
             FROM director
             WHERE id_director = :id"
         );
 
-        $sql->execute(["id" => $id]);
+        $sqlDetail->execute(["id" => $id]);
 
-        require "view/director_detail.php";
-    }
-
-    public function directorMovies($id)
-    {
-        $pdo = Connect::dbConnect();
-
-        $sql = $pdo->prepare(
+        $sqlMovies = $pdo->prepare(
             "SELECT title, release_date 
             FROM movie
             INNER JOIN director ON movie.id_director = director.id_director
             WHERE movie.id_director = :id"
         );
 
-        $sql->execute(["id" => $id]);
+        $sqlMovies->execute(["id" => $id]);
 
         require "view/director_detail.php";
     }
@@ -177,7 +157,22 @@ class CinemaController
         require "view/genres.php";
     }
 
-    public function genreDetail()
+    public function genreDetail($id)
     {
+        $pdo = Connect::dbConnect();
+
+        $sql = $pdo->prepare(
+            "SELECT GROUP_CONCAT(movie_genre.genre_name) AS 'genre', title, movie_genre.id_movie_genre 'id_genre'
+            FROM movie
+            INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
+            INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_genre
+            WHERE movie_genre.id_movie_genre = :id
+            GROUP BY movie_genre.genre_name, title, movie_genre.id_movie_genre
+            "
+        );
+
+        $sql->execute(["id" => $id]);
+
+        require "view/genre_detail.php";
     }
 }

@@ -4,7 +4,20 @@ ob_start();
 
 ?>
 
+<?php
 
+$genreDetail = $sql->fetchAll();
+
+foreach ($genreDetail as $detail) {
+    var_dump($genreDetail);
+?>
+
+
+    
+
+<?php
+}
+?>
 
 <?php
 

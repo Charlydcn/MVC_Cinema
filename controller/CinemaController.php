@@ -28,9 +28,13 @@ class CinemaController
         $pdo = Connect::dbConnect();
 
         $sql = $pdo->prepare(
-            "SELECT *
+            "SELECT title, YEAR(release_date), SEC_TO_TIME(length*60), first_name, last_name, synopsis, rating, poster, genre_name
             FROM movie
-            WHERE id_movie = :id"
+            INNER JOIN director ON movie.id_director = director.id_director
+            INNER JOIN person ON director.id_person = person.id_person
+            INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
+            INNER JOIN movie_genre ON movie_genre.id_movie_genre = set_movie_genre.id_movie_genre
+            WHERE movie.id_movie = :id"
         );
 
         $sql->execute(["id" => $id]);

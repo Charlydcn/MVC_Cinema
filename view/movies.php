@@ -4,33 +4,26 @@ ob_start();
 
 ?>
 
-<table class="table table-striped table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Release date</th>
-        </tr>
-    </thead>
+<div class="row">
 
-    <tbody>
+    <?php
 
-        <?php
+    foreach ($sql->fetchAll() as $movie) { ?>
 
-        foreach ($sql->fetchAll() as $movie) { ?>
-            <tr>
-                <td>
-                    <a class="text-decoration-none text-reset" href="index.php?movie_detail&id=<?= $movie['id_movie'] ?>">
-                        <?= $movie['title'] ?>
-                    </a>
-                </td>
-                <td><?= $movie['release_date'] ?></td>
-            </tr>
+        <div class="col-lg-2">
+            <a class="text-decoration-none text-reset" href="">
+                <figure>
+                    <img src="public/img/<?= $movie['poster'] ?>" alt="portrait <?= $movie['title'] ?>" class="img-thumbnail">
+                    <figcaption class="text-center fw-semibold"><?= $movie['title'] ?> (<?= $movie['release_date'] ?>)</figcaption>
+                </figure>
+            </a>
+
+        </div>
 
 
-        <?php } ?>
+    <?php } ?>
 
-    </tbody>
-</table>
+</div>
 
 <?php
 

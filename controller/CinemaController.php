@@ -28,7 +28,7 @@ class CinemaController
         $pdo = Connect::dbConnect();
 
         $sqlDetail = $pdo->prepare(
-            "SELECT title, YEAR(release_date) AS 'release_date', SEC_TO_TIME(length*60) AS 'length', first_name, last_name, synopsis, rating, poster, GROUP_CONCAT(genre_name) AS 'genres'
+            "SELECT title, YEAR(release_date) AS 'release_date', SEC_TO_TIME(length*60) AS 'length', first_name, last_name, synopsis, rating, poster, GROUP_CONCAT(genre_name) AS 'genres', movie.id_director
             FROM movie
             INNER JOIN director ON movie.id_director = director.id_director
             INNER JOIN person ON director.id_person = person.id_person

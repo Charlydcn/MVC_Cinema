@@ -53,16 +53,14 @@ foreach($actorMovies as $movie) {
 ?>
 
 <p class="lh-1"><a class="text-decoration-none text-reset fw-bold" href="index.php?action=movie_detail&id=<?=$movie['id_movie']?>"><?= $movie['title']?></a><?=" (" . $movie['release_date'] . ")"?></p>
-<p>Role : <?= $movie['role_name'] ?></p>
+<p><span class="fw-bold">Role : </span><?= $movie['role_name'] ?></p>
 
 <?php } ?>
-
-
 
 <?php
 
 $content = ob_get_clean();
-$title = "Actor";
+$title = $actorDetail['first_name'] . " " . $actorDetail['last_name'];
 $secondTitle = "Actor";
 require 'template.php';
 

@@ -59,7 +59,7 @@ foreach($directorMovies as $movie) {
 <?php
 
 $content = ob_get_clean();
-$title = "Director";
+$title = $directorDetail['first_name'] . " " . $directorDetail['last_name'];
 $secondTitle = "Director";
 require 'template.php';
 

@@ -22,13 +22,13 @@ $movieDetail = $sqlDetail->fetch();
             <div class="card-body">
                 <h2 class="card-title"><?= $movieDetail['title'] ?> (<?= $movieDetail['release_date'] ?>)</h2>
                 <br>
-                <p class="card-text fw-bold lh-1">Genre(s) :
+                <p class="card-text fw-bold lh-1">Genre(s) :</p>
                 <p><?= $movieDetail['genres'] ?></p>
 
-                <p class="card-text fw-bold lh-1">Duration :
+                <p class="card-text fw-bold lh-1">Duration :</p>
                 <p><?= $movieDetail['length'] ?></p>
 
-                <p class="card-text fw-bold lh-1">Director : </p>
+                <p class="card-text fw-bold lh-1">Director :</p>
                 <p><a class="text-decoration-none text-reset" href="index.php?action=director_detail&id=<?=$movieDetail['id_director']?>"><?= $movieDetail['first_name'] . " " . $movieDetail['last_name'] ?></a></p>
 
                 <p class="card-text fw-bold">Synopsis :</p>
@@ -42,7 +42,7 @@ $movieDetail = $sqlDetail->fetch();
                         <a class="text-decoration-none" href="">
                             <i class="fa-solid fa-pen-to-square"></i>    
                         </a>
-                </small>
+                    </small>
                 </p>
             </div>
         </div>

@@ -209,7 +209,7 @@ class CinemaController
         if (!empty($isActor) && !empty($isDirector)) { // SI ACTEURS ET REALISATEUR...
 
             $detailQuery = $pdo->prepare(
-                "SELECT first_name, last_name, birthdate, genre, portrait
+                "SELECT *
                 FROM person
                 INNER JOIN actor ON person.id_person = actor.id_person
                 WHERE actor.id_person = :id"
@@ -222,7 +222,7 @@ class CinemaController
         } elseif (!empty($isActor)) { // SI ACTEUR...
 
             $detailQuery = $pdo->prepare(
-                "SELECT first_name, last_name, birthdate, genre, portrait
+                "SELECT *
                 FROM person
                 INNER JOIN actor ON person.id_person = actor.id_person
                 WHERE actor.id_person = :id"
@@ -235,7 +235,7 @@ class CinemaController
         } elseif (!empty($isDirector)) { // SI REALISATEUR...
 
             $detailQuery = $pdo->prepare(
-                "SELECT first_name, last_name, birthdate, genre, portrait
+                "SELECT *
                 FROM person
                 INNER JOIN director ON person.id_person = director.id_person
                 WHERE director.id_person = :id"
@@ -245,22 +245,34 @@ class CinemaController
 
             $isDirector = "checked";
             $isActor = "";
-        } else { // SINON...
-            // ...
+        } else {
+            $isActor = "";
+            $isDirector = "";
         }
 
         require "view/person_dashboard.php";
     }
 
-    public function updatePerson($first_name, $last_name, $birthdate, $genre, $isActor, $isDirector, $portrait)
+    public function updatePerson($id, $first_name, $last_name, $birthdate, $genre, $portrait)
     {
-        // var_dump($id);
-        // var_dump($first_name);
-        // var_dump($last_name);
-        // var_dump($birthdate);
-        // var_dump($genre);
-        // var_dump($isActor);
-        // var_dump($isDirector);
-        // var_dump($portrait);
+        $pdo = Connect::dbConnect();
+
+        $updateQuery = $pdo->prepare(
+            "UPDATE person
+            SET first_name = :first_name, last_name = :first_name, birthdate = birthdate, genre = :genre
+            WHERE person.id_person = :id"
+        );
+
+        $updateQuery->bindValue(':id', $id);
+        $updateQuery->bindValue(':first_name', $first_name);
+        $updateQuery->bindValue(':last_name', $last_name);
+        $updateQuery->bindValue(':birthdate', $birthdate);
+        $updateQuery->bindValue(':genre', $genre);
+        $updateQuery->bindValue(':portrait', $portrait);
+
+        $updateQuery->execute();
+
+        var_dump($updateQuery);
+        die;
     }
 }

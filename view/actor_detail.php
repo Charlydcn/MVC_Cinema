@@ -11,22 +11,37 @@ $actorMovies = $sqlMovies->fetchAll();
 
 ?>
 
-<div class="d-flex flex-row bd-highlight mb-3">
-    <div class="col-md-7 order-md-2">
+<div class="card mb-3" style="max-width: 1024px;">
+  <div class="row g-0">
 
-        <p class="fs-3 fw-semibold"><?= $actorDetail['first_name'] . " " . $actorDetail['last_name'] ?></p>
-
-        <p class="fw-bold lh-1">Birth-date :
-        <p><?= $actorDetail['birthdate'] ?></p>
-
-        <p class="fw-bold lh-1">Genre :
-        <p><?= $actorDetail['genre'] ?></p>
-
+    <div class="col-md-4">
+        <img src="public/img/<?= $actorDetail['portrait'] ?>" alt="portrait <?= $actor['first_name'] . " " . $actor['last_name']?>" class="img-fluid rounded-start">
     </div>
 
-    <figure class="col-md-5 order-md-1 w-25">
-        <img src="public/img/<?= $actorDetail['portrait'] ?>" alt="portrait <?= $actor['first_name'] . " " . $actor['last_name']?>" class="img-fluid">
-    </figure>
+    <div class="col-md-8">
+      <div class="card-body">
+        
+        <h2 class="card-title">
+            <?= $actorDetail['first_name'] . " " . $actorDetail['last_name'] ?>
+        </h2>
+
+        <p class="card-text fw-bold lh-1">Birth-date :</p>
+        <p><?= $actorDetail['birthdate']?></p>
+
+        <p class="card-text fw-bold lh-1">Genre :</p>
+        <p><?= $actorDetail['genre'] ?></p>
+
+        <p class="card-text">
+            <small>
+                <a class="text-decoration-none" href="">
+                    <i class="fa-solid fa-pen-to-square"></i>    
+                </a>
+            </small>
+        </p>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <p class="fs-4">Movie played :</p>

@@ -176,4 +176,91 @@ class CinemaController
 
         require "view/genre_detail.php";
     }
+
+    // *********************************************************
+    // DASHBOARDS **********************************************
+
+    public function personDashboard($id)
+    {
+
+        $pdo = Connect::dbConnect();
+
+
+        $checkActorQuery = $pdo->prepare(
+            "SELECT *
+            FROM person
+            INNER JOIN actor ON person.id_person = actor.id_person
+            WHERE person.id_person = :id"
+        );
+
+        $checkDirectorQuery = $pdo->prepare(
+            "SELECT *
+            FROM person
+            INNER JOIN director ON person.id_person = director.id_person
+            WHERE person.id_person = :id"
+        );
+
+        $checkActorQuery->execute(["id" => $id]);
+        $checkDirectorQuery->execute(["id" => $id]);
+
+        $isActor = $checkActorQuery->fetch();
+        $isDirector = $checkDirectorQuery->fetch();
+
+        if (!empty($isActor) && !empty($isDirector)) { // SI ACTEURS ET REALISATEUR...
+
+            $detailQuery = $pdo->prepare(
+                "SELECT first_name, last_name, birthdate, genre, portrait
+                FROM person
+                INNER JOIN actor ON person.id_person = actor.id_person
+                WHERE actor.id_person = :id"
+            );
+
+            $detailQuery->execute(["id" => $id]);
+
+            $isActor = "checked";
+            $isDirector = "checked";
+        } elseif (!empty($isActor)) { // SI ACTEUR...
+
+            $detailQuery = $pdo->prepare(
+                "SELECT first_name, last_name, birthdate, genre, portrait
+                FROM person
+                INNER JOIN actor ON person.id_person = actor.id_person
+                WHERE actor.id_person = :id"
+            );
+
+            $detailQuery->execute(["id" => $id]);
+
+            $isActor = "checked";
+            $isDirector = "";
+        } elseif (!empty($isDirector)) { // SI REALISATEUR...
+
+            $detailQuery = $pdo->prepare(
+                "SELECT first_name, last_name, birthdate, genre, portrait
+                FROM person
+                INNER JOIN director ON person.id_person = director.id_person
+                WHERE director.id_person = :id"
+            );
+
+            $detailQuery->execute(["id" => $id]);
+
+            $isDirector = "checked";
+            $isActor = "";
+        } else { // SINON...
+            // ...
+        }
+
+        require "view/person_dashboard.php";
+    }
+
+    public function updatePerson($first_name, $last_name, $birthdate, $genre, $isActor, $isDirector, $portrait)
+    {
+        // var_dump($id);
+        // var_dump($first_name);
+        // var_dump($last_name);
+        // var_dump($birthdate);
+        // var_dump($genre);
+        // var_dump($isActor);
+        // var_dump($isDirector);
+        // var_dump($portrait);
+    }
 }

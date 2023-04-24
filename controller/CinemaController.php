@@ -164,13 +164,12 @@ class CinemaController
         $pdo = Connect::dbConnect();
 
         $sql = $pdo->prepare(
-            "SELECT GROUP_CONCAT(movie_genre.genre_name) AS 'genre', title, movie_genre.id_movie_genre 'id_genre'
+            "SELECT GROUP_CONCAT(movie_genre.genre_name) AS 'genre', title, movie_genre.id_movie_genre AS 'id_genre', movie.id_movie AS 'id_movie', poster, YEAR(release_date) AS 'release_date', genre_name
             FROM movie
             INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
             INNER JOIN movie_genre ON set_movie_genre.id_movie_genre = movie_genre.id_movie_genre
-            WHERE movie_genre.id_movie_genre = :id
-            GROUP BY movie_genre.genre_name, title, movie_genre.id_movie_genre
-            "
+            WHERE set_movie_genre.id_movie_genre = :id
+            GROUP BY movie_genre.genre_name, title, movie_genre.id_movie_genre,  movie.id_movie"
         );
 
         $sql->execute(["id" => $id]);

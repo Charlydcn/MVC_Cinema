@@ -74,17 +74,18 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $sqlDetails = $pdo->prepare(
+        $sqlDetail = $pdo->prepare(
             "SELECT *
-            FROM actor
+            FROM person
+            INNER JOIN actor ON person.id_person = actor.id_person
             WHERE id_actor = :id"
         );
 
-        $sqlDetails->execute(["id" => $id]);
+        $sqlDetail->execute(["id" => $id]);
 
 
         $sqlMovies = $pdo->prepare(
-            "SELECT title, release_date, role_name
+            "SELECT title, YEAR(release_date) AS 'release_date', role_name, movie.id_movie
             FROM movie
             INNER JOIN casting ON movie.id_movie = casting.id_movie
             INNER JOIN role ON casting.id_role = role.id_role

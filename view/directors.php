@@ -11,7 +11,7 @@ ob_start();
     foreach ($sql->fetchAll() as $director) { ?>
 
         <div class="col-lg-2">
-            <a class="text-decoration-none text-reset" href="">
+            <a class="text-decoration-none text-reset" href="index.php?action=director_detail&id=<?=$director['id_director']?>">
                 <figure>
                     <img src="public/img/<?= $director['portrait'] ?>" alt="portrait <?= $director['first_name'] . " " . $director['last_name'] ?>" class="rounded-circle img-thumbnail">
                     <figcaption class="text-center fw-semibold"><?= $director['first_name'] . " " . $director['last_name'] ?></figcaption>

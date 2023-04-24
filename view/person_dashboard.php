@@ -7,24 +7,18 @@ ob_start();
 <?php
 
 $person = $detailQuery->fetch();
-$isActor = $checkActorQuery->fetch();
-$isDirector = $checkDirectorQuery->fetch();
+var_dump($person);
 
-if (!empty($isActor)) {
-    $isActor = "checked";
-} else {
-    $isActor = "";
-}
+$genres = [
+    'Male',
+    'Female',
+    'Other',
+]
 
-if (!empty($isDirector)) {
-    $isDirector = "checked";
-} else {
-    $isDirector = "";
-}
 
 ?>
 
-<form class="row g-3 w-25 p-3 m-3 border" action="index.php?action=updatePerson">
+<form class="row g-3 w-25 p-3 m-3 border" action="index.php?action=updatePerson&id=<?= $person['id_person'] ?>" method="POST" enctype="multipart/form-data" autocomplete=" off">
 
     <div class="col-md-6">
         <label class="form-label">
@@ -50,11 +44,21 @@ if (!empty($isDirector)) {
     <div class="col-md-6">
         <label class="form-label">
             Genre :
+
             <select name="genre" class="form-select">
-                <option selected disabled><?= $person['genre'] ?></option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+
+                <?php
+
+                foreach ($genres as $genre) {
+
+                    $isSelected = ($genre === $person['genre'] ? 'selected' : '');
+
+                    echo "<option value='$genre' $isSelected>$genre</option>"
+
+                ?>
+
+                <?php } ?>
+
             </select>
         </label>
     </div>

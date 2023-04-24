@@ -34,9 +34,9 @@ $movieDetail = $sqlDetail->fetch();
 
     </div>
 
-    <div class="col-md-5 order-md-1">
-        <img src="public/img/<?= $movieDetail['poster'] ?>" alt="portrait <?= $movie['title'] ?>" class="img-thumbnail">
-    </div>
+    <figure class="col-md-5 order-md-1">
+        <img src="public/img/<?= $movieDetail['poster'] ?>" alt="portrait <?= $movieDetail['title'] ?>" class="img-thumbnail">
+    </figure>
 
 </div>
 

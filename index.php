@@ -97,6 +97,7 @@ if (isset($_GET['action'])) {
                 $isActor = filter_input(INPUT_POST, "isActor", FILTER_VALIDATE_BOOL);
                 $isDirector = filter_input(INPUT_POST, "isDirector", FILTER_VALIDATE_BOOL);
 
+
                 //************************ IMAGE *********************************
 
                 if (isset($_FILES['portrait'])) {
@@ -110,7 +111,7 @@ if (isset($_GET['action'])) {
 
                     //Tableau des extensions que l'on accepte
                     $extensions = ['jpg', 'png', 'jpeg', 'gif'];
-                    $maxSize = 400000;
+                    $maxSize = 5000000;
 
                     if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
                         $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
@@ -130,14 +131,20 @@ if (isset($_GET['action'])) {
 
 
                 if ($first_name && $last_name && $birthdate && $genre && is_bool($isActor) && is_bool($isDirector)) {
-                    $ctrlCinema->updatePerson($id, $first_name, $last_name, $birthdate, $genre);
 
-                    if (isset($portrait) && $portrait != null) {
+                    if ($isActor === true || $isDirector === true) {
+                        $ctrlCinema->updatePerson($id, $first_name, $last_name, $birthdate, $genre, $isActor, $isDirector);
 
-                        $ctrlCinema->updatePortrait($id, $portrait);
+                        if (isset($portrait) && $portrait != null) {
+                            $ctrlCinema->updatePortrait($id, $portrait);
+                        }
+
+                        $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
+                    } else {
+                        $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
                     }
-                    $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
                 } else {
+
                     $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
                 }
             }

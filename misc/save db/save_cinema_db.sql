@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS `actor` (
   `id_person` int DEFAULT NULL,
   PRIMARY KEY (`id_actor`),
   KEY `id_person` (`id_person`) USING BTREE,
-  CONSTRAINT `FK_actor_person` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK_actor_person` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.actor : ~13 rows (environ)
+-- Listage des données de la table cinema.actor : ~37 rows (environ)
 INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(1, 2),
 	(2, 3),
@@ -65,8 +65,8 @@ INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(33, 49),
 	(34, 50),
 	(35, 51),
-	(58, 52),
-	(42, 53);
+	(36, 52),
+	(37, 53);
 
 -- Listage de la structure de table cinema. casting
 CREATE TABLE IF NOT EXISTS `casting` (
@@ -81,14 +81,14 @@ CREATE TABLE IF NOT EXISTS `casting` (
   CONSTRAINT `casting_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE CASCADE,
   CONSTRAINT `casting_ibfk_2` FOREIGN KEY (`id_actor`) REFERENCES `actor` (`id_actor`) ON DELETE CASCADE,
   CONSTRAINT `casting_ibfk_3` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id_movie`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.casting : ~38 rows (environ)
+-- Listage des données de la table cinema.casting : ~35 rows (environ)
 INSERT INTO `casting` (`id_casting`, `id_role`, `id_actor`, `id_movie`) VALUES
 	(36, 18, 18, 4),
 	(37, 1, 1, 1),
+	(38, 2, 2, 1),
 	(39, 3, 3, 1),
-	(40, 4, 4, 1),
 	(41, 6, 6, 2),
 	(42, 7, 7, 2),
 	(43, 8, 8, 2),
@@ -119,7 +119,7 @@ INSERT INTO `casting` (`id_casting`, `id_role`, `id_actor`, `id_movie`) VALUES
 	(68, 34, 34, 7),
 	(69, 35, 35, 7),
 	(70, 10, 10, 2),
-	(74, 2, 2, 1);
+	(75, 4, 4, 1);
 
 -- Listage de la structure de table cinema. director
 CREATE TABLE IF NOT EXISTS `director` (
@@ -127,12 +127,13 @@ CREATE TABLE IF NOT EXISTS `director` (
   `id_person` int NOT NULL,
   PRIMARY KEY (`id_director`),
   KEY `id_person` (`id_person`),
-  CONSTRAINT `director_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `director_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table cinema.director : ~8 rows (environ)
 INSERT INTO `director` (`id_director`, `id_person`) VALUES
 	(1, 1),
+	(20, 3),
 	(2, 20),
 	(3, 21),
 	(4, 28),
@@ -195,15 +196,15 @@ CREATE TABLE IF NOT EXISTS `person` (
   `genre` varchar(20) DEFAULT NULL,
   `portrait` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_person`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table cinema.person : ~44 rows (environ)
 INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `birthdate`, `genre`, `portrait`) VALUES
 	(1, 'Tim', 'Burton', '1959-08-25', 'Male', 'leonardo_dicaprio.jpg'),
 	(2, 'Michael', 'Keaton', '1953-12-09', 'Male', 'leonardo_dicaprio.jpg'),
-	(3, 'Kim', 'Basinger', '1937-04-22', 'Female', '6447c8438f18c9.07316301.jpg'),
+	(3, 'Kim', 'Basinger', '1937-04-22', 'Female', '6447da5b02de01.00202678.jpg'),
 	(5, 'Jack', 'Nicholson', '1937-04-22', 'Male', 'leonardo_dicaprio.jpg'),
-	(6, 'Jack', 'Palance', '1919-02-18', 'Male', 'leonardo_dicaprio.jpg'),
+	(6, 'Jack', 'Palance', '1919-02-18', 'Male', '6447de2c434083.00795995.jpg'),
 	(7, 'Michael', 'Gough', '1916-12-23', 'Male', 'leonardo_dicaprio.jpg'),
 	(8, 'Tobey', 'Maguire', '1975-06-27', 'Male', 'leonardo_dicaprio.jpg'),
 	(9, 'Willem', 'Dafoe', '1955-07-22', 'Male', 'leonardo_dicaprio.jpg'),
@@ -242,8 +243,7 @@ INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `birthdate`, `genr
 	(50, 'Mykelti', 'Williamson', '1960-03-04', 'Male', 'leonardo_dicaprio.jpg'),
 	(51, 'Sally', 'Field', '1946-11-06', 'Female', 'leonardo_dicaprio.jpg'),
 	(52, 'Monsieur', 'Test', '2001-08-28', 'Female', 'leonardo_dicaprio.jpg'),
-	(53, 'Madame', 'Test', '2000-01-20', 'Female', 'leonardo_dicaprio.jpg'),
-	(100, 'SUPER', 'DELETE', '2023-04-25', NULL, NULL);
+	(53, 'Madame', 'Test', '2000-01-20', 'Female', 'leonardo_dicaprio.jpg');
 
 -- Listage de la structure de table cinema. role
 CREATE TABLE IF NOT EXISTS `role` (

@@ -272,11 +272,9 @@ class CinemaController
         $updateQuery->execute();
     }
 
-    public function updatePortrait($portrait)
+    public function updatePortrait($id, $portrait)
     {
         $pdo = Connect::dbConnect();
-        var_dump($portrait);
-        die;
 
         $portraitQuery = $pdo->prepare(
             "UPDATE person
@@ -284,6 +282,9 @@ class CinemaController
             WHERE id_person = :id"
         );
 
-        $portraitQuery->execute(["portrait" => $portrait]);
+        $portraitQuery->bindValue(':id', $id);
+        $portraitQuery->bindValue(':portrait', $portrait);
+
+        $portraitQuery->execute();
     }
 }

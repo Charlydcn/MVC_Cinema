@@ -6,6 +6,8 @@ spl_autoload_register(function ($class_name) {
     include $class_name . '.php';
 });
 
+session_start();
+
 $ctrlCinema = new CinemaController();
 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
@@ -79,9 +81,9 @@ if (isset($_GET['action'])) {
             // *********************************************************
             // DASHBOARDS **********************************************
 
-        case "person_dashboard":
+        case "edit_person":
 
-            $ctrlCinema->personDashboard($id);
+            $ctrlCinema->editPerson($id);
 
             break;
 
@@ -114,12 +116,9 @@ if (isset($_GET['action'])) {
                         $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
                         $portrait = $uniqueName . '.' . $extension;
                         move_uploaded_file($imgTmpName, 'public/img/' . $portrait);
-                    } else {
-                        echo "Mauvaise extension ou image trop volumineuse";
                     }
-                } else {
-                    $portrait = null;
                 }
+                //****************************************************************
 
                 if ($isActor === null) {
                     $isActor = false;
@@ -129,11 +128,21 @@ if (isset($_GET['action'])) {
                     $isDirector = false;
                 }
 
-                //****************************************************************
+
                 if ($first_name && $last_name && $birthdate && $genre && is_bool($isActor) && is_bool($isDirector)) {
-                    $ctrlCinema->updatePerson($id, $first_name, $last_name, $birthdate, $genre, $portrait);
+                    $ctrlCinema->updatePerson($id, $first_name, $last_name, $birthdate, $genre);
+
+                    if (isset($portrait) && $portrait != null) {
+
+                        $ctrlCinema->updatePortrait($id, $portrait);
+                    }
+                    $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
+                } else {
+                    $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
                 }
             }
+
+            Header("Location:index.php?action=edit_person&id=$id");
 
             break;
     }

@@ -6,7 +6,7 @@ ob_start();
 
 <?php
 
-$person = $detailQuery->fetch();
+$person = $detailQry->fetch();
 
 $genres = [
     'Male',
@@ -23,7 +23,7 @@ if (isset($_SESSION['message'])) {
 
 <div class="d-flex flex-row align-items-center">
 
-    <form class="row w-50 g-3 p-3 m-3 border" action="index.php?action=updatePerson&id=<?= $person['id_person'] ?>" method="POST" enctype="multipart/form-data" autocomplete=" off">
+    <form class="row w-50 g-3 p-3 m-3 border" action="index.php?action=updatePerson&id=<?= $person['id_person'] ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
 
         <div class="col-md-6">
             <label class="form-label">
@@ -93,12 +93,16 @@ if (isset($_SESSION['message'])) {
             </div>
         </div>
 
+
         <div class="col-12">
             <input type="submit" name="submit" class="btn btn-primary">
         </div>
 
-    </form>
+        <a href="index.php?action=deletePerson&id=<?= $person['id_person'] ?>" class="d-flex justify-content-end fs-4">
+            <i class="fa-sharp fa-solid fa-trash text-danger"></i>
+        </a>
 
+    </form>
 
     <figure class="w-50">
         <img src="public/img/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="w-25 img-fluid rounded-circle">

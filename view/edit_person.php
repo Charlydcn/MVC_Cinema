@@ -7,18 +7,21 @@ ob_start();
 <?php
 
 $person = $detailQuery->fetch();
-var_dump($person);
 
 $genres = [
     'Male',
     'Female',
     'Other',
-]
+];
 
+if (isset($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);
+}
 
 ?>
 
-<form class="row g-3 w-25 p-3 m-3 border" action="index.php?action=updatePerson&id=<?= $person['id_person'] ?>" method="POST" enctype="multipart/form-data" autocomplete=" off">
+<form class="row w-50 g-3 p-3 m-3 border" action="index.php?action=updatePerson&id=<?= $person['id_person'] ?>" method="POST" enctype="multipart/form-data" autocomplete=" off">
 
     <div class="col-md-6">
         <label class="form-label">
@@ -66,7 +69,7 @@ $genres = [
     <div class="col-md-6">
         <label class="form-label">
             Portrait :
-            <input type="file" name="portrait" class="form-control" value="<?= $person['portrait'] ?>">
+            <input type="file" name="portrait" class="form-control" value="public/img/<?= $person['portrait'] ?>">
         </label>
     </div>
 
@@ -93,6 +96,7 @@ $genres = [
     </div>
 
 </form>
+
 
 <?php
 

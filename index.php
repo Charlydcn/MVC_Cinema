@@ -152,5 +152,13 @@ if (isset($_GET['action'])) {
             Header("Location:index.php?action=edit_person&id=$id");
 
             break;
+
+        case "deletePerson":
+
+            $ctrlCinema->deletePerson($id);
+
+            Header("Location:index.php?action=movies");
+
+            break;
     }
 }

@@ -182,66 +182,44 @@ class CinemaController
 
     public function editPerson($id)
     {
-
         $pdo = Connect::dbConnect();
 
+        if ($this->checkIfActor($id) === true && $this->checkIfDirector($id) === true) { // SI ACTEURS ET REALISATEUR...
 
-        $checkActorQuery = $pdo->prepare(
-            "SELECT *
-            FROM person
-            INNER JOIN actor ON person.id_person = actor.id_person
-            WHERE person.id_person = :id"
-        );
-
-        $checkDirectorQuery = $pdo->prepare(
-            "SELECT *
-            FROM person
-            INNER JOIN director ON person.id_person = director.id_person
-            WHERE person.id_person = :id"
-        );
-
-        $checkActorQuery->execute(["id" => $id]);
-        $checkDirectorQuery->execute(["id" => $id]);
-
-        $isActor = $checkActorQuery->fetch();
-        $isDirector = $checkDirectorQuery->fetch();
-
-        if (!empty($isActor) && !empty($isDirector)) { // SI ACTEURS ET REALISATEUR...
-
-            $detailQuery = $pdo->prepare(
+            $detailQry = $pdo->prepare(
                 "SELECT *
                 FROM person
                 INNER JOIN actor ON person.id_person = actor.id_person
-                WHERE actor.id_person = :id"
+                WHERE person.id_person = :id"
             );
 
-            $detailQuery->execute(["id" => $id]);
+            $detailQry->execute(["id" => $id]);
 
             $isActor = "checked";
             $isDirector = "checked";
-        } elseif (!empty($isActor)) { // SI ACTEUR...
+        } elseif ($this->checkIfActor($id) === true) { // SI ACTEUR...
 
-            $detailQuery = $pdo->prepare(
+            $detailQry = $pdo->prepare(
                 "SELECT *
                 FROM person
                 INNER JOIN actor ON person.id_person = actor.id_person
-                WHERE actor.id_person = :id"
+                WHERE person.id_person = :id"
             );
 
-            $detailQuery->execute(["id" => $id]);
+            $detailQry->execute(["id" => $id]);
 
             $isActor = "checked";
             $isDirector = "";
-        } elseif (!empty($isDirector)) { // SI REALISATEUR...
+        } elseif ($this->checkIfDirector($id) === true) { // SI REALISATEUR...
 
-            $detailQuery = $pdo->prepare(
+            $detailQry = $pdo->prepare(
                 "SELECT *
                 FROM person
                 INNER JOIN director ON person.id_person = director.id_person
-                WHERE director.id_person = :id"
+                WHERE person.id_person = :id"
             );
 
-            $detailQuery->execute(["id" => $id]);
+            $detailQry->execute(["id" => $id]);
 
             $isDirector = "checked";
             $isActor = "";
@@ -253,23 +231,60 @@ class CinemaController
         require "view/edit_person.php";
     }
 
-    public function updatePerson($id, $first_name, $last_name, $birthdate, $genre)
+    public function updatePerson($id, $first_name, $last_name, $birthdate, $genre, $isActor, $isDirector)
     {
         $pdo = Connect::dbConnect();
 
-        $updateQuery = $pdo->prepare(
+        $detailQry = $pdo->prepare(
             "UPDATE person
             SET first_name = :first_name, last_name = :last_name, birthdate = :birthdate, genre = :genre
             WHERE id_person = :id"
         );
 
-        $updateQuery->bindValue(':id', $id);
-        $updateQuery->bindValue(':first_name', $first_name);
-        $updateQuery->bindValue(':last_name', $last_name);
-        $updateQuery->bindValue(':birthdate', $birthdate);
-        $updateQuery->bindValue(':genre', $genre);
+        $detailQry->bindValue(':id', $id);
+        $detailQry->bindValue(':first_name', $first_name);
+        $detailQry->bindValue(':last_name', $last_name);
+        $detailQry->bindValue(':birthdate', $birthdate);
+        $detailQry->bindValue(':genre', $genre);
 
-        $updateQuery->execute();
+        $detailQry->execute();
+
+        if ($this->checkIfActor($id) != $isActor) { // SI SON ANCIEN STATUT D'ACTEUR (true/false) EST DIFFERENT DU NOUVEAU DONNÉ PAR LE FOM :
+            if ($isActor === true) {
+                $isActorQry = $pdo->prepare(
+                    "INSERT INTO actor (id_person)
+                    VALUES (:id)"
+                );
+
+                $isActorQry->execute(["id" => $id]);
+            } else {
+                $isActorQry = $pdo->prepare(
+                    "DELETE FROM actor
+                    WHERE id_person = (:id)"
+                );
+
+                $isActorQry->execute(["id" => $id]);
+            }
+        }
+
+        if ($this->checkIfDirector($id) != $isDirector) { // SI SON ANCIEN STATUT DE DIRECTOR (true/false) EST DIFFERENT DU NOUVEAU DONNÉ PAR LE FOM :
+            if ($isDirector === true) {
+
+                $isDirectorQry = $pdo->prepare(
+                    "INSERT INTO director (id_person)
+                    VALUES (:id)"
+                );
+
+                $isDirectorQry->execute(["id" => $id]);
+            } else {
+                $isDirectorQry = $pdo->prepare(
+                    "DELETE FROM director
+                    WHERE id_person = (:id)"
+                );
+
+                $isDirectorQry->execute(["id" => $id]);
+            }
+        }
     }
 
     public function updatePortrait($id, $portrait)
@@ -286,5 +301,87 @@ class CinemaController
         $portraitQuery->bindValue(':portrait', $portrait);
 
         $portraitQuery->execute();
+    }
+
+    public function checkIfActor($id)
+    {
+        $pdo = Connect::dbConnect();
+
+        $checkActorQuery = $pdo->prepare(
+            "SELECT *
+            FROM person
+            INNER JOIN actor ON person.id_person = actor.id_person
+            WHERE person.id_person = :id"
+        );
+
+        $checkActorQuery->execute(["id" => $id]);
+        $isActor = $checkActorQuery->fetch();
+
+        if (!empty($isActor)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return $result;
+    }
+
+    public function checkIfDirector($id)
+    {
+        $pdo = Connect::dbConnect();
+
+        $checkDirectorQuery = $pdo->prepare(
+            "SELECT *
+            FROM person
+            INNER JOIN director ON person.id_person = director.id_person
+            WHERE person.id_person = :id"
+        );
+
+        $checkDirectorQuery->execute(["id" => $id]);
+        $isDirector = $checkDirectorQuery->fetch();
+
+        if (!empty($isDirector)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return $result;
+    }
+
+    public function deletePerson($id)
+    {
+        if ($this->checkIfPersonExist($id) === true) {
+            $pdo = Connect::dbConnect();
+
+            $checkDirectorQuery = $pdo->prepare(
+                "DELETE FROM person
+                WHERE id_person = :id"
+            );
+
+            $checkDirectorQuery->execute(["id" => $id]);
+        }
+    }
+
+    public function checkIfPersonExist($id)
+    {
+        $pdo = Connect::dbConnect();
+
+        $checkDirectorQuery = $pdo->prepare(
+            "SELECT *
+            FROM person
+            WHERE id_person = :id"
+        );
+
+        $checkDirectorQuery->execute(["id" => $id]);
+        $personExist = $checkDirectorQuery->fetch();
+
+        if (!empty($personExist)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return $result;
     }
 }

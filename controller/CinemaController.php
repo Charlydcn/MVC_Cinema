@@ -180,7 +180,7 @@ class CinemaController
     // *********************************************************
     // DASHBOARDS **********************************************
 
-    public function personDashboard($id)
+    public function editPerson($id)
     {
 
         $pdo = Connect::dbConnect();
@@ -250,17 +250,17 @@ class CinemaController
             $isDirector = "";
         }
 
-        require "view/person_dashboard.php";
+        require "view/edit_person.php";
     }
 
-    public function updatePerson($id, $first_name, $last_name, $birthdate, $genre, $portrait)
+    public function updatePerson($id, $first_name, $last_name, $birthdate, $genre)
     {
         $pdo = Connect::dbConnect();
 
         $updateQuery = $pdo->prepare(
             "UPDATE person
-            SET first_name = :first_name, last_name = :first_name, birthdate = birthdate, genre = :genre
-            WHERE person.id_person = :id"
+            SET first_name = :first_name, last_name = :last_name, birthdate = :birthdate, genre = :genre
+            WHERE id_person = :id"
         );
 
         $updateQuery->bindValue(':id', $id);
@@ -268,11 +268,22 @@ class CinemaController
         $updateQuery->bindValue(':last_name', $last_name);
         $updateQuery->bindValue(':birthdate', $birthdate);
         $updateQuery->bindValue(':genre', $genre);
-        $updateQuery->bindValue(':portrait', $portrait);
 
         $updateQuery->execute();
+    }
 
-        var_dump($updateQuery);
+    public function updatePortrait($portrait)
+    {
+        $pdo = Connect::dbConnect();
+        var_dump($portrait);
         die;
+
+        $portraitQuery = $pdo->prepare(
+            "UPDATE person
+            SET portrait = :portrait
+            WHERE id_person = :id"
+        );
+
+        $portraitQuery->execute(["portrait" => $portrait]);
     }
 }

@@ -375,22 +375,6 @@ class CinemaController
         Header("Location:index.php?action=edit_person&id=$id");
     }
 
-    public function updatePortrait($id, $portrait)
-    {
-        $pdo = Connect::dbConnect();
-
-        $portraitQuery = $pdo->prepare(
-            "UPDATE person
-            SET portrait = :portrait
-            WHERE id_person = :id"
-        );
-
-        $portraitQuery->bindValue(':id', $id);
-        $portraitQuery->bindValue(':portrait', $portrait);
-
-        $portraitQuery->execute();
-    }
-
     public function checkIfActor($id)
     {
         $pdo = Connect::dbConnect();
@@ -475,8 +459,139 @@ class CinemaController
 
     public function createPersonDashboard()
     {
-        var_dump("test");
+        if (isset($_POST['submit'])) {
+            $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $birthdate = filter_input(INPUT_POST, "birthdate");
+            $genre = filter_input(INPUT_POST, "genre");
+            $isActor = filter_input(INPUT_POST, "isActor", FILTER_VALIDATE_BOOL);
+            $isDirector = filter_input(INPUT_POST, "isDirector", FILTER_VALIDATE_BOOL);
 
-        require "view/create_person.php";
+
+            //************************ IMAGE *********************************
+
+            if (isset($_FILES['portrait'])) {
+                $imgTmpName = $_FILES['portrait']['tmp_name'];
+                $imgName = $_FILES['portrait']['name'];
+                $imgSize = $_FILES['portrait']['size'];
+                $imgError = $_FILES['portrait']['error'];
+
+                $tabExtension = explode('.', $imgName);
+                $extension = strtolower(end($tabExtension));
+
+                //Tableau des extensions que l'on accepte
+                $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+                $maxSize = 5000000;
+
+                if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
+                    $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
+                    $portrait = $uniqueName . '.' . $extension;
+                    move_uploaded_file($imgTmpName, 'public/img/' . $portrait);
+                } else {
+                    $portrait = null;
+                }
+            }
+            //****************************************************************
+
+            if ($isActor === null) {
+                $isActor = false;
+            }
+
+            if ($isDirector === null) {
+                $isDirector = false;
+            }
+
+            if ($first_name && $last_name && $birthdate && $genre && is_bool($isActor) && is_bool($isDirector)) {
+
+                if ($isActor === true || $isDirector === true) {
+
+                    $person = [
+                        "first_name" => $first_name,
+                        "last_name" => $last_name,
+                        "birthdate" => $birthdate,
+                        "genre" => $genre,
+                        "isActor" => $isActor,
+                        "isDirector" => $isDirector,
+                        "portrait" => $portrait
+                    ];
+
+                    // ************************************************************************************************
+                    // QUERY CREATE ***********************************************************************************
+
+                    $pdo = Connect::dbConnect();
+
+                    $createPersonQuery = $pdo->prepare(
+                        "INSERT INTO person (first_name, last_name, birthdate, genre, portrait)
+                        VALUES (:first_name, :last_name, :birthdate, :genre, :portrait)"
+                    );
+
+                    $createPersonQuery->bindValue(':first_name', $first_name);
+                    $createPersonQuery->bindValue(':last_name', $last_name);
+                    $createPersonQuery->bindValue(':birthdate', $birthdate);
+                    $createPersonQuery->bindValue(':genre', $genre);
+                    $createPersonQuery->bindValue(':portrait', $portrait);
+
+                    $createPersonQuery->execute();
+
+                    $findPersonQuery = $pdo->prepare(
+                        "SELECT *
+                        FROM person
+                        WHERE first_name = :first_name
+                        AND last_name = :last_name
+                        AND birthdate = :birthdate
+                        AND genre = :genre"
+                    );
+
+                    $findPersonQuery->bindValue(':first_name', $first_name);
+                    $findPersonQuery->bindValue(':last_name', $last_name);
+                    $findPersonQuery->bindValue(':birthdate', $birthdate);
+                    $findPersonQuery->bindValue(':genre', $genre);
+
+                    $findPersonQuery->execute();
+                    $person = $findPersonQuery->fetch();
+                    $id = $person['id_person'];
+
+                    // ************************************************************************************************
+                    // QUERY ADD TO ACTOR/DIRECTOR ********************************************************************
+
+                    if ($isActor === true) {
+                        $addActorQuery = $pdo->prepare(
+                            "INSERT INTO actor (id_person)
+                            VALUES (:id)"
+                        );
+
+                        $addActorQuery->execute(["id" => $id]);
+                    }
+
+                    if ($isDirector === true) {
+                        $addDirectorQuery = $pdo->prepare(
+                            "INSERT INTO director (id_person)
+                            VALUES (:id)"
+                        );
+
+                        $addDirectorQuery->execute(["id" => $id]);
+                    }
+
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+
+                    $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully created</p>";
+
+                    require "view/create_person.php";
+                } else {
+                    $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
+
+                    require "view/create_person.php";
+                }
+            } else {
+
+                $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
+
+                require "view/create_person.php";
+            }
+        } else {
+
+            require "view/create_person.php";
+        }
     }
 }

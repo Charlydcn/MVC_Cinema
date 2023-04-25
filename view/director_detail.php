@@ -33,7 +33,7 @@ $directorMovies = $sqlMovies->fetchAll();
 
         <p class="card-text">
           <small>
-            <a class="text-decoration-none" href="index.php?action=person_dashboard&id=<?= $directorDetail['id_person'] ?>">
+            <a class="text-decoration-none" href="index.php?action=edit_person&id=<?= $directorDetail['id_person'] ?>">
               <i class="fa-solid fa-pen-to-square"></i>
             </a>
           </small>

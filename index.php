@@ -6,8 +6,6 @@ spl_autoload_register(function ($class_name) {
     include $class_name . '.php';
 });
 
-session_start();
-
 $ctrlCinema = new CinemaController();
 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
@@ -89,6 +87,25 @@ if (isset($_GET['action'])) {
 
         case "updatePerson":
 
+            $ctrlCinema->updatePerson($id);
+
+            break;
+
+        case "deletePerson":
+
+            $ctrlCinema->deletePerson($id);
+
+            Header("Location:index.php?action=movies");
+
+            break;
+
+        case "createPersonDashboard":
+
+            $ctrlCinema->createPersonDashboard();
+
+            break;
+
+        case "createPerson":
             if (isset($_POST['submit'])) {
                 $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -133,31 +150,32 @@ if (isset($_GET['action'])) {
                 if ($first_name && $last_name && $birthdate && $genre && is_bool($isActor) && is_bool($isDirector)) {
 
                     if ($isActor === true || $isDirector === true) {
-                        $ctrlCinema->updatePerson($id, $first_name, $last_name, $birthdate, $genre, $isActor, $isDirector);
 
-                        if (isset($portrait) && $portrait != null) {
-                            $ctrlCinema->updatePortrait($id, $portrait);
-                        }
+                        $person = [
+                            "first_name" => $first_name,
+                            "last_name" => $last_name,
+                            "birthdate" => $birthdate,
+                            "genre" => $genre,
+                            "isActor" => $isActor,
+                            "isDirector" => $isDirector,
+                            "portrait" => $portrait
+                        ];
 
-                        $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
+                        // $ctrlCinema->createPerson($person);
+
+                        // if (isset($portrait) && $portrait != null) {
+                        //     $ctrlCinema->updatePortrait($id, $portrait);
+                        // }
+
+                        // $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
                     } else {
-                        $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
+                        // $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
                     }
                 } else {
 
-                    $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
+                    // $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
                 }
             }
-
-            Header("Location:index.php?action=edit_person&id=$id");
-
-            break;
-
-        case "deletePerson":
-
-            $ctrlCinema->deletePerson($id);
-
-            Header("Location:index.php?action=movies");
 
             break;
     }

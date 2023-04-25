@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+session_start();
+
 use Model\Connect;
 
 class CinemaController
@@ -231,60 +233,146 @@ class CinemaController
         require "view/edit_person.php";
     }
 
-    public function updatePerson($id, $first_name, $last_name, $birthdate, $genre, $isActor, $isDirector)
+    public function updatePerson($id)
     {
-        $pdo = Connect::dbConnect();
+        // FORM SUBMIT TRAITEMENT ****************************************************************************************
+        // ***************************************************************************************************************
 
-        $detailQry = $pdo->prepare(
-            "UPDATE person
-            SET first_name = :first_name, last_name = :last_name, birthdate = :birthdate, genre = :genre
-            WHERE id_person = :id"
-        );
+        if (isset($_POST['submit'])) {
+            $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $birthdate = filter_input(INPUT_POST, "birthdate");
+            $genre = filter_input(INPUT_POST, "genre");
+            $isActor = filter_input(INPUT_POST, "isActor", FILTER_VALIDATE_BOOL);
+            $isDirector = filter_input(INPUT_POST, "isDirector", FILTER_VALIDATE_BOOL);
 
-        $detailQry->bindValue(':id', $id);
-        $detailQry->bindValue(':first_name', $first_name);
-        $detailQry->bindValue(':last_name', $last_name);
-        $detailQry->bindValue(':birthdate', $birthdate);
-        $detailQry->bindValue(':genre', $genre);
 
-        $detailQry->execute();
+            //************************ IMAGE *********************************
 
-        if ($this->checkIfActor($id) != $isActor) { // SI SON ANCIEN STATUT D'ACTEUR (true/false) EST DIFFERENT DU NOUVEAU DONNÉ PAR LE FOM :
-            if ($isActor === true) {
-                $isActorQry = $pdo->prepare(
-                    "INSERT INTO actor (id_person)
-                    VALUES (:id)"
-                );
+            if (isset($_FILES['portrait'])) {
+                $imgTmpName = $_FILES['portrait']['tmp_name'];
+                $imgName = $_FILES['portrait']['name'];
+                $imgSize = $_FILES['portrait']['size'];
+                $imgError = $_FILES['portrait']['error'];
 
-                $isActorQry->execute(["id" => $id]);
+                $tabExtension = explode('.', $imgName);
+                $extension = strtolower(end($tabExtension));
+
+                //Tableau des extensions que l'on accepte
+                $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+                $maxSize = 5000000;
+
+                if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
+                    $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
+                    $portrait = $uniqueName . '.' . $extension;
+                    move_uploaded_file($imgTmpName, 'public/img/' . $portrait);
+                }
+            }
+            //****************************************************************
+
+            if ($isActor === null) {
+                $isActor = false;
+            }
+
+            if ($isDirector === null) {
+                $isDirector = false;
+            }
+
+            // *********************************************************************************************************
+            // *********************************************************************************************************
+
+            if ($first_name && $last_name && $birthdate && $genre && is_bool($isActor) && is_bool($isDirector)) { // SI LES FILTERS SONT VALIDES..
+
+                if ($isActor === true || $isDirector === true) { // SI LA PERSONNE EST ACTEUR OU REALISATEUR.. (pas aucun)
+
+                    // UPDATE PERSON DETAIL ************************************************************************************
+
+                    $pdo = Connect::dbConnect();
+
+                    $detailQry = $pdo->prepare(
+                        "UPDATE person
+                        SET first_name = :first_name, last_name = :last_name, birthdate = :birthdate, genre = :genre
+                        WHERE id_person = :id"
+                    );
+
+                    $detailQry->bindValue(':id', $id);
+                    $detailQry->bindValue(':first_name', $first_name);
+                    $detailQry->bindValue(':last_name', $last_name);
+                    $detailQry->bindValue(':birthdate', $birthdate);
+                    $detailQry->bindValue(':genre', $genre);
+
+                    $detailQry->execute();
+
+                    // *********************************************************************************************************
+                    // UPDATE PERSON STATUT (acteur/réalisateur/both) **********************************************************
+
+                    if ($this->checkIfActor($id) != $isActor) { // SI SON ANCIEN STATUT D'ACTEUR (true/false) EST DIFFERENT DU NOUVEAU DONNÉ PAR LE FOM :
+                        if ($isActor === true) {                // SI LA NOUVELLE CASE isActor EST COCHEE..
+                            $isActorQry = $pdo->prepare(
+                                "INSERT INTO actor (id_person)
+                                VALUES (:id)"
+                            );
+
+                            $isActorQry->execute(["id" => $id]);
+                        } else {
+                            $isActorQry = $pdo->prepare(
+                                "DELETE FROM actor
+                                WHERE id_person = (:id)"
+                            );
+
+                            $isActorQry->execute(["id" => $id]);
+                        }
+                    }
+
+                    if ($this->checkIfDirector($id) != $isDirector) { // SI SON ANCIEN STATUT DE DIRECTOR (true/false) EST DIFFERENT DU NOUVEAU DONNÉ PAR LE FOM :
+                        if ($isDirector === true) {                   // SI LA NOUVELLE CASE isActor EST COCHEE..
+
+                            $isDirectorQry = $pdo->prepare(
+                                "INSERT INTO director (id_person)
+                                VALUES (:id)"
+                            );
+
+                            $isDirectorQry->execute(["id" => $id]);
+                        } else {                                      // SINON..
+                            $isDirectorQry = $pdo->prepare(
+                                "DELETE FROM director
+                                WHERE id_person = (:id)"
+                            );
+
+                            $isDirectorQry->execute(["id" => $id]);
+                        }
+                    }
+
+                    // *********************************************************************************************************
+                    // UPDATE PERSON PORTRAIT **********************************************************************************
+
+                    if (isset($portrait) && $portrait != null) { // SI LE PORTRAIT EST SET ET QU'IL N'EST PAS null
+                        $portraitQuery = $pdo->prepare(
+                            "UPDATE person
+                            SET portrait = :portrait
+                            WHERE id_person = :id"
+                        );
+
+                        $portraitQuery->bindValue(':id', $id);
+                        $portraitQuery->bindValue(':portrait', $portrait);
+
+                        $portraitQuery->execute();
+                    }
+
+                    // *********************************************************************************************************
+                    // *********************************************************************************************************
+
+                    $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
+                } else {
+                    $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
+                }
             } else {
-                $isActorQry = $pdo->prepare(
-                    "DELETE FROM actor
-                    WHERE id_person = (:id)"
-                );
 
-                $isActorQry->execute(["id" => $id]);
+                $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
             }
         }
 
-        if ($this->checkIfDirector($id) != $isDirector) { // SI SON ANCIEN STATUT DE DIRECTOR (true/false) EST DIFFERENT DU NOUVEAU DONNÉ PAR LE FOM :
-            if ($isDirector === true) {
-
-                $isDirectorQry = $pdo->prepare(
-                    "INSERT INTO director (id_person)
-                    VALUES (:id)"
-                );
-
-                $isDirectorQry->execute(["id" => $id]);
-            } else {
-                $isDirectorQry = $pdo->prepare(
-                    "DELETE FROM director
-                    WHERE id_person = (:id)"
-                );
-
-                $isDirectorQry->execute(["id" => $id]);
-            }
-        }
+        Header("Location:index.php?action=edit_person&id=$id");
     }
 
     public function updatePortrait($id, $portrait)
@@ -383,5 +471,12 @@ class CinemaController
         }
 
         return $result;
+    }
+
+    public function createPersonDashboard()
+    {
+        var_dump("test");
+
+        require "view/create_person.php";
     }
 }

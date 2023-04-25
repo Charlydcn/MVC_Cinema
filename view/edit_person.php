@@ -99,7 +99,10 @@ if (isset($_SESSION['message'])) {
 
     </form>
 
-    <img src="public/img/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="w-25 img-fluid rounded-circle">
+
+    <figure class="w-50">
+        <img src="public/img/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="w-25 img-fluid rounded-circle">
+    </figure>
 </div>
 
 

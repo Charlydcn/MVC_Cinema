@@ -95,7 +95,7 @@ if (isset($_GET['action'])) {
 
             $ctrlCinema->deletePerson($id);
 
-            Header("Location:index.php?action=movies");
+            Header("Location:index.php?action=actors");
 
             break;
 
@@ -108,6 +108,12 @@ if (isset($_GET['action'])) {
         case "createPerson":
 
             $ctrlCinema->createPersonDashboard();
+
+            break;
+
+        case "createMovie":
+
+            $ctrlCinema->createMovie();
 
             break;
     }

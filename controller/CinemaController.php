@@ -580,14 +580,14 @@ class CinemaController
         if (isset($_POST['submit'])) {
             $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $release_date = filter_input(INPUT_POST, "release_date", FILTER_SANITIZE_SPECIAL_CHARS);
-            $length = filter_input(INPUT_POST, "length", FILTER_SANITIZE_NUMBER_INT, FILTER_VALIDATE_INT);
+            $length = filter_input(INPUT_POST, "length", FILTER_VALIDATE_INT);
             $synopsis = filter_input(INPUT_POST, "synopsis");
-            $rating = filter_input(INPUT_POST, "rating",  FILTER_SANITIZE_NUMBER_FLOAT, FILTER_VALIDATE_FLOAT);
-            $director = filter_input(INPUT_POST, "director", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $genre1 = filter_input(INPUT_POST, "genre1", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $genre2 = filter_input(INPUT_POST, "genre2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $genre3 = filter_input(INPUT_POST, "genre3", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+            $rating = filter_input(INPUT_POST, "rating", FILTER_VALIDATE_FLOAT);
+            $director = filter_input(INPUT_POST, "directors", FILTER_VALIDATE_INT);
+            $genre1 = filter_input(INPUT_POST, "genres1", FILTER_VALIDATE_INT);
+            $genre2 = filter_input(INPUT_POST, "genres2", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            
             //************************ IMAGE *********************************
 
             if (isset($_FILES['poster'])) {
@@ -612,71 +612,103 @@ class CinemaController
                 }
             }
 
-            if($title && $release_date && $length && $synopsis && $rating && $director && $genre1 && $genre2 && $genre3) {
+            if($title && $release_date && $length && $synopsis && $rating && $director && ($genre1 || is_bool($genre1)) && ($genre2 || is_bool($genre2)) && ($genre3 || is_bool($genre3))) {
              
-            // ************************************************************************************************
-            // QUERY CREATE ***********************************************************************************
+                // ************************************************************************************************
+                // QUERY CREATE ***********************************************************************************
 
-            $pdo = Connect::dbConnect();
+                $pdo = Connect::dbConnect();
 
-            $createMovieQuery = $pdo->prepare(
-                "INSERT INTO movie (title, release_date, LENGTH, synopsis, rating, poster, id_director)
-                VALUES (:title, :release_date, :length, :synopsis, :rating, :poster, :id_director)"
-            );
-
-            $createMovieQuery->bindValue(':title', $title);
-            $createMovieQuery->bindValue(':release_date', $release_date);
-            $createMovieQuery->bindValue(':length', $length);
-            $createMovieQuery->bindValue(':synopsis', $synopsis);
-            $createMovieQuery->bindValue(':rating', $rating);
-            $createMovieQuery->bindValue(':poster', $poster);
-            $createMovieQuery->bindValue(':director', $director);
-            
-            $createMovieQuery->execute();
-
-            if ($genre1 != null) {
-                $addGenre1Query = $pdo->prepare(
-                    "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                    VALUES (LAST_INSERT_ID(), :genre1)"
+                $createMovieQuery = $pdo->prepare(
+                    "INSERT INTO movie (title, release_date, LENGTH, synopsis, rating, poster, id_director)
+                    VALUES (:title, :release_date, :length, :synopsis, :rating, :poster, :id_director)"
                 );
 
-                $addGenre1Query->execute([":genre1" => $genre1]);
+                $createMovieQuery->bindValue(':title', $title);
+                $createMovieQuery->bindValue(':release_date', $release_date);
+                $createMovieQuery->bindValue(':length', $length);
+                $createMovieQuery->bindValue(':synopsis', $synopsis);
+                $createMovieQuery->bindValue(':rating', $rating);
+                $createMovieQuery->bindValue(':poster', $poster);
+                $createMovieQuery->bindValue(':id_director', $director);
+                
+                $createMovieQuery->execute();
+
+                if ($genre1 != false || $genre1 != null) {
+                    $addGenre1Query = $pdo->prepare(
+                        "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                        VALUES (LAST_INSERT_ID(), :genre1)"
+                    );
+
+                    $addGenre1Query->execute([":genre1" => $genre1]);
+
+                }
+
+                if ($genre2 != false || $genre2 != null) {
+                    $addGenre2Query = $pdo->prepare(
+                        "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                        VALUES (LAST_INSERT_ID(), :genre2)"
+                    );
+
+                    $addGenre2Query->execute([":genre2" => $genre2]);
+
+                }
+
+                if ($genre3 != false || $genre3 != null) {
+                    $addGenre3Query = $pdo->prepare(
+                        "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                        VALUES (LAST_INSERT_ID(), :genre3)"
+                    );
+
+                    $addGenre3Query->execute([":genre3" => $genre3]);
+
+                }
 
             }
 
-            if ($genre2 != null) {
-                $addGenre2Query = $pdo->prepare(
-                    "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                    VALUES (LAST_INSERT_ID(), :genre2)"
-                );
+            $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Movie successfully created</p>";
 
-                $addGenre2Query->execute([":genre2" => $genre2]);
-
-            }
-
-            if ($genre3 != null) {
-                $addGenre3Query = $pdo->prepare(
-                    "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                    VALUES (LAST_INSERT_ID(), :genre3)"
-                );
-
-                $addGenre3Query->execute([":genre3" => $genre3]);
-
-            }
-
-            }
         }
 
+        $genres = $this->getGenres();
+        $directors = $this->getDirectors();
+
+        require 'view/create_movie.php';
+
+    }
+
+    public function getGenres()
+    {
         $pdo = Connect::dbConnect();
 
         $getGenres = $pdo->prepare(
-            "SELECT genre_name
+            "SELECT *
             FROM movie_genre"
         );
 
         $getGenres->execute();
+        
+        $genres = $getGenres->fetchAll();
 
-        require 'view/create_movie.php';
+        return $genres;
+    }
+
+    public function getDirectors()
+    {
+
+        $pdo = Connect::dbConnect();
+
+        $getDirectors = $pdo->prepare(
+            "SELECT *
+            FROM person
+            INNER JOIN director ON person.id_person = director.id_person"
+        );
+
+        $getDirectors->execute();
+        
+        $directors = $getDirectors->fetchAll();
+
+        return $directors;
     }
 
 

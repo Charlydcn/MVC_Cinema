@@ -12,6 +12,10 @@ $movieDetail = $sqlDetail->fetch();
 
 ?>
 
+<div class="w-100 d-flex justify-content-end p-1">
+    <a href="index.php?action=createCasting&id=<?=$movieDetail['id_movie']?>" class="btn btn-outline-secondary">Edit movie casting</a>
+</div>
+
 
 <div class="card mb-3" style="max-width: 1024px">
     <div class="row g-0">

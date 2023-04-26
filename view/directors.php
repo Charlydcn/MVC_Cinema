@@ -17,7 +17,7 @@ ob_start();
         <div class="col-lg-2">
             <a class="text-decoration-none text-reset" href="index.php?action=director_detail&id=<?= $director['id_director'] ?>">
                 <figure>
-                    <img src="public/img/<?= $director['portrait'] ?>" alt="portrait <?= $director['first_name'] . " " . $director['last_name'] ?>" class="rounded-circle img-thumbnail">
+                    <img src="public/img/portraits/<?= $director['portrait'] ?>" alt="portrait <?= $director['first_name'] . " " . $director['last_name'] ?>" class="rounded-circle img-thumbnail">
                     <figcaption class="text-center fw-semibold"><?= $director['first_name'] . " " . $director['last_name'] ?></figcaption>
                 </figure>
             </a>

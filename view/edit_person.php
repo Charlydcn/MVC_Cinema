@@ -77,7 +77,7 @@ $genres = [
             <div class="col-md-6">
                 <label class="form-label">
                     Portrait :
-                    <input type="file" name="portrait" class="form-control" value="public/img/<?= $person['portrait'] ?>">
+                    <input type="file" name="portrait" class="form-control" value="public/img/portraits/<?= $person['portrait'] ?>">
                 </label>
             </div>
 
@@ -113,7 +113,7 @@ $genres = [
         </form>
 
         <figure class="w-50">
-            <img src="public/img/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="w-25 img-fluid rounded-circle">
+            <img src="public/img/portraits/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="w-25 img-fluid rounded-circle">
         </figure>
     </div>
 

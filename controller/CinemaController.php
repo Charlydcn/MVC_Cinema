@@ -265,7 +265,7 @@ class CinemaController
                 if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
                     $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
                     $portrait = $uniqueName . '.' . $extension;
-                    move_uploaded_file($imgTmpName, 'public/img/' . $portrait);
+                    move_uploaded_file($imgTmpName, 'public/img/portraits/' . $portrait);
                 }
             }
             //****************************************************************
@@ -486,7 +486,7 @@ class CinemaController
                 if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
                     $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
                     $portrait = $uniqueName . '.' . $extension;
-                    move_uploaded_file($imgTmpName, 'public/img/' . $portrait);
+                    move_uploaded_file($imgTmpName, 'public/img/portraits/' . $portrait);
                 } else {
                     $portrait = null;
                 }
@@ -606,7 +606,7 @@ class CinemaController
                 if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
                     $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
                     $poster = $uniqueName . '.' . $extension;
-                    move_uploaded_file($imgTmpName, 'public/img/' . $poster);
+                    move_uploaded_file($imgTmpName, 'public/img/posters/' . $poster);
                 } else {
                     $poster = null;
                 }

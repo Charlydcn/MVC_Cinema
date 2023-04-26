@@ -17,7 +17,7 @@ ob_start();
         <div class="col-lg-2">
             <a class="text-decoration-none text-reset" href="index.php?action=movie_detail&id=<?= $movie['id_movie'] ?>">
                 <figure>
-                    <img src="public/img/<?= $movie['poster'] ?>" alt="poster <?= $movie['title'] ?>" class="img-thumbnail" style="width:250px;">
+                    <img src="public/img/posters/<?= $movie['poster'] ?>" alt="poster <?= $movie['title'] ?>" class="img-thumbnail" style="width:250px;">
                     <figcaption class="text-center fw-semibold"><?= $movie['title'] ?> (<?= $movie['release_date'] ?>)</figcaption>
                 </figure>
             </a>

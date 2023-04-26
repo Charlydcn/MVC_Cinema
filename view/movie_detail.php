@@ -20,7 +20,7 @@ $movieDetail = $sqlDetail->fetch();
 <div class="card mb-3" style="max-width: 1024px">
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="public/img/<?= $movieDetail['poster'] ?>" alt="poster <?= $movieDetail['title'] ?>" class="img-fluid rounded-start">
+            <img src="public/img/posters/<?= $movieDetail['poster'] ?>" alt="poster <?= $movieDetail['title'] ?>" class="img-fluid rounded-start">
         </div>
         <div class="col-md-8">
             <div class="card-body">

@@ -15,7 +15,7 @@ $actorMovies = $sqlMovies->fetchAll();
   <div class="row g-0">
 
     <div class="col-md-4">
-      <img src="public/img/<?= $actorDetail['portrait'] ?>" alt="portrait <?= $actorDetail['first_name'] . " " . $actorDetail['last_name'] ?>" class="img-fluid rounded-start">
+      <img src="public/img/portraits/<?= $actorDetail['portrait'] ?>" alt="portrait <?= $actorDetail['first_name'] . " " . $actorDetail['last_name'] ?>" class="img-fluid rounded-start">
     </div>
 
     <div class="col-md-8">

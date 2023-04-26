@@ -17,7 +17,7 @@ ob_start();
         <div class="col-lg-2">
             <a class="text-decoration-none text-reset" href="index.php?action=actor_detail&id=<?= $actor['id_actor'] ?>">
                 <figure>
-                    <img src="public/img/<?= $actor['portrait'] ?>" alt="portrait <?= $actor['first_name'] . " " . $actor['last_name'] ?>" class="rounded-circle img-thumbnail">
+                    <img src="public/img/portraits/<?= $actor['portrait'] ?>" alt="portrait <?= $actor['first_name'] . " " . $actor['last_name'] ?>" class="rounded-circle img-thumbnail">
                     <figcaption class="text-center fw-semibold"><?= $actor['first_name'] . " " . $actor['last_name'] ?></figcaption>
                 </figure>
             </a>

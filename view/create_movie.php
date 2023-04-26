@@ -32,8 +32,8 @@ ob_start();
         <div class="col-md-6" > <!-- DURATION -->
             <label class="form-label">
                 Duration :
-                <div class="input-group mb-2 w-75">
-                    <input type="number" name="length" class="form-control" min="0" required>
+                <div class="input-group mb-2">
+                    <input type="number" name="length" class="form-control" min="0" max="500" required>
                     <div class="input-group-prepend">
                         <div class="input-group-text">minutes</div>
                     </div>
@@ -60,13 +60,14 @@ ob_start();
             </label>
         </div>
 
-        <div class="col-md-6">
-            <div>  <!-- DIRECTOR -->
+        <div class="col-md-6"> <!-- DIRECTOR & POSTER -->
+            <div class="col-md-12"> <!-- DIRECTOR -->
+            
                 <label>
                     Director :
                     <select name="directors" class="form-select">
                 </label>
-    
+                    <option value="" selected disabled>Choose...</option>    
                 <?php
                 foreach($directors as $director) {
                 ?>
@@ -77,14 +78,17 @@ ob_start();
     
                 </select>
             </div>
-
-            <div>
-                <label>
-                    Poster : 
-                    <input type="file" name="poster" class="form-control">
-                </label>
+    
+            <div class="col-md-12"> <!-- POSTER -->
+    
+                <div>
+                    <label>
+                        Poster : 
+                        <input type="file" name="poster" class="form-control">
+                    </label>
+                </div>
+    
             </div>
-
         </div>
 
         <div class="col-md-4" >  <!-- GENRE 1 -->

@@ -523,12 +523,12 @@ class CinemaController
 
                     $createPersonQuery->execute();
 
-                    $findPersonQuery = $pdo->prepare(
+                    $getLastId = $pdo->prepare(
                         "SELECT LAST_INSERT_ID()"
                     );
 
-                    $findPersonQuery->execute();
-                    $lastId = $findPersonQuery->fetch();
+                    $getLastId->execute();
+                    $lastId = $getLastId->fetch();
                     $id = $lastId[0];
 
                     // ************************************************************************************************
@@ -666,6 +666,16 @@ class CinemaController
 
             }
 
+            $getLastId = $pdo->prepare(
+                "SELECT LAST_INSERT_ID()"
+            );
+
+            $getLastId->execute();
+            $lastId = $getLastId->fetch();
+            $id = $lastId[0];
+
+            Header("Location:index.php?action=createCasting&id=$id");
+
             $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Movie successfully created</p>";
 
         }
@@ -709,6 +719,14 @@ class CinemaController
         $directors = $getDirectors->fetchAll();
 
         return $directors;
+    }
+
+    public function createCasting()
+    {
+
+        
+
+        require 'view/create_casting.php';
     }
 
 

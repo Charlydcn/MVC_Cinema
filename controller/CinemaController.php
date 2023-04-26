@@ -266,6 +266,8 @@ class CinemaController
                     $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
                     $portrait = $uniqueName . '.' . $extension;
                     move_uploaded_file($imgTmpName, 'public/img/portraits/' . $portrait);
+                } else {
+                    $portrait = "missing.png";
                 }
             }
             //****************************************************************
@@ -362,7 +364,7 @@ class CinemaController
                     // *********************************************************************************************************
                     // *********************************************************************************************************
 
-                    $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Person successfully modified</p>";
+                    $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Person successfully modified</div>";
                 } else {
                     $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
                 }
@@ -462,8 +464,8 @@ class CinemaController
         if (isset($_POST['submit'])) {
             $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $birthdate = filter_input(INPUT_POST, "birthdate", FILTER_SANITIZE_SPECIAL_CHARS);
-            $genre = filter_input(INPUT_POST, "genre");
+            $birthdate = filter_input(INPUT_POST, "birthdate", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre = filter_input(INPUT_POST, "genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $isActor = filter_input(INPUT_POST, "isActor", FILTER_VALIDATE_BOOL);
             $isDirector = filter_input(INPUT_POST, "isDirector", FILTER_VALIDATE_BOOL);
 
@@ -488,7 +490,7 @@ class CinemaController
                     $portrait = $uniqueName . '.' . $extension;
                     move_uploaded_file($imgTmpName, 'public/img/portraits/' . $portrait);
                 } else {
-                    $portrait = null;
+                    $portrait = "missing.png";
                 }
             }
             //****************************************************************
@@ -555,7 +557,7 @@ class CinemaController
                     // ************************************************************************************************
                     // ************************************************************************************************
 
-                    $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Person successfully created</p>";
+                    $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Person successfully created</div>";
 
                     require "view/create_person.php";
                 } else {
@@ -608,7 +610,7 @@ class CinemaController
                     $poster = $uniqueName . '.' . $extension;
                     move_uploaded_file($imgTmpName, 'public/img/posters/' . $poster);
                 } else {
-                    $poster = null;
+                    $poster = "missing.png";
                 }
             }
 
@@ -676,7 +678,7 @@ class CinemaController
 
             Header("Location:index.php?action=createCasting&id=$id");
 
-            $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Movie successfully created</p>";
+            $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Movie successfully created</div>";
 
         }
 
@@ -800,10 +802,10 @@ class CinemaController
     {
 
         if (isset($_POST['submit'])) {
-            $movie = filter_input(INPUT_POST, "movies", FILTER_VALIDATE_INT);
             $actor = filter_input(INPUT_POST, "actors", FILTER_VALIDATE_INT);
             $role = filter_input(INPUT_POST, "roles", FILTER_VALIDATE_INT);
-            if($movie && $actor && $role) {
+
+            if($actor && $role) {
                 $pdo = Connect::dbConnect();
 
                 $createCasting = $pdo->prepare(
@@ -813,15 +815,16 @@ class CinemaController
 
                 $createCasting->bindValue(':role', $role);
                 $createCasting->bindValue(':actor', $actor);
-                $createCasting->bindValue(':movie', $movie);
+                $createCasting->bindValue(':movie', $id);
 
                 $createCasting->execute();
 
-                $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Casting successfully created</p>";
+                $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Casting successfully created</div>";
             } else {
                 $_SESSION['message'] = "<p class='text-danger m-3 fw-semibold fs-4'>Incorrect values<p>";
             }
 
+            Header("Location:index.php?action=createCasting&id=$id");      
 
         }
 
@@ -836,6 +839,27 @@ class CinemaController
 
     public function deleteCasting($id)
     {
+
+        $pdo = Connect::dbConnect();
+
+        $findMovie = $pdo->prepare(
+            "SELECT id_movie
+            FROM casting
+            WHERE id_casting = :id"
+        );
+
+        $findMovie->execute(['id' => $id]);
+
+        $idMovie = $findMovie->fetch();
+
+        $deleteCasting = $pdo->prepare(
+            "DELETE FROM casting
+            WHERE id_casting = :id"
+        );
+
+        $deleteCasting->execute(['id' => $id]);
+
+        Header("Location:index.php?action=createCasting&id=$idMovie[0]");      
 
     }
 

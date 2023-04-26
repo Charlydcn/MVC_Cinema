@@ -116,5 +116,11 @@ if (isset($_GET['action'])) {
             $ctrlCinema->createMovie();
 
             break;
+
+        case "createCasting":
+
+            $ctrlCinema->createCasting($id);
+
+            break;
     }
 }

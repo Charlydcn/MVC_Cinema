@@ -30,7 +30,7 @@ class CinemaController
         $pdo = Connect::dbConnect();
 
         $sqlDetail = $pdo->prepare(
-            "SELECT title, YEAR(release_date) AS 'release_date', SEC_TO_TIME(length*60) AS 'length', first_name, last_name, synopsis, rating, poster, GROUP_CONCAT(genre_name) AS 'genres', movie.id_director
+            "SELECT movie.id_movie, title, YEAR(release_date) AS 'release_date', SEC_TO_TIME(length*60) AS 'length', first_name, last_name, synopsis, rating, poster, GROUP_CONCAT(genre_name) AS 'genres', movie.id_director
             FROM movie
             INNER JOIN director ON movie.id_director = director.id_director
             INNER JOIN person ON director.id_person = person.id_person
@@ -362,7 +362,7 @@ class CinemaController
                     // *********************************************************************************************************
                     // *********************************************************************************************************
 
-                    $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully modified</p>";
+                    $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Person successfully modified</p>";
                 } else {
                     $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
                 }
@@ -555,7 +555,7 @@ class CinemaController
                     // ************************************************************************************************
                     // ************************************************************************************************
 
-                    $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Person successfully created</p>";
+                    $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Person successfully created</p>";
 
                     require "view/create_person.php";
                 } else {
@@ -676,7 +676,7 @@ class CinemaController
 
             Header("Location:index.php?action=createCasting&id=$id");
 
-            $_SESSION['message'] = "<p class='text-success fw-semibold fs-4'>Movie successfully created</p>";
+            $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Movie successfully created</p>";
 
         }
 
@@ -773,13 +773,70 @@ class CinemaController
         return $roles;
     }
 
-    public function createCasting()
+    public function getCastings($id)
     {
 
-        
+        $pdo = Connect::dbConnect();
 
-        require 'view/create_casting.php';
+        $createCasting = $pdo->prepare(
+            "SELECT id_casting, title AS 'movie', first_name, last_name, role_name AS 'role'
+            FROM person
+            INNER JOIN actor ON person.id_person = actor.id_person
+            INNER JOIN casting ON actor.id_actor = casting.id_actor
+            INNER JOIN movie ON casting.id_movie = movie.id_movie
+            INNER JOIN role ON casting.id_role = role.id_role
+            WHERE movie.id_movie = :id"
+        );
+
+        $createCasting->execute(['id' => $id]);
+
+        $castings = $createCasting->fetchAll();
+
+        return $castings;        
+
     }
 
+    public function createCasting($id)
+    {
+
+        if (isset($_POST['submit'])) {
+            $movie = filter_input(INPUT_POST, "movies", FILTER_VALIDATE_INT);
+            $actor = filter_input(INPUT_POST, "actors", FILTER_VALIDATE_INT);
+            $role = filter_input(INPUT_POST, "roles", FILTER_VALIDATE_INT);
+            if($movie && $actor && $role) {
+                $pdo = Connect::dbConnect();
+
+                $createCasting = $pdo->prepare(
+                    "INSERT INTO casting (id_role, id_actor, id_movie)
+                    VALUES (:role, :actor, :movie)"
+                );
+
+                $createCasting->bindValue(':role', $role);
+                $createCasting->bindValue(':actor', $actor);
+                $createCasting->bindValue(':movie', $movie);
+
+                $createCasting->execute();
+
+                $_SESSION['message'] = "<p class='text-success m-3 fw-semibold fs-4'>Casting successfully created</p>";
+            } else {
+                $_SESSION['message'] = "<p class='text-danger m-3 fw-semibold fs-4'>Incorrect values<p>";
+            }
+
+
+        }
+
+        $movies = $this->getMovies();
+        $actors = $this->getActors();
+        $roles = $this->getRoles();
+        $castings = $this->getCastings($id);
+
+        require 'view/create_casting.php';
+
+    }
+
+    public function deleteCasting($id)
+    {
+
+    }
 
 }

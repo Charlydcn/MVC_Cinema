@@ -589,6 +589,13 @@ class CinemaController
             $genre1 = filter_input(INPUT_POST, "genres1", FILTER_VALIDATE_INT);
             $genre2 = filter_input(INPUT_POST, "genres2", FILTER_VALIDATE_INT);
             $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
+            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
             
             //************************ IMAGE *********************************
 
@@ -636,35 +643,17 @@ class CinemaController
                 
                 $createMovieQuery->execute();
 
-                if ($genre1 != false || $genre1 != null) {
-                    $addGenre1Query = $pdo->prepare(
-                        "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                        VALUES (LAST_INSERT_ID(), :genre1)"
-                    );
 
-                    $addGenre1Query->execute([":genre1" => $genre1]);
 
-                }
+                // if ($genre1 != false || $genre1 != null) {
+                //     $addGenre1Query = $pdo->prepare(
+                //         "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                //         VALUES (LAST_INSERT_ID(), :genre1)"
+                //     );
 
-                if ($genre2 != false || $genre2 != null) {
-                    $addGenre2Query = $pdo->prepare(
-                        "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                        VALUES (LAST_INSERT_ID(), :genre2)"
-                    );
+                //     $addGenre1Query->execute([":genre1" => $genre1]);
 
-                    $addGenre2Query->execute([":genre2" => $genre2]);
-
-                }
-
-                if ($genre3 != false || $genre3 != null) {
-                    $addGenre3Query = $pdo->prepare(
-                        "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                        VALUES (LAST_INSERT_ID(), :genre3)"
-                    );
-
-                    $addGenre3Query->execute([":genre3" => $genre3]);
-
-                }
+                // }
 
             }
 

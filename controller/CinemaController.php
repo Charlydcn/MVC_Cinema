@@ -149,7 +149,7 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $sql = $pdo->query(
+        $getGenres = $pdo->query(
             "SELECT movie_genre.id_movie_genre, movie_genre.genre_name, COUNT(title) AS 'count'
             FROM movie
             INNER JOIN set_movie_genre ON movie.id_movie = set_movie_genre.id_movie
@@ -439,14 +439,14 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $checkDirectorQuery = $pdo->prepare(
+        $checkIfExistQuery = $pdo->prepare(
             "SELECT *
             FROM person
             WHERE id_person = :id"
         );
 
-        $checkDirectorQuery->execute(["id" => $id]);
-        $personExist = $checkDirectorQuery->fetch();
+        $checkIfExistQuery->execute(["id" => $id]);
+        $personExist = $checkIfExistQuery->fetch();
 
         if (!empty($personExist)) {
             $result = true;
@@ -462,7 +462,7 @@ class CinemaController
         if (isset($_POST['submit'])) {
             $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $birthdate = filter_input(INPUT_POST, "birthdate");
+            $birthdate = filter_input(INPUT_POST, "birthdate", FILTER_SANITIZE_SPECIAL_CHARS);
             $genre = filter_input(INPUT_POST, "genre");
             $isActor = filter_input(INPUT_POST, "isActor", FILTER_VALIDATE_BOOL);
             $isDirector = filter_input(INPUT_POST, "isDirector", FILTER_VALIDATE_BOOL);
@@ -505,16 +505,6 @@ class CinemaController
 
                 if ($isActor === true || $isDirector === true) {
 
-                    $person = [
-                        "first_name" => $first_name,
-                        "last_name" => $last_name,
-                        "birthdate" => $birthdate,
-                        "genre" => $genre,
-                        "isActor" => $isActor,
-                        "isDirector" => $isDirector,
-                        "portrait" => $portrait
-                    ];
-
                     // ************************************************************************************************
                     // QUERY CREATE ***********************************************************************************
 
@@ -534,22 +524,12 @@ class CinemaController
                     $createPersonQuery->execute();
 
                     $findPersonQuery = $pdo->prepare(
-                        "SELECT *
-                        FROM person
-                        WHERE first_name = :first_name
-                        AND last_name = :last_name
-                        AND birthdate = :birthdate
-                        AND genre = :genre"
+                        "SELECT LAST_INSERT_ID()"
                     );
 
-                    $findPersonQuery->bindValue(':first_name', $first_name);
-                    $findPersonQuery->bindValue(':last_name', $last_name);
-                    $findPersonQuery->bindValue(':birthdate', $birthdate);
-                    $findPersonQuery->bindValue(':genre', $genre);
-
                     $findPersonQuery->execute();
-                    $person = $findPersonQuery->fetch();
-                    $id = $person['id_person'];
+                    $lastId = $findPersonQuery->fetch();
+                    $id = $lastId[0];
 
                     // ************************************************************************************************
                     // QUERY ADD TO ACTOR/DIRECTOR ********************************************************************
@@ -594,4 +574,110 @@ class CinemaController
             require "view/create_person.php";
         }
     }
+
+    public function createMovie()
+    {
+        if (isset($_POST['submit'])) {
+            $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $release_date = filter_input(INPUT_POST, "release_date", FILTER_SANITIZE_SPECIAL_CHARS);
+            $length = filter_input(INPUT_POST, "length", FILTER_SANITIZE_NUMBER_INT, FILTER_VALIDATE_INT);
+            $synopsis = filter_input(INPUT_POST, "synopsis");
+            $rating = filter_input(INPUT_POST, "rating",  FILTER_SANITIZE_NUMBER_FLOAT, FILTER_VALIDATE_FLOAT);
+            $director = filter_input(INPUT_POST, "director", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre1 = filter_input(INPUT_POST, "genre1", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre2 = filter_input(INPUT_POST, "genre2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre3 = filter_input(INPUT_POST, "genre3", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            //************************ IMAGE *********************************
+
+            if (isset($_FILES['poster'])) {
+                $imgTmpName = $_FILES['poster']['tmp_name'];
+                $imgName = $_FILES['poster']['name'];
+                $imgSize = $_FILES['poster']['size'];
+                $imgError = $_FILES['poster']['error'];
+
+                $tabExtension = explode('.', $imgName);
+                $extension = strtolower(end($tabExtension));
+
+                //Tableau des extensions que l'on accepte
+                $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+                $maxSize = 5000000;
+
+                if (in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0) {
+                    $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
+                    $poster = $uniqueName . '.' . $extension;
+                    move_uploaded_file($imgTmpName, 'public/img/' . $poster);
+                } else {
+                    $poster = null;
+                }
+            }
+
+            if($title && $release_date && $length && $synopsis && $rating && $director && $genre1 && $genre2 && $genre3) {
+             
+            // ************************************************************************************************
+            // QUERY CREATE ***********************************************************************************
+
+            $pdo = Connect::dbConnect();
+
+            $createMovieQuery = $pdo->prepare(
+                "INSERT INTO movie (title, release_date, LENGTH, synopsis, rating, poster, id_director)
+                VALUES (:title, :release_date, :length, :synopsis, :rating, :poster, :id_director)"
+            );
+
+            $createMovieQuery->bindValue(':title', $title);
+            $createMovieQuery->bindValue(':release_date', $release_date);
+            $createMovieQuery->bindValue(':length', $length);
+            $createMovieQuery->bindValue(':synopsis', $synopsis);
+            $createMovieQuery->bindValue(':rating', $rating);
+            $createMovieQuery->bindValue(':poster', $poster);
+            $createMovieQuery->bindValue(':director', $director);
+            
+            $createMovieQuery->execute();
+
+            if ($genre1 != null) {
+                $addGenre1Query = $pdo->prepare(
+                    "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                    VALUES (LAST_INSERT_ID(), :genre1)"
+                );
+
+                $addGenre1Query->execute([":genre1" => $genre1]);
+
+            }
+
+            if ($genre2 != null) {
+                $addGenre2Query = $pdo->prepare(
+                    "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                    VALUES (LAST_INSERT_ID(), :genre2)"
+                );
+
+                $addGenre2Query->execute([":genre2" => $genre2]);
+
+            }
+
+            if ($genre3 != null) {
+                $addGenre3Query = $pdo->prepare(
+                    "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
+                    VALUES (LAST_INSERT_ID(), :genre3)"
+                );
+
+                $addGenre3Query->execute([":genre3" => $genre3]);
+
+            }
+
+            }
+        }
+
+        $pdo = Connect::dbConnect();
+
+        $getGenres = $pdo->prepare(
+            "SELECT genre_name
+            FROM movie_genre"
+        );
+
+        $getGenres->execute();
+
+        require 'view/create_movie.php';
+    }
+
+
 }

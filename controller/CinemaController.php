@@ -721,6 +721,58 @@ class CinemaController
         return $directors;
     }
 
+    public function getMovies()
+    {
+
+        $pdo = Connect::dbConnect();
+
+        $getMovies = $pdo->prepare(
+            "SELECT *
+            FROM movie"
+        );
+
+        $getMovies->execute();
+        
+        $movies = $getMovies->fetchAll();
+
+        return $movies;
+    }
+
+    public function getActors()
+    {
+
+        $pdo = Connect::dbConnect();
+
+        $getActors = $pdo->prepare(
+            "SELECT *
+            FROM person
+            INNER JOIN actor ON person.id_person = actor.id_person"
+        );
+
+        $getActors->execute();
+        
+        $actors = $getActors->fetchAll();
+
+        return $actors;
+    }
+
+    public function getRoles()
+    {
+
+        $pdo = Connect::dbConnect();
+
+        $getRoles = $pdo->prepare(
+            "SELECT *
+            FROM role"
+        );
+
+        $getRoles->execute();
+        
+        $roles = $getRoles->fetchAll();
+
+        return $roles;
+    }
+
     public function createCasting()
     {
 

@@ -12,9 +12,6 @@ ob_start();
     }
 
 ?>
-
-<div class="row">
-
     <form class="row w-25 g-3 p-3 m-3 border" action="index.php?action=createCasting&id=<?=$id?>" method="POST" enctype="multipart/form-data" autocomplete="off">
         <h2>Role : </h2>
         
@@ -24,7 +21,7 @@ ob_start();
                 Movie :
             </label> 
             <select name="movies" class="form-select">
-                <option value="<?=$movies[($id-1)]['title']?>" selected disabled><?=$movies[($id-1)]['title']?></option> 
+                <option value="<?=$movie['title']?>" selected><?=$movie['title']?></option> 
             </select>
 
         </div>
@@ -78,7 +75,7 @@ ob_start();
     <table class="table table-hover w-25 m-3">
         <thead>
             <tr>
-                <th colspan="3" class="text-center">
+                <th colspan="4" class="text-center">
                     Casting
                 </th>                
             </tr>
@@ -86,6 +83,8 @@ ob_start();
                 <th class="text-center">Movie</th>
                 <th class="text-center">Actor/Actress</th>
                 <th class="text-center">Role</th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
             </tr>
         </thead>
 
@@ -100,15 +99,12 @@ ob_start();
                     <td class="text-center"><?=$casting['first_name'] . " " . $casting['last_name']?></td>
                     <td class="text-center"><?=$casting['role']?></td>
                     <td><a href="index.php?action=deleteCasting&id=<?=$casting['id_casting']?>"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-                    <td><a href=""><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
 
             <?php } ?>
             
         </tbody>
     </table>
-
-</div>
 
 <?php
 

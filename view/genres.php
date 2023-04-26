@@ -5,7 +5,7 @@ ob_start();
 ?>
 
 <?php
-foreach ($sql->fetchAll() as $genre) {
+foreach ($getGenres->fetchAll() as $genre) {
 ?>
 
     <ul>

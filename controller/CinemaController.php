@@ -740,6 +740,24 @@ class CinemaController
         return $movies;
     }
 
+    public function getMovieById($id) {
+
+        $pdo = Connect::dbConnect();
+
+        $getMovie = $pdo->prepare(
+            "SELECT *
+            FROM movie
+            WHERE id_movie = :id"
+        );
+
+        $getMovie->execute(['id' => $id]);
+        
+        $movie = $getMovie->fetch();
+
+        return $movie;
+
+    }
+
     public function getActors()
     {
 
@@ -828,7 +846,7 @@ class CinemaController
 
         }
 
-        $movies = $this->getMovies();
+        $movie = $this->getMovieById($id);
         $actors = $this->getActors();
         $roles = $this->getRoles();
         $castings = $this->getCastings($id);

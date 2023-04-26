@@ -24,16 +24,7 @@ ob_start();
                 Movie :
             </label> 
             <select name="movies" class="form-select">
-
-                <option value="" selected disabled>Choose...</option>    
-                <?php
-                foreach($movies as $movie) {
-                ?>
-
-                    <option value="<?=$movie['id_movie']?>"><?=$movie['title']?></option>
-
-                <?php } ?>
-
+                <option value="<?=$movies[($id-1)]['title']?>" selected disabled><?=$movies[($id-1)]['title']?></option> 
             </select>
 
         </div>
@@ -108,7 +99,7 @@ ob_start();
                     <td class="text-center"><?=$casting['movie']?></td>
                     <td class="text-center"><?=$casting['first_name'] . " " . $casting['last_name']?></td>
                     <td class="text-center"><?=$casting['role']?></td>
-                    <td><a href=""><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                    <td><a href="index.php?action=deleteCasting&id=<?=$casting['id_casting']?>"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
                     <td><a href=""><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
 

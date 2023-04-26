@@ -4,6 +4,10 @@ ob_start();
 
 ?>
 
+<div class="w-100 d-flex justify-content-end p-1">
+    <a href="index.php?action=createMovie" class="btn btn-outline-secondary">Create movie</a>
+</div>
+
 <div class="row">
 
     <?php

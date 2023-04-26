@@ -91,62 +91,23 @@ ob_start();
             </div>
         </div>
 
-        <div class="col-md-4" >  <!-- GENRE 1 -->
-            <label class="form-label">
-                Genre 1 : 
-                <select name="genres1" class="form-select">
-                    <option value="genre0" selected>-</option>
-
+        <div class="col-md-4">  <!-- GENRES -->
+            
                 <?php
                 foreach ($genres as $genre) {
                 ?>
 
-                    <option value="<?= $genre['id_movie_genre'] ?>"> <?=$genre['genre_name']?> </option>
+                    <div class="form-check">
+
+                        <label class="form-check-label">
+                            <?=$genre['genre_name']?>
+                            <input name="genre<?=$genre['id_movie_genre']?>" class="form-check-input" type="checkbox" value="<?=$genre['id_movie_genre']?>">
+                        </label>
                     
+                    </div>
+
                 <?php } ?>
 
-                </select>
-
-            </label>
-        </div>
-
-        <div class="col-md-4" > <!-- GENRE 2 -->
-            <label class="form-label">
-                Genre 2 : 
-                <select name="genres3" class="form-select">
-                    <option value="genre0" selected>-</option>
-
-                <?php
-                foreach ($genres as $genre) {
-                ?>
-
-                    <option value="<?= $genre['id_movie_genre'] ?>"> <?=$genre['genre_name']?> </option>
-                    
-                <?php } ?>
-
-                </select>
-
-            </label>
-        </div>
-
-        <div class="col-md-4" > <!-- GENRE 3 -->
-            <label class="form-label">
-                Genre 3 : 
-                <select name="genres2" class="form-select">
-                    <option value="genre0" selected>-</option>
-
-                <?php
-                foreach ($genres as $genre) {
-                ?>
-
-                    <option value="<?= $genre['id_movie_genre'] ?>"> <?=$genre['genre_name']?> </option>
-                    
-                <?php } ?>
-
-                </select>
-
-            </label>            
-        </div>
         <small class="lh-1 text-muted">(3 genres max.)</small>
 
         <div class="col-md-12 d-flex justify-content-end"> <!-- SUBMIT -->

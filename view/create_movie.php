@@ -91,7 +91,7 @@ ob_start();
             </div>
         </div>
 
-        <div class="col-md-4">  <!-- GENRES -->
+        <div class="col-md-12">  <!-- GENRES -->
             
                 <?php
                 foreach ($genres as $genre) {
@@ -108,7 +108,8 @@ ob_start();
 
                 <?php } ?>
 
-        <small class="lh-1 text-muted">(3 genres max.)</small>
+            <small class="lh-1 text-muted">(3 genres max.)</small>
+        </div>
 
         <div class="col-md-12 d-flex justify-content-end"> <!-- SUBMIT -->
             <input type="submit" name="submit" value="Create movie" class="btn btn-primary w-25">

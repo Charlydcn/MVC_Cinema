@@ -428,6 +428,19 @@ class CinemaController
         if ($this->checkIfPersonExist($id) === true) {
             $pdo = Connect::dbConnect();
 
+            $getPortraitQuery = $pdo->prepare(
+                "SELECT portrait
+                FROM person
+                WHERE id_person = :id"
+            );
+
+            $getPortraitQuery->execute(["id" => $id]);
+            $portrait = $getPortraitQuery->fetch();
+
+            if ($portrait != "missing.png") {
+                unlink("public/img/portraits/$portrait[0]");
+            }
+
             $checkDirectorQuery = $pdo->prepare(
                 "DELETE FROM person
                 WHERE id_person = :id"

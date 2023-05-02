@@ -586,17 +586,15 @@ class CinemaController
             $synopsis = filter_input(INPUT_POST, "synopsis");
             $rating = filter_input(INPUT_POST, "rating", FILTER_VALIDATE_FLOAT);
             $director = filter_input(INPUT_POST, "directors", FILTER_VALIDATE_INT);
-            $genre1 = filter_input(INPUT_POST, "genres1", FILTER_VALIDATE_INT);
-            $genre2 = filter_input(INPUT_POST, "genres2", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            $genre3 = filter_input(INPUT_POST, "genres3", FILTER_VALIDATE_INT);
-            
+            $genres = filter_input_array(INPUT_POST, [
+                'genres' => [
+                    'filter' => FILTER_VALIDATE_INT,
+                    'flags'  => FILTER_REQUIRE_ARRAY,
+                ]
+            ]);
+
+            $nbGenres = count($genres['genres']);
+
             //************************ IMAGE *********************************
 
             if (isset($_FILES['poster'])) {
@@ -621,8 +619,8 @@ class CinemaController
                 }
             }
 
-            if($title && $release_date && $length && $synopsis && $rating && $director && ($genre1 || is_bool($genre1)) && ($genre2 || is_bool($genre2)) && ($genre3 || is_bool($genre3))) {
-             
+            if ($title && $release_date && $length && $synopsis && $rating && $director && ($nbGenres <= 3)) {
+
                 // ************************************************************************************************
                 // QUERY CREATE ***********************************************************************************
 
@@ -640,42 +638,41 @@ class CinemaController
                 $createMovieQuery->bindValue(':rating', $rating);
                 $createMovieQuery->bindValue(':poster', $poster);
                 $createMovieQuery->bindValue(':id_director', $director);
-                
+
                 $createMovieQuery->execute();
 
+                foreach ($genres['genres'] as $genre) {
+                    $addGenreQuery = $pdo->prepare(
+                        "INSERT INTO set_movie_genre
+                        VALUES (LAST_INSERT_ID(), :genre)"
+                    );
 
+                    $addGenreQuery->execute(["genre" => $genre]);
+                }
 
-                // if ($genre1 != false || $genre1 != null) {
-                //     $addGenre1Query = $pdo->prepare(
-                //         "INSERT INTO set_movie_genre (id_movie, id_movie_genre)
-                //         VALUES (LAST_INSERT_ID(), :genre1)"
-                //     );
+                // ************************************************************************************************
+                // REDIRECT ***********************************************************************************
 
-                //     $addGenre1Query->execute([":genre1" => $genre1]);
+                $getLastId = $pdo->prepare(
+                    "SELECT LAST_INSERT_ID()"
+                );
 
-                // }
+                $getLastId->execute();
+                $lastId = $getLastId->fetch();
+                $id = $lastId[0];
 
+                Header("Location:index.php?action=createCasting&id=$id");
+
+                $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Movie successfully created</div>";
+            } else {
+                $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error, incorrect values<p>";
             }
-
-            $getLastId = $pdo->prepare(
-                "SELECT LAST_INSERT_ID()"
-            );
-
-            $getLastId->execute();
-            $lastId = $getLastId->fetch();
-            $id = $lastId[0];
-
-            Header("Location:index.php?action=createCasting&id=$id");
-
-            $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Movie successfully created</div>";
-
         }
 
         $genres = $this->getGenres();
         $directors = $this->getDirectors();
 
         require 'view/create_movie.php';
-
     }
 
     public function getGenres()
@@ -688,7 +685,7 @@ class CinemaController
         );
 
         $getGenres->execute();
-        
+
         $genres = $getGenres->fetchAll();
 
         return $genres;
@@ -706,7 +703,7 @@ class CinemaController
         );
 
         $getDirectors->execute();
-        
+
         $directors = $getDirectors->fetchAll();
 
         return $directors;
@@ -723,13 +720,14 @@ class CinemaController
         );
 
         $getMovies->execute();
-        
+
         $movies = $getMovies->fetchAll();
 
         return $movies;
     }
 
-    public function getMovieById($id) {
+    public function getMovieById($id)
+    {
 
         $pdo = Connect::dbConnect();
 
@@ -740,11 +738,10 @@ class CinemaController
         );
 
         $getMovie->execute(['id' => $id]);
-        
+
         $movie = $getMovie->fetch();
 
         return $movie;
-
     }
 
     public function getActors()
@@ -759,7 +756,7 @@ class CinemaController
         );
 
         $getActors->execute();
-        
+
         $actors = $getActors->fetchAll();
 
         return $actors;
@@ -776,7 +773,7 @@ class CinemaController
         );
 
         $getRoles->execute();
-        
+
         $roles = $getRoles->fetchAll();
 
         return $roles;
@@ -801,8 +798,7 @@ class CinemaController
 
         $castings = $createCasting->fetchAll();
 
-        return $castings;        
-
+        return $castings;
     }
 
     public function createCasting($id)
@@ -812,7 +808,7 @@ class CinemaController
             $actor = filter_input(INPUT_POST, "actors", FILTER_VALIDATE_INT);
             $role = filter_input(INPUT_POST, "roles", FILTER_VALIDATE_INT);
 
-            if($actor && $role) {
+            if ($actor && $role) {
                 $pdo = Connect::dbConnect();
 
                 $createCasting = $pdo->prepare(
@@ -831,8 +827,7 @@ class CinemaController
                 $_SESSION['message'] = "<p class='text-danger m-3 fw-semibold fs-4'>Incorrect values<p>";
             }
 
-            Header("Location:index.php?action=createCasting&id=$id");      
-
+            Header("Location:index.php?action=createCasting&id=$id");
         }
 
         $movie = $this->getMovieById($id);
@@ -841,7 +836,6 @@ class CinemaController
         $castings = $this->getCastings($id);
 
         require 'view/create_casting.php';
-
     }
 
     public function deleteCasting($id)
@@ -866,8 +860,6 @@ class CinemaController
 
         $deleteCasting->execute(['id' => $id]);
 
-        Header("Location:index.php?action=createCasting&id=$idMovie[0]");      
-
+        Header("Location:index.php?action=createCasting&id=$idMovie[0]");
     }
-
 }

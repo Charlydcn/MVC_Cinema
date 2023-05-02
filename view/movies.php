@@ -8,7 +8,7 @@ ob_start();
     <a href="index.php?action=createMovie" class="btn btn-outline-secondary">Create movie</a>
 </div>
 
-<div class="row">
+<div class="row m-3">
 
     <?php
 
@@ -16,12 +16,9 @@ ob_start();
 
         <div class="col-lg-2">
             <a class="text-decoration-none text-reset" href="index.php?action=movie_detail&id=<?= $movie['id_movie'] ?>">
-                <figure>
-                    <img src="public/img/posters/<?= $movie['poster'] ?>" alt="poster <?= $movie['title'] ?>" class="img-thumbnail" style="width:250px;">
-                    <figcaption class="text-center fw-semibold"><?= $movie['title'] ?> (<?= $movie['release_date'] ?>)</figcaption>
-                </figure>
+                <img src="public/img/posters/<?= $movie['poster'] ?>" alt="poster <?= $movie['title'] ?>" style="width: 200px; height: 300px; object-fit: cover;">
+                <h5 class="text-center fw-semibold"><?= $movie['title'] ?> (<?= $movie['release_date'] ?>)</h5>
             </a>
-
         </div>
 
 

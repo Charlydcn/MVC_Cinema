@@ -128,5 +128,11 @@ if (isset($_GET['action'])) {
             $ctrlCinema->deleteCasting($id);
 
             break;
+
+        case "deleteMovie":
+
+            $ctrlCinema->deleteMovie($id);
+
+            break;
     }
 }

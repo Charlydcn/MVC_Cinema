@@ -661,7 +661,7 @@ class CinemaController
                 $lastId = $getLastId->fetch();
                 $id = $lastId[0];
 
-                Header("Location:index.php?action=createCasting&id=$id");
+                Header("Location:index.php?action=casting&id=$id");
 
                 $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Movie successfully created</div>";
             } else {
@@ -827,7 +827,7 @@ class CinemaController
                 $_SESSION['message'] = "<p class='text-danger m-3 fw-semibold fs-4'>Incorrect values<p>";
             }
 
-            Header("Location:index.php?action=createCasting&id=$id");
+            Header("Location:index.php?action=casting&id=$id");
         }
 
         $movie = $this->getMovieById($id);
@@ -835,7 +835,7 @@ class CinemaController
         $roles = $this->getRoles();
         $castings = $this->getCastings($id);
 
-        require 'view/create_casting.php';
+        require 'view/casting.php';
     }
 
     public function deleteCasting($id)
@@ -860,6 +860,6 @@ class CinemaController
 
         $deleteCasting->execute(['id' => $id]);
 
-        Header("Location:index.php?action=createCasting&id=$idMovie[0]");
+        Header("Location:index.php?action=casting&id=$idMovie[0]");
     }
 }

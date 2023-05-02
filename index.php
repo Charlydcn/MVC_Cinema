@@ -117,7 +117,7 @@ if (isset($_GET['action'])) {
 
             break;
 
-        case "createCasting":
+        case "casting":
 
             $ctrlCinema->createCasting($id);
 

@@ -246,7 +246,6 @@ class CinemaController
             $isActor = filter_input(INPUT_POST, "isActor", FILTER_VALIDATE_BOOL);
             $isDirector = filter_input(INPUT_POST, "isDirector", FILTER_VALIDATE_BOOL);
 
-
             //************************ IMAGE *********************************
 
             if (isset($_FILES['portrait'])) {
@@ -266,8 +265,6 @@ class CinemaController
                     $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
                     $portrait = $uniqueName . '.' . $extension;
                     move_uploaded_file($imgTmpName, 'public/img/portraits/' . $portrait);
-                } else {
-                    $portrait = "missing.png";
                 }
             }
             //****************************************************************
@@ -348,7 +345,16 @@ class CinemaController
                     // *********************************************************************************************************
                     // UPDATE PERSON PORTRAIT **********************************************************************************
 
-                    if (isset($portrait) && $portrait != null) { // SI LE PORTRAIT EST SET ET QU'IL N'EST PAS null
+                    $getOldPortraitQuery = $pdo->prepare(
+                        "SELECT portrait
+                        FROM person
+                        WHERE id_person = :id"
+                    );
+
+                    $getOldPortraitQuery->execute(["id" => $id]);
+                    $oldPortrait = $getOldPortraitQuery->fetch();
+
+                    if (isset($portrait) && $portrait != null && $portrait != $oldPortrait) { // SI LE PORTRAIT EST SET ET QU'IL N'EST PAS null ET QU'IL N'EST PAS LE MEME QU'AVANT
                         $portraitQuery = $pdo->prepare(
                             "UPDATE person
                             SET portrait = :portrait
@@ -692,12 +698,10 @@ class CinemaController
     {
         $pdo = Connect::dbConnect();
 
-        $getGenres = $pdo->prepare(
+        $getGenres = $pdo->query(
             "SELECT *
             FROM movie_genre"
         );
-
-        $getGenres->execute();
 
         $genres = $getGenres->fetchAll();
 
@@ -709,13 +713,11 @@ class CinemaController
 
         $pdo = Connect::dbConnect();
 
-        $getDirectors = $pdo->prepare(
+        $getDirectors = $pdo->query(
             "SELECT *
             FROM person
             INNER JOIN director ON person.id_person = director.id_person"
         );
-
-        $getDirectors->execute();
 
         $directors = $getDirectors->fetchAll();
 
@@ -727,12 +729,10 @@ class CinemaController
 
         $pdo = Connect::dbConnect();
 
-        $getMovies = $pdo->prepare(
+        $getMovies = $pdo->query(
             "SELECT *
             FROM movie"
         );
-
-        $getMovies->execute();
 
         $movies = $getMovies->fetchAll();
 
@@ -762,13 +762,11 @@ class CinemaController
 
         $pdo = Connect::dbConnect();
 
-        $getActors = $pdo->prepare(
+        $getActors = $pdo->query(
             "SELECT *
             FROM person
             INNER JOIN actor ON person.id_person = actor.id_person"
         );
-
-        $getActors->execute();
 
         $actors = $getActors->fetchAll();
 
@@ -780,12 +778,10 @@ class CinemaController
 
         $pdo = Connect::dbConnect();
 
-        $getRoles = $pdo->prepare(
+        $getRoles = $pdo->query(
             "SELECT *
             FROM role"
         );
-
-        $getRoles->execute();
 
         $roles = $getRoles->fetchAll();
 

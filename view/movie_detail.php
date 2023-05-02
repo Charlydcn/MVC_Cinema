@@ -13,7 +13,7 @@ $movieDetail = $sqlDetail->fetch();
 ?>
 
 <div class="w-100 d-flex justify-content-end p-1">
-    <a href="index.php?action=createCasting&id=<?=$movieDetail['id_movie']?>" class="btn btn-outline-secondary">Edit movie casting</a>
+    <a href="index.php?action=casting&id=<?= $movieDetail['id_movie'] ?>" class="btn btn-outline-secondary">Edit movie casting</a>
 </div>
 
 
@@ -33,7 +33,7 @@ $movieDetail = $sqlDetail->fetch();
                 <p><?= $movieDetail['length'] ?></p>
 
                 <p class="card-text fw-bold lh-1">Director :</p>
-                <p><a class="text-decoration-none text-reset" href="index.php?action=director_detail&id=<?=$movieDetail['id_director']?>"><?= $movieDetail['first_name'] . " " . $movieDetail['last_name'] ?></a></p>
+                <p><a class="text-decoration-none text-reset" href="index.php?action=director_detail&id=<?= $movieDetail['id_director'] ?>"><?= $movieDetail['first_name'] . " " . $movieDetail['last_name'] ?></a></p>
 
                 <p class="card-text fw-bold">Synopsis :</p>
                 <p><?= $movieDetail['synopsis'] ?></p>
@@ -44,7 +44,7 @@ $movieDetail = $sqlDetail->fetch();
                 <p class="card-text">
                     <small>
                         <a class="text-decoration-none" href="">
-                            <i class="fa-solid fa-pen-to-square"></i>    
+                            <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                     </small>
                 </p>
@@ -55,27 +55,27 @@ $movieDetail = $sqlDetail->fetch();
 
 <p class="fs-4">Casting : </p>
 
-    <?php
+<?php
 
-    foreach ($sqlCasting->fetchAll() as $casting) {
-    ?>
+foreach ($sqlCasting->fetchAll() as $casting) {
+?>
 
 
-        <ul>
-            <a class="text-decoration-none text-reset" href="index.php?action=actor_detail&id=<?= $casting['id_actor'] ?>">
-                <li><span class="fw-bold"><?= $casting['first_name'] . " " . $casting['last_name'] . "</span> (" . $casting['role_name'] . ") " ?></li>
-            </a>
-        </ul>
+    <ul>
+        <a class="text-decoration-none text-reset" href="index.php?action=actor_detail&id=<?= $casting['id_actor'] ?>">
+            <li><span class="fw-bold"><?= $casting['first_name'] . " " . $casting['last_name'] . "</span> (" . $casting['role_name'] . ") " ?></li>
+        </a>
+    </ul>
 
-</div>
+    </div>
 
 <?php } ?>
 
 <?php
 
-    $content = ob_get_clean();
-    $title = $movieDetail['title'];
-    $secondTitle = "Movie";
-    require 'template.php';
+$content = ob_get_clean();
+$title = $movieDetail['title'];
+$secondTitle = "Movie";
+require 'template.php';
 
 ?>

@@ -366,11 +366,11 @@ class CinemaController
 
                     $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Person successfully modified</div>";
                 } else {
-                    $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
+                    $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Person has to be either an actor, or a director</div>";
                 }
             } else {
 
-                $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
+                $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Error</div>";
             }
         }
 
@@ -561,13 +561,13 @@ class CinemaController
 
                     require "view/create_person.php";
                 } else {
-                    $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Person has to be either an actor, or a director<p>";
+                    $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Person has to be either an actor, or a director</div>";
 
                     require "view/create_person.php";
                 }
             } else {
 
-                $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error<p>";
+                $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Error</div>";
 
                 require "view/create_person.php";
             }
@@ -665,7 +665,7 @@ class CinemaController
 
                 $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Movie successfully created</div>";
             } else {
-                $_SESSION['message'] = "<p class='text-danger fw-semibold fs-4'>Error, incorrect values<p>";
+                $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Error, incorrect values</div>";
             }
         }
 
@@ -824,7 +824,7 @@ class CinemaController
 
                 $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Casting successfully created</div>";
             } else {
-                $_SESSION['message'] = "<p class='text-danger m-3 fw-semibold fs-4'>Incorrect values<p>";
+                $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Incorrect values</div>";
             }
 
             Header("Location:index.php?action=casting&id=$id");

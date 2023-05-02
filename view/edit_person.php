@@ -112,9 +112,7 @@ $genres = [
 
         </form>
 
-        <figure class="w-50">
-            <img src="public/img/portraits/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="w-25 img-fluid rounded-circle">
-        </figure>
+        <img src="public/img/portraits/<?= $person['portrait'] ?>" alt="<?= $person['first_name'] . " " . $person['last_name'] ?> portrait" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
     </div>
 
 </div>

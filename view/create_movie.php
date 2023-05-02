@@ -100,7 +100,7 @@ if (isset($_SESSION['message'])) {
                 <label for="genres">Genres :</label>
                 <small class="lh-1 text-muted">(press CTRL)</small>
 
-                <select name="genres" multiple class="form-control">
+                <select name="genres[]" multiple class="form-control">
 
                     <?php foreach ($genres as $genre) { ?>
 

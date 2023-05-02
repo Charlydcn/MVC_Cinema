@@ -871,4 +871,33 @@ class CinemaController
 
         Header("Location:index.php?action=casting&id=$idMovie[0]");
     }
+
+    public function deleteMovie($id)
+    {
+        $pdo = Connect::dbConnect();
+
+        $getPosterQuery = $pdo->prepare(
+            "SELECT poster
+                FROM movie
+                WHERE id_movie = :id"
+        );
+
+        $getPosterQuery->execute(["id" => $id]);
+        $poster = $getPosterQuery->fetch();
+
+        if ($poster != "missing.png") {
+            unlink("public/img/posters/$poster[0]");
+        }
+
+        $deleteMovie = $pdo->prepare(
+            "DELETE FROM movie
+            WHERE id_movie = :id"
+        );
+
+        $deleteMovie->execute([":id" => $id]);
+
+        $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Movie deleted</div>";
+
+        Header("Location:index.php?action=movies");
+    }
 }

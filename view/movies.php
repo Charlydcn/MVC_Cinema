@@ -4,6 +4,15 @@ ob_start();
 
 ?>
 
+<?php
+
+if (isset($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+
+?>
+
 <div class="w-100 d-flex justify-content-end p-1">
     <a href="index.php?action=createMovie" class="btn btn-outline-secondary">Create movie</a>
 </div>
